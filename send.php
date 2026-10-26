@@ -137,14 +137,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     if (isset($_GET['setup'])) {
         if ($cfg['telegram_token'] === '') { out(['ok' => false, 'error' => 'Сначала впиши telegram_token в config.php']); }
-        $res = @file_get_contents('https://api.telegram.org/bot' . $cfg['telegram_token'] . '/getUpdates');
+        $ch = curl_init('https://api.telegram.org/bot' . $cfg['telegram_token'] . '/getUpdates');
+        curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 15, CURLOPT_CONNECTTIMEOUT => 8]);
+        $res = curl_exec($ch); $curlErr = curl_error($ch); $httpCode = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE); curl_close($ch);
+        if ($res === false) { out(['ok' => false, 'error' => 'Сервер не достучался до Telegram: ' . $curlErr]); }
         $j = $res ? json_decode($res, true) : null;
         $chats = [];
         foreach (($j['result'] ?? []) as $u) {
             $c = $u['message']['chat'] ?? $u['channel_post']['chat'] ?? null;
             if ($c) { $chats[(string)$c['id']] = trim(($c['title'] ?? '') . ' ' . ($c['first_name'] ?? '') . ' ' . ($c['username'] ?? '')); }
         }
-        out(['ok' => (bool)$j, 'hint' => 'Сначала напиши боту любое сообщение, затем открой эту страницу снова. В telegram_chat впиши нужный id.', 'chats' => $chats, 'raw_ok' => $j['ok'] ?? null]);
+        out(['ok' => (bool)$j, 'hint' => 'Сначала напиши боту любое сообщение, затем открой эту страницу снова. В telegram_chat впиши нужный id.', 'chats' => $chats, 'raw_ok' => $j['ok'] ?? null, 'http' => $httpCode, 'desc' => $j['description'] ?? null]);
     }
 
     // selftest
