@@ -140,7 +140,7 @@ function secret_ok(array $cfg, string $key): bool {
 
 // ───────── Служебные запросы (GET с секретом) ─────────
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $key = (string)($_GET['selftest'] ?? $_GET['setup'] ?? $_GET['health'] ?? '');
+    $key = (string)($_GET['selftest'] ?? $_GET['setup'] ?? $_GET['health'] ?? $_GET['nettest'] ?? '');
     if ($key === '' || !secret_ok($cfg, $key)) { out(['ok' => false, 'error' => 'not found'], 404); }
 
     if (isset($_GET['health'])) {
@@ -171,6 +171,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             'leads_total' => $total, 'leads_undelivered' => $undelivered, 'last_lead' => $last,
             'leads_dir_writable' => is_dir($LEADS) ? is_writable($LEADS) : is_writable($BASE),
         ], $problems ? 503 : 200);
+    }
+
+    if (isset($_GET['nettest'])) {
+        $targets = ['https://api.telegram.org/', 'https://workers.dev/', 'https://www.cloudflare.com/', 'https://hooks.zapier.com/', 'https://api.github.com/', 'https://platform-api.max.ru/', 'https://pipedream.com/', 'https://ntfy.sh/'];
+        $res = [];
+        foreach ($targets as $u) {
+            $ch = curl_init($u);
+            curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 6, CURLOPT_CONNECTTIMEOUT => 5, CURLOPT_NOBODY => true]);
+            curl_exec($ch);
+            $res[$u] = curl_errno($ch) ? ('ОШИБКА: ' . curl_error($ch)) : ('ответ ' . curl_getinfo($ch, CURLINFO_HTTP_CODE));
+            curl_close($ch);
+        }
+        out(['ok' => true, 'results' => $res]);
     }
 
     if (isset($_GET['setup'])) {
