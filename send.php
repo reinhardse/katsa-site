@@ -190,13 +190,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
 
     if (isset($_GET['nettest'])) {
-        $targets = ['https://api.telegram.org/', 'https://workers.dev/', 'https://www.cloudflare.com/', 'https://hooks.zapier.com/', 'https://api.github.com/', 'https://platform-api.max.ru/', 'https://pipedream.com/', 'https://ntfy.sh/'];
+        $tests = [
+            'telegram_auto'   => ['https://api.telegram.org/', 0],
+            'telegram_ipv4'   => ['https://api.telegram.org/', CURL_IPRESOLVE_V4],
+            'telegram_ipv6'   => ['https://api.telegram.org/', CURL_IPRESOLVE_V6],
+            'telegram_8443'   => ['https://api.telegram.org:8443/', CURL_IPRESOLVE_V4],
+            'telegram_http'   => ['http://api.telegram.org/', CURL_IPRESOLVE_V4],
+            'telegram_web'    => ['https://t.me/', CURL_IPRESOLVE_V4],
+            'cloudflare'      => ['https://www.cloudflare.com/', CURL_IPRESOLVE_V4],
+            'workers_dev'     => ['https://workers.dev/', CURL_IPRESOLVE_V4],
+            'github'          => ['https://api.github.com/', CURL_IPRESOLVE_V4],
+            'max'             => ['https://platform-api.max.ru/', CURL_IPRESOLVE_V4],
+            'ntfy'            => ['https://ntfy.sh/', CURL_IPRESOLVE_V4],
+        ];
         $res = [];
-        foreach ($targets as $u) {
+        foreach ($tests as $name => [$u, $ipr]) {
             $ch = curl_init($u);
-            curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 6, CURLOPT_CONNECTTIMEOUT => 5, CURLOPT_NOBODY => true]);
+            $o = [CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 6, CURLOPT_CONNECTTIMEOUT => 4, CURLOPT_NOBODY => true];
+            if ($ipr) { $o[CURLOPT_IPRESOLVE] = $ipr; }
+            curl_setopt_array($ch, $o);
             curl_exec($ch);
-            $res[$u] = curl_errno($ch) ? ('ОШИБКА: ' . curl_error($ch)) : ('ответ ' . curl_getinfo($ch, CURLINFO_HTTP_CODE));
+            $res[$name] = curl_errno($ch) ? ('ОШИБКА: ' . curl_error($ch)) : ('ответ ' . curl_getinfo($ch, CURLINFO_HTTP_CODE) . ', ip ' . curl_getinfo($ch, CURLINFO_PRIMARY_IP));
             curl_close($ch);
         }
         out(['ok' => true, 'results' => $res]);
