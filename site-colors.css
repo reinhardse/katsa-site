@@ -63,3 +63,6 @@ body #approach .stage-title h4{background:var(--katsa-gradient);background-clip:
 #medical .medical-primary:hover{--action-fill:var(--katsa-gradient)}
 body .site-header nav a.nav-medical span,body .mobile-menu a.nav-medical span{background:var(--katsa-gradient)!important;background-clip:text!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important}
 .prototype-controls button:focus-visible{outline-color:var(--katsa-blue)}
+
+/* Поля форм: без внутреннего светлого прямоугольника (рамка только у внешней карточки) */
+body #project-request input:not([type=checkbox]),body #project-request textarea,body #service-request .service-contact-label input,body #contact #project-request input:not([type=checkbox]),body #contact #project-request textarea{background:transparent!important;border:0!important;box-shadow:none!important;outline:0!important}
