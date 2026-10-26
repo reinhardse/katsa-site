@@ -111,6 +111,7 @@ function secret_ok(array $cfg, string $key): bool {
 }
 
 // ───────── Служебные запросы (GET с секретом) ─────────
+if (isset($_GET['diag'])) { out(['config_found' => is_file($CONFIG), 'secret_set' => $cfg['secret'] !== '', 'secret_len' => strlen($cfg['secret']), 'base' => basename($BASE), 'list' => array_slice(scandir($BASE) ?: [], 0, 30)]); }
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $key = (string)($_GET['selftest'] ?? $_GET['setup'] ?? $_GET['health'] ?? '');
     if ($key === '' || !secret_ok($cfg, $key)) { out(['ok' => false, 'error' => 'not found'], 404); }
