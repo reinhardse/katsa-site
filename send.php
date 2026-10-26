@@ -121,13 +121,15 @@ function deliver(array $cfg, array $lead): array {
     if ($lead['task'] !== '')    { $lines[] = "Задача:\n" . $h($lead['task']); }
     $lines[] = '';
     $lines[] = 'Страница: ' . $h($lead['page']);
+    if (($lead['url'] ?? '') !== '') { $lines[] = 'Ссылка: ' . $h($lead['url']); }
+    if (($lead['via'] ?? '') !== '') { $lines[] = 'Откуда: ' . $h($lead['via']); }
     $lines[] = 'Время: ' . $h($lead['time']);
     $tg = send_telegram($cfg, implode("\n", $lines));
     $mx = send_max($cfg, strip_tags(str_replace(['<b>', '</b>'], '', implode("\n", $lines))));
 
     $plain = "Новая заявка с katsa.ru\n\nИмя: " . ($lead['name'] ?: '—') . "\nКонтакт: " . $lead['contact']
         . "\nУслуга: " . ($lead['service'] ?: '—') . "\n\nЗадача:\n" . ($lead['task'] ?: '—')
-        . "\n\nСтраница: " . $lead['page'] . "\nВремя: " . $lead['time'] . "\n";
+ . "\n\nСтраница: " . $lead['page'] . "\nСсылка: " . ($lead['url'] ?? '') . "\nОткуда: " . ($lead['via'] ?? '') . "\nВремя: " . $lead['time'] . "\n";
     $ml = send_mail($cfg, 'Заявка с сайта KATSA' . ($lead['name'] ? ' — ' . $lead['name'] : ''), $plain);
     return ['telegram' => $tg, 'max' => $mx, 'mail' => $ml];
 }
@@ -204,7 +206,9 @@ $lead = [
     'contact' => clean($_POST['contact'] ?? '', 150),
     'task'    => clean($_POST['task'] ?? '', 4000),
     'service' => clean($_POST['service'] ?? '', 300),
-    'page'    => clean(($_POST['page'] ?? '') . ' ' . ($_POST['url'] ?? ''), 300),
+    'page'    => clean($_POST['page'] ?? '', 200),
+    'url'     => clean($_POST['url'] ?? '', 300),
+    'via'     => clean($_POST['via'] ?? '', 200),
     'form'    => clean($_POST['form'] ?? '', 60),
     'time'    => date('Y-m-d H:i:s'),
     'ip'      => $_SERVER['REMOTE_ADDR'] ?? '',
