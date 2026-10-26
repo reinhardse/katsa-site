@@ -1,0 +1,17 @@
+/* All action buttons share geometry and material; medical CTA changes only color. */
+:root{--action-neutral:linear-gradient(110deg,#ffffff59 0%,#ffffff40 45%,#ffffff32 100%);--action-fill:var(--action-neutral);--action-ink:#f4f4f6;--action-radius:999px;--action-shadow:none}
+:is(#services,#contact,#contact-modal,body) :is(.glass-button,.medical-primary,.medical-secondary,.contact-send button,#service-request button[type="submit"]){display:inline-flex;align-items:center;justify-content:center;gap:0;box-sizing:border-box;min-height:48px;height:48px;padding:0 24px;border:0;border-radius:var(--action-radius);background:var(--action-fill);color:var(--action-ink);box-shadow:var(--action-shadow);font-family:inherit;font-size:16px;font-weight:500;line-height:1.2;text-align:center;text-decoration:none;cursor:pointer;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);transition:filter .25s ease,transform .25s ease;animation:none;scale:1}
+:is(#services,#contact,#contact-modal,body) :is(.glass-button,.medical-primary,.medical-secondary,.contact-send button,#service-request button[type="submit"]):hover{background:var(--action-fill);color:var(--action-ink);filter:brightness(1.15);transform:scale(1.02);box-shadow:var(--action-shadow);scale:1;animation:none}
+:is(#services,#contact,#contact-modal,body) :is(.glass-button,.medical-primary,.medical-secondary,.contact-send button,#service-request button[type="submit"]):active{transform:scale(.985)}
+:is(#services,#contact,#contact-modal,body) :is(.glass-button,.medical-primary,.medical-secondary,.contact-send button,#service-request button[type="submit"]):focus-visible{outline:2px solid #d7d7df;outline-offset:4px}
+:is(#services,#contact,#contact-modal,body) :is(.glass-button,.medical-primary,.medical-secondary,.contact-send button,#service-request button[type="submit"])::before,:is(#services,#contact,#contact-modal,body) :is(.glass-button,.medical-primary,.medical-secondary,.contact-send button,#service-request button[type="submit"])::after{content:none}
+.site-header .header-cta{flex-shrink:0}
+.contact-modal-form .contact-send button{width:100%}
+.medical-primary{--action-fill:linear-gradient(145deg,#c7b6e7,#b49bd8 48%,#9d82c5);--action-ink:#1b1427}
+.project-cursor{background:linear-gradient(145deg,#ffffffe8,#f2f3f9c9);border:0;color:#11121a;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);box-shadow:inset 0 1px #ffffffbb,0 8px 28px #0002}
+@media(prefers-reduced-motion:reduce){:is(#services,#contact,#contact-modal,body) :is(.glass-button,.medical-primary,.medical-secondary,.contact-send button,#service-request button[type="submit"]){transition:none}:is(#services,#contact,#contact-modal,body) :is(.glass-button,.medical-primary,.medical-secondary,.contact-send button,#service-request button[type="submit"]):hover{transform:none}}
+/* A restrained amber tint for service actions; the request form uses neutral glass. */
+#services .service-cta{--action-fill:linear-gradient(110deg,#cba66e65 0%,#ffffff40 65%,#ffffff32);--action-ink:#f4f4f6}
+#services .request-card .service-cta{--action-fill:var(--action-neutral);--action-ink:#f4f4f6}
+.header-social{background:transparent;border:0;box-shadow:none}
+.header-social:hover,.header-social:focus-visible{background:#ffffff14;box-shadow:none}

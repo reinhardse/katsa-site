@@ -1,0 +1,84 @@
+/* Medical case edition. Activated before first paint by ?theme=light. */
+html.case-light{color-scheme:light;--bg:#fcfbfd;--ink:#292532;--muted:#817889;--accent:#7960a6;--line:#51405f1a;--glass:#6b51830a;--action-neutral:linear-gradient(110deg,#71608016,#71608024);--action-fill:var(--action-neutral);--action-ink:#473653;--action-shadow:none;background:#fcfbfd}
+.case-light body{background:var(--bg);color:var(--ink)}
+.case-light ::selection{background:#d8c9ee;color:#35263e}
+/* White navigation keeps the same geometry and behavior as the medical page. */
+.case-light .site-header,.case-light .site-header:not(.scrolled){background:transparent;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.case-light .site-header.scrolled{background:#fcfbfdef;box-shadow:0 1px 0 #5e456b10,0 10px 30px #48305406;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.case-light .site-header .brand,.case-light .site-header .brand span{color:#302838}
+.case-light .site-header nav a{color:#696070}
+.case-light .site-header nav a:hover,.case-light .site-header nav a:focus-visible,.case-light .site-header nav a.nav-medical:hover{background:#65507810;color:#392c47;box-shadow:none}
+.case-light .site-header .nav-medical span,.case-light .mobile-menu .nav-medical span{background-image:linear-gradient(110deg,#ad4c7f,#7961ac 60%,#4d7d9f)}
+.case-light .header-social{background:transparent;color:#4c4058}
+.case-light .header-social .header-icon,.case-light .header-social .header-icon path{fill:#4c4058;color:#4c4058}
+.case-light .header-social:hover,.case-light .header-social:focus-visible{background:#65507810}
+.case-light .site-header .header-cta{--action-fill:linear-gradient(110deg,#58426713,#58426720);--action-ink:#4a3c55}
+.case-light .menu-toggle svg{color:#4c4058}
+.case-light .mobile-menu{background:#fcfbfdf5;border-color:#69527515;color:#4c4058;box-shadow:0 18px 45px -20px #5a416f30}
+.case-light .mobile-menu>a{color:#4c4058}
+.case-light .mobile-menu .glass-button{--action-fill:linear-gradient(110deg,#71608016,#71608026);--action-ink:#4c4058}
+/* Dark typography and quiet, cool-tinted surfaces replace glowing dark panels. */
+.case-light .section-label,.case-light .case-kind,.case-light .case-number{color:#8b789c}
+.case-light .case-back,.case-light .case-return{color:#8b7f94}
+.case-light .case-back:hover,.case-light .case-return a:hover{color:#635078}
+.case-light .case-hero h1{color:#2c2435}
+.case-light .case-hero-bottom>p{color:#776a82}
+.case-light .case-tags span{border:1px solid #79648d1d;background:linear-gradient(135deg,#eee8f4b8,#f7f4fab8);color:#78648c;box-shadow:inset 0 1px #fff}
+.case-light .case-section+.case-section,.case-light .case-return,.case-light .editorial-shot,.case-light .editorial-palette{border-color:#69527518}
+.case-light .editorial-facts span,.case-light .editorial-decision-main>span,.case-light .editorial-reason>span,.case-light .editorial-palette>span{color:#95869f}
+.case-light .editorial-client-scope p{color:#5e5369}
+.case-light .editorial-scope li{background:#eee8f450;border:1px solid #79648d20;color:#77618b;box-shadow:inset 0 1px #fff8}
+.case-light .case-section h2,.case-light .editorial-decision h3{color:#32283e}
+.case-light .editorial-decision p,.case-light .case-design-body>p{color:#7a6e84}
+.case-light .editorial-decision .editorial-reason{background:linear-gradient(130deg,#f5f1f9,#efedf6);box-shadow:inset 0 1px #fff,0 14px 36px -28px #6b4c8b35;border:1px solid #79648d0e}
+.case-light .editorial-reason p{color:#756782}
+.case-light .editorial-palette p{color:#7a6e84}
+.case-light .editorial-palette i{box-sizing:border-box;border:1px solid #62587522;box-shadow:0 3px 9px #59456809}
+.case-light .editorial-prototype-description,.case-light .case-process-copy>p:not(.section-label){color:#7a6e84}
+.case-light .case-flow{border:1px solid #79648d17;background:radial-gradient(ellipse at 100% 0%,#c3b1df29,transparent 75%),linear-gradient(135deg,#f6f2fa,#eeedf6);box-shadow:inset 0 1px #fff,0 18px 50px -38px #6b4c8b30}
+.case-light .case-flow-caption{color:#8c7d99}
+.case-light .case-flow li{color:#60516f}.case-light .case-flow li+li{border-color:#79648d1a}.case-light .case-flow li>span{color:#9b88ac}
+.case-light .prototype-dot:after{background:#dcd4e7}.case-light .prototype-dot.is-active:after{background:#9e85bd}.case-light .prototype-pause{color:#897698}
+.case-light .case-result-text{color:#72637e}.case-light .case-result-note{color:#96879f;border-left-color:#bca7d14d}
+/* Preserve the colors and compositing bounds of all original work visuals. */
+.case-light .case-visual figcaption,.case-light .case-media figcaption{color:#92829f}
+/* Closing form belongs to the same white medical environment. */
+.case-light #contact.ron-contact{border-top:1px solid #69527518;background:radial-gradient(ellipse at 8% 62%,#d8c8ef26,transparent 63%),#fcfbfd}
+.case-light #contact:before{background:radial-gradient(ellipse at 34% 45%,#cab7e32e,transparent 62%)}
+.case-light #contact h2,.case-light #contact h3{color:#32283e}.case-light #contact h2 span{color:#9270b0}
+.case-light #contact .contact-intro{color:#8a7b96}
+.case-light #contact .direct-contact h3{color:#94849e}
+.case-light #contact .contact-messengers>a{border:1px solid #79648d17;background:linear-gradient(130deg,#f0ebf6,#f7f4fa);color:#746183}
+.case-light #contact .contact-messengers>a:hover{background:#eae2f2}
+.case-light #contact .contact-icon,.case-light #contact .contact-icon path{fill:#71607e;color:#71607e}
+.case-light #project-request label:not(.service-consent){background:#f3eff7;border:1px solid #79648d19;color:#92809f;box-shadow:inset 0 1px #fff8}
+.case-light #project-request label:focus-within{border-color:#b399ca}
+.case-light #project-request input,.case-light #project-request textarea{color:#473453}
+.case-light #project-request input::placeholder,.case-light #project-request textarea::placeholder{color:#a595b1}
+.case-light #project-request label.service-consent{color:#9a8ba5;background:none;border:0;box-shadow:none}
+.case-light #project-request .service-consent a{color:#846990}.case-light #project-request .service-consent input{accent-color:#9976b4}
+.case-light #contact .contact-send button{--action-fill:linear-gradient(110deg,#60446f,#79608a);--action-ink:#fff;--action-shadow:0 7px 20px #6e4f8420}
+.case-light #contact .footer{border-color:#69527518}.case-light #contact .footer-brand{color:#35273f}
+.case-light #contact .footer nav,.case-light #contact .footer-bottom{color:#9b8ba7}.case-light #contact .footer nav a:hover,.case-light #contact .footer-bottom a:hover{color:#694e7d}
+/* Request dialog also inherits the light edition. */
+.case-light #contact-modal{color:#493653;background:radial-gradient(ellipse at 0 0,#e6d9f35c,transparent 65%),#fcfbfd;border-color:#69527517;box-shadow:0 35px 100px #4935582e}
+.case-light #contact-modal::backdrop{background:#32293d59;backdrop-filter:blur(12px)}
+.case-light .contact-modal-close{background:#79648d0d;color:#78648a}.case-light .contact-modal-close:hover{background:#79648d20}
+.case-light .contact-modal-intro h2{color:#392b45}.case-light .contact-modal-intro h2 span{color:#9574b1}.case-light .contact-modal-description{color:#95859f}
+.case-light .contact-modal-connect h3{color:#8a7698}
+.case-light .contact-modal-social{border-color:#79648d17;background:#f0ebf6;color:#78648b}.case-light .contact-modal-social:hover{background:#e7ddf0}
+.case-light .contact-modal-social svg,.case-light .contact-modal-social svg path{fill:#78648b}
+.case-light .contact-modal-form label:not(.service-consent){color:#95839f}
+.case-light .contact-modal-form input:not([type=checkbox]),.case-light .contact-modal-form textarea{background:#f4f0f8;border-color:#79648d20;color:#4b3658}
+.case-light .contact-modal-form input::placeholder,.case-light .contact-modal-form textarea::placeholder{color:#aa9bb4}
+.case-light .contact-modal-form .service-consent{color:#a291ad}.case-light .contact-modal-form .service-consent a{color:#8d709d}.case-light .contact-modal-form .service-consent input{accent-color:#9976b4}
+.case-light #contact-modal .contact-send button{--action-fill:linear-gradient(110deg,#60446f,#79608a);--action-ink:#fff}
+/* Mobile image inspection keeps the selected theme too. */
+.case-light .media-viewer,.case-light .media-viewer::backdrop{background:#f8f5fb;color:#4a3658}.case-light .media-viewer-bar{background:#f8f5fbef}.case-light .media-viewer-bar button{color:#6f537f;border-color:#79648d22;background:#eae2f2}.case-light .media-viewer-hint{color:#9a88a7}
+@media(max-width:1100px){.case-light .site-header .header-social,.case-light .site-header .menu-toggle{background:#7660830d;border-color:#69527515}.case-light .site-header .menu-toggle svg{color:#4c4058}}
+/* Keep small labels and form hints readable on pale surfaces. */
+.case-light .contact-modal-description{color:#7c6d87}.case-light .contact-modal-form label:not(.service-consent){color:#7c6a88}
+.case-light .contact-modal-form input::placeholder,.case-light .contact-modal-form textarea::placeholder{color:#84738f}
+.case-light .contact-modal-form .service-consent{color:#897792}.case-light .contact-modal-form .service-consent a{color:#796185}
+.case-light #project-request label:not(.service-consent){color:#806b8c}.case-light #project-request input::placeholder,.case-light #project-request textarea::placeholder{color:#877390}
+.case-light #project-request label.service-consent{color:#897594}

@@ -1,0 +1,50 @@
+/* Central eight-column stack; particle current is a separate layer behind it. */
+.medicine-page #med-tasks.med-task-flow{position:relative;isolation:isolate;width:100%;margin:0;padding:100px 0 120px;overflow:visible;background:#08090d;transform:none;opacity:1}
+.med-task-heading,.med-task-stack{position:relative;z-index:2;width:min(906px,55.333vw);margin-inline:auto}
+.medicine-page .med-task-heading h2{font-size:clamp(40px,4.2vw,68px);font-weight:400;line-height:1.06;letter-spacing:-.055em;margin:22px 0 68px;color:#f4f4f6}
+.med-task-stack{padding-bottom:90px}
+.med-stack-card{position:sticky;top:calc(100px + var(--card-index)*13px);padding-bottom:36px;z-index:calc(3 + var(--card-index));transform-origin:50% 0}
+.med-stack-face{box-sizing:border-box;min-height:390px;padding:44px 48px 50px;background:linear-gradient(120deg,#1c2027,#14171c 75%);border:1px solid #ffffff12;border-radius:24px;box-shadow:0 -14px 38px #0003;transform-origin:50% 0;will-change:transform;transition:border-color .3s}
+.med-stack-number{display:block;font-size:18px;line-height:1.4;color:#568dff;margin-bottom:44px;font-variant-numeric:tabular-nums}.med-stack-number span{color:#747a86}
+.medicine-page .med-stack-face h3{font-size:clamp(30px,3.35vw,52px);font-weight:400;line-height:1.08;letter-spacing:-.045em;max-width:700px;margin:0 0 24px;color:#f5f5f7}
+.medicine-page .med-stack-face p{font-size:clamp(18px,1.55vw,23px);line-height:1.45;color:#aeb3bd;max-width:650px;margin:0}
+.med-flow-stage{position:sticky;top:0;height:100svh;margin-bottom:-100svh;z-index:0;pointer-events:none;overflow:hidden}.med-flow-canvas{display:block;width:100%;height:100%}
+@media(min-width:1700px){.med-task-heading,.med-task-stack{width:906px}}
+@media(max-width:1000px){.med-task-heading,.med-task-stack{width:76%}.med-stack-face{padding:36px;min-height:370px}}
+@media(max-width:600px){.medicine-page #med-tasks.med-task-flow{padding:66px 0 70px}.med-task-heading,.med-task-stack{width:calc(100% - 36px)}.medicine-page .med-task-heading h2{font-size:36px;margin:20px 0 42px}.med-stack-card{top:calc(92px + var(--card-index)*8px);padding-bottom:26px}.med-stack-face{padding:28px 25px 35px;min-height:340px;border-radius:20px}.med-stack-number{font-size:15px;margin-bottom:36px}.medicine-page .med-stack-face h3{font-size:32px;margin-bottom:20px}.medicine-page .med-stack-face p{font-size:18px}.med-task-stack{padding-bottom:40px}}
+@media(prefers-reduced-motion:reduce){.med-stack-card{position:relative;top:auto}.med-stack-face{will-change:auto}.med-flow-stage{display:none}}
+
+/* Clip the sticky current at this section boundary without creating a scroll container. */
+.medicine-page #med-tasks.med-task-flow{clip-path:inset(0)}
+
+/* Approved glass study: dense readable left, diffuse moving colour through the right. */
+.med-stack-face{position:relative;isolation:isolate;min-height:430px;padding:44px 48px 48px;background:linear-gradient(100deg,rgba(12,15,21,.91) 0%,rgba(16,20,28,.77) 42%,rgba(22,29,43,.28) 100%);-webkit-backdrop-filter:blur(30px) saturate(1.3) brightness(1.35);backdrop-filter:blur(30px) saturate(1.3) brightness(1.35);border:1px solid rgba(204,221,245,.16);box-shadow:0 -12px 32px rgba(0,0,0,.25),0 22px 48px rgba(0,0,0,.16)}
+.med-stack-number{font-size:24px;color:#f28b61;margin-bottom:48px}.med-stack-number span{font-size:.86em;color:#858a94}
+.medicine-page .med-stack-face h3{font-size:clamp(30px,3.05vw,48px);line-height:1.13;letter-spacing:-.018em;max-width:100%;margin-bottom:22px;text-wrap:balance}
+.medicine-page .med-stack-face p{max-width:72%;font-size:clamp(18px,1.5vw,22px);line-height:1.48;color:#b5b8c1}
+@media(max-width:1000px){.med-stack-face{padding:36px;min-height:400px}.medicine-page .med-stack-face p{max-width:88%}}
+@media(max-width:600px){.med-stack-face{padding:29px 25px 36px;min-height:365px;-webkit-backdrop-filter:blur(22px) saturate(1.2);backdrop-filter:blur(22px) saturate(1.2)}.med-stack-number{font-size:21px;margin-bottom:34px}.medicine-page .med-stack-face h3{font-size:clamp(27px,7.8vw,33px);letter-spacing:-.012em;line-height:1.15;overflow-wrap:normal}.medicine-page .med-stack-face p{max-width:100%;font-size:18px}}
+
+/* Live optical layer: do not let overlapping panes erase the current. */
+.med-stack-face{overflow:hidden;background:rgba(14,18,26,.25);-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+.med-glass-wave{position:absolute;inset:0;width:100%;height:100%;z-index:-2;pointer-events:none;filter:blur(19px) saturate(1.45) brightness(2.8);opacity:.94;transform:scale(1.09)}
+.med-stack-face:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(95deg,rgba(9,12,18,.77),rgba(10,15,24,.40) 48%,rgba(15,22,36,.10));}
+@media(max-width:600px){.med-glass-wave{filter:blur(16px) saturate(1.3) brightness(2.5)}.med-stack-face:before{background:linear-gradient(95deg,rgba(9,12,18,.8),rgba(10,15,24,.35))}}
+/* The optical sample replaces the raw background: only the softened current shows through. */
+.med-stack-face{background:#0b0f17}
+.med-glass-wave{z-index:0;filter:blur(24px) saturate(1.5) brightness(3.4);opacity:1}
+.med-stack-face:before{z-index:1}
+.med-stack-face>.med-stack-number,.med-stack-face>h3,.med-stack-face>p{position:relative;z-index:2}
+@media(max-width:600px){.med-glass-wave{filter:blur(20px) saturate(1.4) brightness(3)}}
+.med-glass-wave{filter:blur(12px) saturate(1.4) brightness(4.2)}
+.med-stack-face:before{background:linear-gradient(95deg,rgba(9,12,18,.68),rgba(10,15,24,.22) 48%,rgba(15,22,36,.04))}
+@media(max-width:600px){.med-glass-wave{filter:blur(11px) saturate(1.3) brightness(3.5)}.med-stack-face:before{background:linear-gradient(95deg,rgba(9,12,18,.75),rgba(10,15,24,.22))}}
+
+/* A card starts as a work-panel surface and reveals the live glass as it rises. */
+.med-stack-face{--glass-progress:0}
+.med-stack-face:after{content:"";position:absolute;inset:0;z-index:1;background:#16171f;box-shadow:inset 0 1px #ffffff12;opacity:calc(1 - var(--glass-progress));pointer-events:none}
+.med-glass-wave{opacity:var(--glass-progress)}
+@media(prefers-reduced-motion:reduce){.med-stack-face{--glass-progress:0!important}}
+
+/* Keep the pin handoff compositor-only; do not filter the whole live glass surface. */
+.med-stack-face{filter:none!important;backface-visibility:hidden;will-change:transform}

@@ -1,0 +1,65 @@
+/* Shared KATSA colour system. */
+:root{--katsa-blue:#719cf2;--katsa-violet:#acbce8;--katsa-gradient:linear-gradient(110deg,#3f5a9f 0%,#719cf2 50%,#acbce8 100%)}
+.site-header a[href="medicine.html"],.mobile-menu a[href="medicine.html"]{background-image:linear-gradient(110deg,#719cf2 0%,#8564e8 38%,#ed986a 76%,#edc27d 100%);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+#medical .medical-tags li:before{background:var(--katsa-gradient);box-shadow:0 0 12px #719cf222}
+#medical .medical-primary{--action-fill:var(--katsa-gradient);--action-ink:#fff}
+#medical .medical-primary:hover{--action-fill:linear-gradient(110deg,#6078ff,#9273f4)}
+.case-number,.case-flow li>span,.case-kind,.med-current-number{background:var(--katsa-gradient);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.case-flow{background:radial-gradient(ellipse at 100% 0%,#719cf223,transparent 65%),linear-gradient(135deg,#1d202d,#12141d)}
+.case-flow li i{color:#8799d7}
+.case-result-note,.case-decision-body .case-why{border-left-color:#719cf260}
+.prototype-dots button,.prototype-dots button.is-active,.prototype-dots button[aria-current="true"]{background:transparent!important;box-shadow:none!important;border:0!important}
+.prototype-dot.is-active:after,.prototype-dot[aria-current="true"]:after{background:var(--katsa-gradient)!important}
+body #approach .report-panel{background:radial-gradient(ellipse at 90% 0,#719cf226,transparent 65%),#16171f}
+body #approach .calendar-day.selected{background:var(--katsa-gradient)!important;color:#fff!important}
+body #approach .calendar-day.has-event:after{background:var(--katsa-gradient)}
+body #approach .agenda-day{color:#91ade8!important}
+body #approach .timeline-stage{--stage-color:#91ade8!important}
+body #approach .stage-title{color:#b5c7ed!important}
+body #approach .stage-title>span{background:var(--katsa-gradient);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:1}
+body #approach .stage-description{border-color:#719cf240}
+body #approach .chat-message.studio{background:linear-gradient(135deg,#c3ccec,#b5bfe5);color:#242b43}
+body #approach .studio .chat-author{color:#586890}
+body #contact.ron-contact{width:auto!important;max-width:none!important;margin:0!important;padding:130px var(--space) 35px!important;isolation:isolate;overflow:hidden;border:0!important;background:radial-gradient(ellipse at 8% 62%,#3f5a9f3d,transparent 63%),#08090d!important}
+body #contact.ron-contact:before{display:block!important;content:'';position:absolute;z-index:-1;pointer-events:none;left:-180px;bottom:100px;width:min(780px,85vw);height:600px;background:radial-gradient(ellipse at 34% 45%,#719cf235,transparent 62%);filter:blur(45px);animation:contact-atmosphere 20s ease-in-out infinite alternate}
+body #contact .ron-contact-layout{display:grid;grid-template-columns:35% 1fr;gap:10%;align-items:start}
+body #contact h2,body #contact h3{color:#f2f2f4!important}
+body #contact h2{font-size:clamp(44px,5.5vw,78px)!important}
+body #contact .contact-intro{color:#aaa5b8!important}
+body #contact .contact-messengers>a{color:#f2f2f4!important;background:linear-gradient(135deg,#ffffff0c,#ffffff04)!important;border-color:#ffffff19!important}
+body #contact .contact-icon,body #contact .contact-icon path{fill:#fff!important;color:#fff!important;filter:none!important}
+body #contact .footer-brand{color:#f2f2f4!important}
+body #contact .footer nav,body #contact .footer-bottom{color:#b9b5c6!important}
+body #contact #contact-title span,body.medicine-page #med-projects .med-projects-fill{background:linear-gradient(90deg,transparent 0%,transparent var(--design-fill,0%),#777784 var(--design-fill,0%),#777784 100%),var(--katsa-gradient)!important;background-clip:text!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important;color:#777784!important}
+body.medicine-page #med-projects .med-projects-fill{background:linear-gradient(90deg,transparent 0%,transparent var(--project-fill,0%),#777784 var(--project-fill,0%),#777784 100%),var(--katsa-gradient)!important;background-clip:text!important;-webkit-background-clip:text!important}
+body #contact-modal{background:radial-gradient(ellipse at 0% 0%,#719cf22e,transparent 65%),#111219}
+body .contact-modal-intro h2 span{background:var(--katsa-gradient);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body .contact-modal-form input:focus,body .contact-modal-form textarea:focus{border-color:#719cf2}
+body .contact-modal-form .service-consent input,body #project-request .service-consent input{accent-color:#719cf2}
+body .contact-modal-form .service-consent a{color:#b0bdec}
+body[data-contacts-page] #contact{min-height:100svh;padding-top:170px!important}
+@media(max-width:760px){body #contact.ron-contact{padding:80px 22px 25px!important}body #contact .ron-contact-layout{display:flex;flex-direction:column-reverse;gap:65px}body #contact h2{font-size:clamp(34px,10vw,48px)!important}body #contact.ron-contact:before{left:-100px;height:450px;bottom:120px}body[data-contacts-page] #contact{padding-top:130px!important}}
+@media(prefers-reduced-motion:reduce){body #contact.ron-contact:before{animation:none}}
+.site-header a[href="medicine.html"] span,.mobile-menu a[href="medicine.html"] span{background:inherit;background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+/* Keep navigation's colour sweep, including the header's existing inner label. */
+.site-header a[href="medicine.html"]{background-image:linear-gradient(110deg,#719cf2 0%,#8564e8 38%,#ed986a 76%,#edc27d 100%)!important;background-clip:text!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important}
+body .site-header nav a.nav-medical span,body .mobile-menu a.nav-medical span{background:linear-gradient(110deg,#719cf2 0%,#8564e8 38%,#ed986a 76%,#edc27d 100%)!important;background-clip:text!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important}
+body #contact #project-request label:not(.service-consent){color:#b8b5c2!important}
+body #contact #project-request input:not([type=checkbox]),body #contact #project-request textarea{background:#ffffff05!important;color:#f2f2f4!important;border-color:#ffffff20!important}
+body #contact #project-request .service-consent{color:#b7b3c5!important}
+body #contact #project-request .service-consent a{color:#dedbe7!important}
+body #contact #project-request .contact-send button{--action-fill:var(--action-neutral);--action-ink:#f4f4f6}
+body #contact .footer nav a,body #contact .footer-bottom a{color:inherit!important}
+
+/* Approved gradient 06: one accent system across every page. */
+.studio-intro h2 span,#projects .section-heading h2 span,.med-task-heading h2 .med-task-fill{background:linear-gradient(90deg,transparent 0%,transparent var(--design-fill,0%),#777784 var(--design-fill,0%),#777784 100%),var(--katsa-gradient);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;color:#777784}
+.med-stack-number{background:none!important;-webkit-text-fill-color:initial;color:#fff}
+.med-stack-number .med-current-number{background:var(--katsa-gradient)!important;background-clip:text!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important;font-size:inherit;color:var(--katsa-blue)}
+.med-stack-number .med-total-number{background:none!important;-webkit-text-fill-color:#fff!important;color:#fff!important}
+#med-projects h2 .med-projects-white{color:#f2f2f4;-webkit-text-fill-color:#f2f2f4;background:none}
+body #approach .agenda-day{background:var(--katsa-gradient);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+body #approach .stage-title{color:#b5c7ed!important}
+body #approach .stage-title h4{background:var(--katsa-gradient);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+#medical .medical-primary:hover{--action-fill:var(--katsa-gradient)}
+body .site-header nav a.nav-medical span,body .mobile-menu a.nav-medical span{background:var(--katsa-gradient)!important;background-clip:text!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important}
+.prototype-controls button:focus-visible{outline-color:var(--katsa-blue)}

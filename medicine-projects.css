@@ -1,0 +1,5 @@
+.medicine-page #med-projects .med-projects-fill{color:#777784;background:linear-gradient(90deg,#36b7f4 0%,#36b7f4 var(--project-fill,0%),#777784 var(--project-fill,0%),#777784 100%);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+@media(min-width:761px){.medicine-page #med-projects .med-projects{align-items:start}.medicine-page #med-projects .med-project:nth-child(even){margin-top:95px}}
+@media(max-width:760px){.medicine-page #med-projects .med-project{margin-top:0}}
+@media(prefers-reduced-motion:reduce){.medicine-page #med-projects .med-projects-fill{--project-fill:100%!important}}
+.medicine-page #med-projects .med-projects-fill{display:block;width:max-content;max-width:100%}
