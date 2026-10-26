@@ -66,3 +66,8 @@ body .site-header nav a.nav-medical span,body .mobile-menu a.nav-medical span{ba
 
 /* Поля форм: без внутреннего светлого прямоугольника (рамка только у внешней карточки) */
 body #project-request input:not([type=checkbox]),body #project-request textarea,body #service-request .service-contact-label input,body #contact #project-request input:not([type=checkbox]),body #contact #project-request textarea{background:transparent!important;border:0!important;box-shadow:none!important;outline:0!important}
+
+/* Галочка согласия: подсветка, если не отмечена при отправке */
+body .service-consent.consent-error,body label.consent-error{color:#ff8a8a!important}
+body .service-consent.consent-error a,body label.consent-error a{color:#ffb0b0!important}
+body input[type=checkbox].consent-error{outline:2px solid #ff5a5a!important;outline-offset:2px;border-radius:4px;box-shadow:0 0 0 4px #ff5a5a33}

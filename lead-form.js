@@ -3,22 +3,26 @@
  const ENDPOINT='/send.php',IDS=['project-request','modal-project-request','service-request'];
  let service='',trigger='';const t0=Date.now();
  document.addEventListener('click',e=>{const b=e.target.closest('[data-service]');if(b)service=b.getAttribute('data-service')||'';const c=e.target.closest('a,button');if(c&&!c.closest('form'))trigger=(c.textContent||'').trim().slice(0,60)},true);
+ function mark(form,consent,on){const l=consent.closest('label');if(l)l.classList.toggle('consent-error',on);consent.classList.toggle('consent-error',on);consent.setAttribute('aria-invalid',on?'true':'false')}
  function note(form,text,ok){
   let n=form.querySelector('.lead-note');
   if(!n){n=document.createElement('p');n.className='lead-note';n.setAttribute('role','status');n.style.cssText='margin:12px 0 0;font-size:15px;line-height:1.4';form.append(n)}
-  n.textContent=text;n.style.color=ok?'#7fd99a':'#ff8a8a';
+  n.textContent=text;n.dataset.err=ok?'0':'1';n.style.color=ok?'#7fd99a':'#ff8a8a';
  }
  document.addEventListener('submit',async e=>{
   const form=e.target;
   if(!form||!form.elements||!form.elements.contact)return;
   e.preventDefault();e.stopImmediatePropagation();
   const el=form.elements,contact=el.contact;
+  const consent=form.querySelector('input[name="consent"]');
+  if(consent&&!consent.checked){mark(form,consent,true);consent.focus({preventScroll:false});note(form,'Чтобы отправить заявку, поставьте галочку согласия на обработку персональных данных.',false);return}
   if(contact){contact.setCustomValidity(contact.value.trim().length<3?'Укажите любой удобный способ связи':'');if(!form.reportValidity())return}
   const btn=form.querySelector('button[type="submit"]'),label=btn?btn.textContent:'';
   const tasks=[...form.querySelectorAll('input[name="task"]:checked')].map(i=>i.value);
   const text=form.querySelector('textarea[name="task"]');
   const fd=new FormData();
   fd.append('form',form.id);
+  fd.append('consent','1');
   fd.append('name',el.name&&el.name.value?el.name.value:'');
   fd.append('contact',contact.value);
   fd.append('task',text?text.value:tasks.join(', '));
@@ -42,6 +46,7 @@
   }finally{if(btn){btn.disabled=false;btn.textContent=label}}
  },true);
  /* скрытое поле-ловушка для ботов */
- const addTrap=()=>IDS.forEach(id=>{const f=document.getElementById(id);if(f&&!f.elements.website){const i=document.createElement('input');i.name='website';i.tabIndex=-1;i.autocomplete='off';i.setAttribute('aria-hidden','true');i.style.cssText='position:absolute;left:-9999px;opacity:0;height:0;width:0';f.append(i)}});
- addTrap();window.addEventListener('load',addTrap);
+ const prep=()=>document.querySelectorAll('form').forEach(f=>{const c=f.querySelector('input[name="consent"]');if(c&&!c.dataset.leadPrep){c.dataset.leadPrep='1';c.required=false;c.removeAttribute('required');c.autocomplete='off';c.checked=false;c.addEventListener('change',()=>{if(c.checked){mark(f,c,false);const n=f.querySelector('.lead-note');if(n&&n.dataset.err==='1')n.textContent=''}})}});
+ const addTrap=()=>{prep();IDS.forEach(id=>{const f=document.getElementById(id);if(f&&!f.elements.website){const i=document.createElement('input');i.name='website';i.tabIndex=-1;i.autocomplete='off';i.setAttribute('aria-hidden','true');i.style.cssText='position:absolute;left:-9999px;opacity:0;height:0;width:0';f.append(i)}})};
+ addTrap();document.addEventListener('DOMContentLoaded',addTrap);window.addEventListener('load',addTrap);
 })();

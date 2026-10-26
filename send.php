@@ -139,7 +139,6 @@ function secret_ok(array $cfg, string $key): bool {
 }
 
 // ───────── Служебные запросы (GET с секретом) ─────────
-if (isset($_GET['diag'])) { out(['config_found' => is_file($CONFIG), 'secret_set' => $cfg['secret'] !== '', 'secret_len' => strlen($cfg['secret']), 'base' => basename($BASE), 'list' => array_slice(scandir($BASE) ?: [], 0, 30)]); }
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $key = (string)($_GET['selftest'] ?? $_GET['setup'] ?? $_GET['health'] ?? '');
     if ($key === '' || !secret_ok($cfg, $key)) { out(['ok' => false, 'error' => 'not found'], 404); }
@@ -211,6 +210,7 @@ $lead = [
     'via'     => clean($_POST['via'] ?? '', 200),
     'form'    => clean($_POST['form'] ?? '', 60),
     'time'    => date('Y-m-d H:i:s'),
+    'consent' => 'yes',
     'ip'      => $_SERVER['REMOTE_ADDR'] ?? '',
 ];
 
@@ -218,6 +218,7 @@ $lead = [
 if (clean($_POST['website'] ?? '', 50) !== '') { out(['ok' => true]); }          // бот: делаем вид, что ок
 $elapsed = (int)($_POST['elapsed'] ?? 0);
 if ($elapsed > 0 && $elapsed < 2000) { out(['ok' => true]); }
+if (($_POST['consent'] ?? '') !== '1') { out(['ok' => false, 'error' => 'Нужно согласие на обработку персональных данных'], 422); }
 if (mb_strlen($lead['contact']) < 3) { out(['ok' => false, 'error' => 'Укажите любой способ связи'], 422); }
 
 // 4. Лимиты: не чаще 5 заявок за 10 минут с одного адреса и 60 в час всего
