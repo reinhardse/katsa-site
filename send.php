@@ -28,6 +28,8 @@ $cfg += [
     'secret'        => '',
     'telegram_token'=> '',
     'telegram_chat' => '',     // один id или несколько через запятую
+    'max_token'     => '',     // токен бота MAX
+    'max_user'      => '',     // id получателя(ей) в MAX через запятую
     'mail_to'       => '',     // куда слать копию на почту (пусто = не слать)
     'mail_from'     => 'no-reply@katsa.ru',
     'allowed_hosts' => ['katsa.ru', 'www.katsa.ru'],
@@ -73,6 +75,29 @@ function send_telegram(array $cfg, string $textHtml): array {
     return $errors ? [false, implode('; ', $errors)] : [true, 'ok'];
 }
 
+
+function max_call(array $cfg, string $method, string $path, ?array $json = null): array {
+    $ch = curl_init('https://platform-api.max.ru' . $path);
+    $opt = [CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 15, CURLOPT_CONNECTTIMEOUT => 8,
+            CURLOPT_CUSTOMREQUEST => $method, CURLOPT_HTTPHEADER => ['Authorization: ' . $cfg['max_token'], 'Content-Type: application/json']];
+    if ($json !== null) { $opt[CURLOPT_POSTFIELDS] = json_encode($json, JSON_UNESCAPED_UNICODE); }
+    curl_setopt_array($ch, $opt);
+    $body = curl_exec($ch); $code = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE); $err = curl_error($ch); curl_close($ch);
+    if ($body === false) { return [false, 'сеть: ' . $err, null]; }
+    $j = json_decode((string)$body, true);
+    return [$code === 200, 'MAX ответил ' . $code . ': ' . mb_substr((string)$body, 0, 200), $j];
+}
+
+function send_max(array $cfg, string $text): array {
+    if ($cfg['max_token'] === '' || $cfg['max_user'] === '') { return [null, 'не настроен']; }
+    $errors = [];
+    foreach (array_filter(array_map('trim', explode(',', $cfg['max_user']))) as $u) {
+        [$ok, $msg] = max_call($cfg, 'POST', '/messages?user_id=' . urlencode($u), ['text' => $text]);
+        if (!$ok) { $errors[] = $msg; }
+    }
+    return $errors ? [false, implode('; ', $errors)] : [true, 'ok'];
+}
+
 function send_mail(array $cfg, string $subject, string $text): array {
     if ($cfg['mail_to'] === '') { return [null, 'не настроена']; }
     $subject = str_replace(["\r", "\n"], ' ', $subject);
@@ -98,12 +123,13 @@ function deliver(array $cfg, array $lead): array {
     $lines[] = 'Страница: ' . $h($lead['page']);
     $lines[] = 'Время: ' . $h($lead['time']);
     $tg = send_telegram($cfg, implode("\n", $lines));
+    $mx = send_max($cfg, strip_tags(str_replace(['<b>', '</b>'], '', implode("\n", $lines))));
 
     $plain = "Новая заявка с katsa.ru\n\nИмя: " . ($lead['name'] ?: '—') . "\nКонтакт: " . $lead['contact']
         . "\nУслуга: " . ($lead['service'] ?: '—') . "\n\nЗадача:\n" . ($lead['task'] ?: '—')
         . "\n\nСтраница: " . $lead['page'] . "\nВремя: " . $lead['time'] . "\n";
     $ml = send_mail($cfg, 'Заявка с сайта KATSA' . ($lead['name'] ? ' — ' . $lead['name'] : ''), $plain);
-    return ['telegram' => $tg, 'mail' => $ml];
+    return ['telegram' => $tg, 'max' => $mx, 'mail' => $ml];
 }
 
 function secret_ok(array $cfg, string $key): bool {
@@ -129,6 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         out([
             'ok' => true, 'time' => date('c'),
             'telegram_configured' => $cfg['telegram_token'] !== '' && $cfg['telegram_chat'] !== '',
+            'max_configured' => $cfg['max_token'] !== '' && $cfg['max_user'] !== '',
             'mail_configured' => $cfg['mail_to'] !== '',
             'leads_total' => $total, 'leads_undelivered' => $undelivered, 'last_lead' => $last,
             'leads_dir_writable' => is_dir($LEADS) ? is_writable($LEADS) : is_writable($BASE),
@@ -136,6 +163,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
 
     if (isset($_GET['setup'])) {
+        if ($cfg['max_token'] !== '' && ($_GET['setup'] ?? '') !== '' && isset($_GET['max'])) {
+            [$ok, $msg, $j] = max_call($cfg, 'GET', '/updates?limit=100&timeout=0&types=bot_started,message_created');
+            $ids = [];
+            $walk = function ($a) use (&$walk, &$ids) { foreach ((array)$a as $k => $v) { if (is_array($v)) { $walk($v); } elseif ($k === 'user_id' && $v) { $ids[(string)$v] = 1; } } };
+            $walk($j['updates'] ?? []);
+            out(['ok' => $ok, 'info' => $msg, 'user_ids' => array_keys($ids), 'hint' => 'Напиши боту в MAX, открой страницу снова, id впиши в max_user']);
+        }
         if ($cfg['telegram_token'] === '') { out(['ok' => false, 'error' => 'Сначала впиши telegram_token в config.php']); }
         $ch = curl_init('https://api.telegram.org/bot' . $cfg['telegram_token'] . '/getUpdates');
         curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 15, CURLOPT_CONNECTTIMEOUT => 8]);
@@ -154,7 +188,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $lead = ['name' => 'Тест', 'contact' => 'selftest', 'service' => '', 'task' => 'Проверка приёмника заявок. Если ты это видишь, всё работает.',
              'page' => 'selftest', 'time' => date('Y-m-d H:i:s')];
     $r = deliver($cfg, $lead);
-    out(['ok' => true, 'telegram' => $r['telegram'], 'mail' => $r['mail']]);
+    out(['ok' => true, 'telegram' => $r['telegram'], 'max' => $r['max'], 'mail' => $r['mail']]);
 }
 
 // ───────── Приём заявки (POST из форм сайта) ─────────
@@ -201,7 +235,7 @@ $saved = @file_put_contents($file, json_encode($lead, JSON_UNESCAPED_UNICODE) . 
 
 // 6. Отправляем
 $r = deliver($cfg, $lead);
-$delivered = ($r['telegram'][0] === true) || ($r['mail'][0] === true);
+$delivered = ($r['telegram'][0] === true) || ($r['max'][0] === true) || ($r['mail'][0] === true);
 
 if ($saved && $delivered) {
     // отмечаем доставку у последней строки файла
