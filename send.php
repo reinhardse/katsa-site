@@ -134,6 +134,14 @@ function deliver(array $cfg, array $lead): array {
     return ['telegram' => $tg, 'max' => $mx, 'mail' => $ml];
 }
 
+
+// Журнал отклонённых заявок (не спам): по нему проверка поднимает тревогу при необычном числе отказов
+function log_reject(string $dir, string $reason, array $lead = []): void {
+    if (!is_dir($dir)) { @mkdir($dir, 0755, true); }
+    $row = ['time' => date('Y-m-d H:i:s'), 'reason' => $reason, 'ip' => $_SERVER['REMOTE_ADDR'] ?? '', 'page' => $lead['page'] ?? ''];
+    @file_put_contents($dir . '/rejects.log', json_encode($row, JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND | LOCK_EX);
+}
+
 function secret_ok(array $cfg, string $key): bool {
     return $cfg['secret'] !== '' && hash_equals($cfg['secret'], $key);
 }
@@ -160,6 +168,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             if (!$mok) { $problems[] = 'MAX: ' . $mmsg; }
         }
         if ($cfg['max_token'] === '' && $cfg['telegram_token'] === '' && $cfg['mail_to'] === '') { $problems[] = 'Не настроен ни один канал доставки'; }
+        $rejects24 = 0;
+        if (is_file($LEADS . '/rejects.log')) {
+            foreach (file($LEADS . '/rejects.log', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $line) {
+                $r = json_decode($line, true);
+                if ($r && strtotime((string)($r['time'] ?? '')) > time() - 86400) { $rejects24++; }
+            }
+        }
+        if ($rejects24 > 5) { $problems[] = 'Много отказанных заявок за сутки: ' . $rejects24 . ' (см. leads/rejects.log)'; }
         if ($undelivered > 0) { $problems[] = 'Недоставленных заявок: ' . $undelivered; }
         if (!(is_dir($LEADS) ? is_writable($LEADS) : is_writable($BASE))) { $problems[] = 'Папка заявок недоступна для записи'; }
         out([
@@ -168,7 +184,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             'telegram_configured' => $cfg['telegram_token'] !== '' && $cfg['telegram_chat'] !== '',
             'max_configured' => $cfg['max_token'] !== '' && $cfg['max_user'] !== '',
             'mail_configured' => $cfg['mail_to'] !== '',
-            'leads_total' => $total, 'leads_undelivered' => $undelivered, 'last_lead' => $last,
+            'leads_total' => $total, 'rejects_24h' => $rejects24, 'leads_undelivered' => $undelivered, 'last_lead' => $last,
             'leads_dir_writable' => is_dir($LEADS) ? is_writable($LEADS) : is_writable($BASE),
         ], $problems ? 503 : 200);
     }
@@ -220,7 +236,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') { out(['ok' => false, 'error' => 'met
 
 // 1. Проверка источника
 $origin = parse_url((string)($_SERVER['HTTP_ORIGIN'] ?? $_SERVER['HTTP_REFERER'] ?? ''), PHP_URL_HOST);
-if ($origin && !in_array($origin, $cfg['allowed_hosts'], true)) { out(['ok' => false, 'error' => 'origin'], 403); }
+if ($origin && !in_array($origin, $cfg['allowed_hosts'], true)) { log_reject($LEADS, 'origin'); out(['ok' => false, 'error' => 'origin'], 403); }
 
 // 2. Данные
 $lead = [
@@ -241,8 +257,8 @@ $lead = [
 if (clean($_POST['website'] ?? '', 50) !== '') { out(['ok' => true]); }          // бот: делаем вид, что ок
 $elapsed = (int)($_POST['elapsed'] ?? 0);
 if ($elapsed > 0 && $elapsed < 2000) { out(['ok' => true]); }
-if (($_POST['consent'] ?? '') !== '1') { out(['ok' => false, 'error' => 'Нужно согласие на обработку персональных данных'], 422); }
-if (mb_strlen($lead['contact']) < 3) { out(['ok' => false, 'error' => 'Укажите любой способ связи'], 422); }
+if (($_POST['consent'] ?? '') !== '1') { log_reject($LEADS, 'no_consent', $lead); out(['ok' => false, 'error' => 'Нужно согласие на обработку персональных данных'], 422); }
+if (mb_strlen($lead['contact']) < 3) { log_reject($LEADS, 'short_contact', $lead); out(['ok' => false, 'error' => 'Укажите любой способ связи'], 422); }
 
 // 4. Лимиты: не чаще 5 заявок за 10 минут с одного адреса и 60 в час всего
 if (!is_dir($LEADS)) { @mkdir($LEADS, 0755, true); }
@@ -252,7 +268,7 @@ $now = time();
 foreach ($rate as $ip => $times) { $rate[$ip] = array_values(array_filter($times, fn($t) => $t > $now - 3600)); if (!$rate[$ip]) { unset($rate[$ip]); } }
 $mine  = array_filter($rate[$lead['ip']] ?? [], fn($t) => $t > $now - 600);
 $total = array_sum(array_map('count', $rate));
-if (count($mine) >= 5 || $total >= 60) { out(['ok' => false, 'error' => 'Слишком много заявок, попробуйте позже'], 429); }
+if (count($mine) >= 5 || $total >= 60) { log_reject($LEADS, 'rate_limit', $lead); out(['ok' => false, 'error' => 'Слишком много заявок, попробуйте позже'], 429); }
 $rate[$lead['ip']][] = $now;
 @file_put_contents($rateFile, json_encode($rate), LOCK_EX);
 
@@ -288,5 +304,5 @@ if ($saved && $delivered) {
 }
 
 if ($saved) { exit; }
-if (!$delivered) { out(['ok' => false, 'error' => 'Не удалось принять заявку'], 500); }
+if (!$delivered) { log_reject($LEADS, 'save_and_delivery_failed', $lead); out(['ok' => false, 'error' => 'Не удалось принять заявку'], 500); }
 out(['ok' => true, 'delivered' => $delivered]);
