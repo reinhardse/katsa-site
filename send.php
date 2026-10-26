@@ -150,17 +150,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             foreach (file($f, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $line) {
                 $r = json_decode($line, true); if (!$r) { continue; }
                 $total++; $last = $r['time'] ?? $last;
-                if (!($r['delivered'] ?? false)) { $undelivered++; }
+                if (!($r['delivered'] ?? false) && strtotime((string)($r['time'] ?? '')) > time() - 3 * 86400) { $undelivered++; }
             }
         }
+        // Глубокая проверка: токен MAX рабочий? Есть ли недоставленные заявки?
+        $problems = [];
+        if ($cfg['max_token'] !== '') {
+            [$mok, $mmsg] = max_call($cfg, 'GET', '/me');
+            if (!$mok) { $problems[] = 'MAX: ' . $mmsg; }
+        }
+        if ($cfg['max_token'] === '' && $cfg['telegram_token'] === '' && $cfg['mail_to'] === '') { $problems[] = 'Не настроен ни один канал доставки'; }
+        if ($undelivered > 0) { $problems[] = 'Недоставленных заявок: ' . $undelivered; }
+        if (!(is_dir($LEADS) ? is_writable($LEADS) : is_writable($BASE))) { $problems[] = 'Папка заявок недоступна для записи'; }
         out([
-            'ok' => true, 'time' => date('c'),
+            'status' => $problems ? 'PROBLEM' : 'ALL_OK', 'problems' => $problems,
+            'ok' => !$problems, 'time' => date('c'),
             'telegram_configured' => $cfg['telegram_token'] !== '' && $cfg['telegram_chat'] !== '',
             'max_configured' => $cfg['max_token'] !== '' && $cfg['max_user'] !== '',
             'mail_configured' => $cfg['mail_to'] !== '',
             'leads_total' => $total, 'leads_undelivered' => $undelivered, 'last_lead' => $last,
             'leads_dir_writable' => is_dir($LEADS) ? is_writable($LEADS) : is_writable($BASE),
-        ]);
+        ], $problems ? 503 : 200);
     }
 
     if (isset($_GET['setup'])) {
