@@ -10,7 +10,7 @@
  }
  document.addEventListener('submit',async e=>{
   const form=e.target;
-  if(!form||!IDS.includes(form.id))return;
+  if(!form||!form.elements||!form.elements.contact)return;
   e.preventDefault();e.stopImmediatePropagation();
   const el=form.elements,contact=el.contact;
   if(contact){contact.setCustomValidity(contact.value.trim().length<3?'Укажите любой удобный способ связи':'');if(!form.reportValidity())return}

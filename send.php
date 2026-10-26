@@ -237,7 +237,20 @@ $file = $LEADS . '/' . date('Y-m') . '.jsonl';
 $lead['delivered'] = false;
 $saved = @file_put_contents($file, json_encode($lead, JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND | LOCK_EX) !== false;
 
-// 6. Отправляем
+// 6. Если заявка сохранена, сразу отвечаем сайту, а отправку в мессенджеры/почту делаем уже после ответа
+if ($saved) {
+    ignore_user_abort(true);
+    $payload = json_encode(['ok' => true], JSON_UNESCAPED_UNICODE);
+    header('Content-Type: application/json; charset=utf-8');
+    header('Cache-Control: no-store');
+    header('Connection: close');
+    header('Content-Length: ' . strlen($payload));
+    echo $payload;
+    if (function_exists('fastcgi_finish_request')) { fastcgi_finish_request(); }
+    else { while (ob_get_level() > 0) { @ob_end_flush(); } @flush(); }
+}
+
+// 7. Отправляем
 $r = deliver($cfg, $lead);
 $delivered = ($r['telegram'][0] === true) || ($r['max'][0] === true) || ($r['mail'][0] === true);
 
@@ -250,5 +263,6 @@ if ($saved && $delivered) {
     }
 }
 
-if (!$saved && !$delivered) { out(['ok' => false, 'error' => 'Не удалось принять заявку'], 500); }
+if ($saved) { exit; }
+if (!$delivered) { out(['ok' => false, 'error' => 'Не удалось принять заявку'], 500); }
 out(['ok' => true, 'delivered' => $delivered]);
