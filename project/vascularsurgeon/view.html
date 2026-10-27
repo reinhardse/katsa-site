@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="ru"><head><meta name="robots" content="noindex,nofollow"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Мобильная версия</title>
+<style>
+body{margin:0;background:#e9e9e9;font-family:"Helvetica Neue",Arial,sans-serif;color:#1f1f1f}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;max-width:520px;margin:0 auto;padding:14px 16px}
+.bar a{color:#1f1f1f;font-weight:600;font-size:14px;text-decoration:none}
+.phone{width:390px;max-width:100%;height:calc(100vh - 84px);min-height:560px;margin:0 auto 20px;border:10px solid #1f1f1f;border-radius:34px;background:#fff;overflow:hidden;box-sizing:content-box}
+iframe{display:block;width:390px;height:100%;border:0;background:#fff}
+</style></head><body>
+<div class="bar"><a href="index.html">☰ Меню</a><a id="d" href="#">Десктоп</a><span id="t" style="font-size:14px;color:#5c5c5c"></span></div>
+<div class="phone"><iframe id="f" title="Мобильная версия"></iframe></div>
+<script>
+var p=(new URLSearchParams(location.search)).get('p')||'MainMobile.dc.html';
+if(!/^[A-Za-z]+Mobile\.dc\.html$/.test(p))p='MainMobile.dc.html';
+if(Math.min(screen.width,innerWidth)<=520){location.replace(p);}
+else{document.getElementById('f').src=p;document.getElementById('d').href=p.replace('Mobile.dc.html','.dc.html');document.getElementById('t').innerHTML='Мобильная версия · 390 px';}
+document.getElementById('f').addEventListener('load',function(){try{var n=this.contentWindow.location.pathname.split('/').pop();if(/Mobile\.dc\.html$/.test(n))document.getElementById('d').href=n.replace('Mobile.dc.html','.dc.html');}catch(e){}});
+</script></body></html>

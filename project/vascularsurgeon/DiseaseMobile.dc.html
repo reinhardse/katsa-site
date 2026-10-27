@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Страница заболевания, мобильная версия</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0;font-family:"Helvetica Neue",Arial,sans-serif;color:#1f1f1f;background:#fff;font-size:15px;line-height:1.5}
+*{box-sizing:border-box}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,p{margin:0}
+h1{font-size:40px;line-height:1.15;text-wrap:balance}
+h2{font-size:28px;line-height:1.2;text-wrap:balance}
+h3{font-size:18px;line-height:1.3}
+.w{max-width:1200px;margin:0 auto;padding-left:24px;padding-right:24px}
+.hd{border-bottom:1.5px solid #1f1f1f;background:#fff}
+.hdr{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-top:16px;padding-bottom:16px}
+.logo{display:flex;align-items:center;gap:12px;font-weight:700}
+.nav{display:flex;gap:28px;align-items:center;flex-wrap:wrap}
+.nav a:hover{text-decoration:underline}
+.dd{position:relative}
+.ddm{display:none;position:absolute;top:100%;left:-12px;min-width:300px;background:#fff;border:1.5px solid #1f1f1f;padding:8px;z-index:5}
+.dd:hover .ddm{display:block}
+.ddm a{display:block;padding:10px 12px}
+.ddm a:hover{background:#efefef;text-decoration:none}
+.hr{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 22px;border:1.5px solid #1f1f1f;border-radius:4px;font-size:15px;font-weight:600;background:#fff;color:#1f1f1f;cursor:pointer;font-family:inherit}
+.btn:hover{background:#efefef}
+.btn.p{background:#1f1f1f;color:#fff}
+.btn.p:hover{background:#3a3a3a}
+.ph{position:relative;display:flex;align-items:center;justify-content:center;background-color:#e4e4e4;border:1.5px solid #b8b8b8;color:#5c5c5c;font-size:13px;text-align:center;background-image:linear-gradient(to top right,transparent calc(50% - 1px),#c4c4c4 50%,transparent calc(50% + 1px)),linear-gradient(to top left,transparent calc(50% - 1px),#c4c4c4 50%,transparent calc(50% + 1px))}
+.ph span{background:#e4e4e4;padding:2px 8px}
+.card{border:1.5px solid #b8b8b8;border-radius:6px;padding:20px;background:#fff}
+.g{display:grid;gap:20px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.row{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.mut{color:#5c5c5c}
+.stub{border:2px dashed #1f1f1f;border-radius:8px;padding:28px;background:#f6f6f6}
+.ft{background:#efefef;border-top:1.5px solid #1f1f1f;padding:40px 0}
+.ft a:hover{text-decoration:underline}
+/* mobile 390 */
+.w{padding-left:16px;padding-right:16px}
+h1{font-size:28px}
+h2{font-size:22px}
+h3{font-size:16px}
+.stat{font-size:26px}
+.sec{padding:36px 0}
+.hd{position:relative;z-index:6}
+.hdr{flex-wrap:nowrap;gap:12px;padding-top:10px;padding-bottom:10px}
+.hdr .logo span:last-child{font-size:14px}
+.mm{border-top:1.5px solid #1f1f1f;background:#fff;padding:8px 16px 16px;display:flex;flex-direction:column}
+.mm a{display:flex;align-items:center;min-height:48px;border-bottom:1px solid #e4e4e4}
+.mm .sbm{padding-left:16px;color:#5c5c5c}
+.mm .btn{margin-top:14px;border-bottom:1.5px solid #1f1f1f}
+.anc .w{flex-wrap:nowrap;overflow-x:auto;gap:20px;padding-top:2px;padding-bottom:2px;-webkit-overflow-scrolling:touch}
+.anc a{white-space:nowrap;min-height:44px}
+.ph[style*="height:400px"]{height:230px!important}
+.ph[style*="height:440px"]{height:300px!important}
+#stats .g4{grid-template-columns:repeat(2,minmax(0,1fr))}
+.row.sb{align-items:flex-start}
+.dxc{grid-template-columns:1fr}
+.fd{min-height:120px}
+.stub{padding:18px}
+</style>
+</helmet>
+
+<header class="hd"><div class="w hdr">
+<a class="logo" href="MainMobile.dc.html"><span class="ph" style="width:36px;height:36px"><span>Лого</span></span><span>Название команды</span></a>
+<button type="button" class="arr" aria-label="Меню" onClick="{{toggleMenu}}">{{menuSign}}</button>
+</div>
+<sc-if value="{{menuOpen}}" hint-placeholder-val="{{ false }}">
+<div class="mm">
+<a href="DirectionMobile.dc.html"><b>Направления</b></a>
+<a class="sbm" href="DirectionMobile.dc.html">Эндоваскулярная хирургия</a>
+<a class="sbm" href="SurgeryMobile.dc.html">Сердечно-сосудистая хирургия</a>
+<a class="sbm" href="PhlebologyMobile.dc.html">Флебология</a>
+<a class="sbm" href="CardiologyMobile.dc.html">Кардиология и аритмология</a>
+<a href="AboutMobile.dc.html"><b>О нас</b></a>
+<a href="ContactsMobile.dc.html"><b>Контакты</b></a>
+<a href="#form" onClick="{{toggleMenu}}"><span class="mut">+7 (000) 000-00-00</span></a>
+<a class="btn p" href="#form" onClick="{{toggleMenu}}">Оставить заявку</a>
+</div>
+</sc-if>
+</header>
+
+<section style="padding:40px 0 64px">
+<div class="w">
+<p class="mut" style="margin-bottom:14px"><a href="DirectionMobile.dc.html">← Эндоваскулярная хирургия</a> / Название заболевания</p>
+<h1>Название заболевания</h1>
+<div class="stub" style="margin-top:32px">
+<h2>Здесь будет страница заболевания</h2>
+<p class="mut" style="margin-top:10px">Один шаблон для всех основных заболеваний. Содержимое страницы:</p>
+<div class="g g2" style="margin-top:24px">
+<div class="card"><h3>Краткая информация</h3><p class="mut" style="margin-top:6px">Что это за заболевание</p></div>
+<div class="card"><h3>Симптомы и факторы риска</h3><p class="mut" style="margin-top:6px">Как проявляется и от чего возникает</p></div>
+<div class="card"><h3>Диагностика</h3><p class="mut" style="margin-top:6px">Исследования из списка направления, подходящие при этом заболевании</p></div>
+<div class="card"><h3>Лечение и операции</h3><p class="mut" style="margin-top:6px">Методики из списка направления, подходящие при этом заболевании</p></div>
+<div class="card"><h3>Врачи</h3><p class="mut" style="margin-top:6px">Врачи, которые лечат это заболевание</p></div>
+<div class="card"><h3>Запись на консультацию</h3><p class="mut" style="margin-top:6px">Кнопка и форма заявки</p></div>
+</div>
+<div class="row" style="margin-top:28px"><a class="btn p" href="DirectionMobile.dc.html">← Назад к направлению</a></div>
+</div>
+</div>
+</section>
+
+<footer class="ft"><div class="w">
+<div class="g g4">
+<div><div class="logo"><span class="ph" style="width:44px;height:44px"><span>Лого</span></span><span>Название команды</span></div></div>
+<div><h3>Разделы</h3><p><a href="DirectionMobile.dc.html">Направления</a></p><p><a href="AboutMobile.dc.html">О нас</a></p><p><a href="ContactsMobile.dc.html">Контакты</a></p></div>
+<div><h3>Контакты</h3><p class="mut">+7 (000) 000-00-00</p><p class="mut">г. Москва, ул. Примерная, д. 1</p></div>
+<div><h3>Документы</h3><p class="mut">Политика конфиденциальности</p></div>
+</div>
+</div></footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1750}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const menu = !!(this.state || {}).menu;
+    return {
+      menuOpen: menu,
+      menuSign: menu ? '×' : '☰',
+      toggleMenu: () => this.setState({ menu: !menu })
+    };
+  }
+}
+</script>
+</body>
+</html>
