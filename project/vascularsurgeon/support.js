@@ -2,6 +2,8 @@
    Поддерживает: <helmet>, <sc-if>, <sc-for>, {{значение}}, onClick="{{функция}}", DCLogic.setState */
 (function () {
   'use strict';
+  var navSrc = (document.currentScript && document.currentScript.src || '').replace(/support\.js.*$/, 'proto-nav.js');
+  if (navSrc) { var ns = document.createElement('script'); ns.src = navSrc; ns.defer = true; document.head.appendChild(ns); }
   var isMobile = /Mobile\.dc\.html/i.test(location.pathname);
   if (isMobile && !document.querySelector('meta[name=viewport]')) {
     var vp = document.createElement('meta'); vp.name = 'viewport'; vp.content = 'width=device-width, initial-scale=1';
@@ -107,26 +109,6 @@
     }
   }
 
-  function addMenuButton() {
-    if (window.top !== window.self) return; // внутри телефонной рамки переключатель уже есть сверху
-    var m = /([A-Za-z]+?)(Mobile)?\.dc\.html$/.exec(location.pathname);
-    var box = document.createElement('div');
-    box.style.cssText = 'position:fixed;left:12px;bottom:12px;z-index:99999;display:flex;gap:6px;font:600 13px/1 Helvetica Neue,Arial,sans-serif;';
-    function pill(text, href, active) {
-      var a = document.createElement('a');
-      a.href = href; a.textContent = text;
-      a.style.cssText = 'padding:10px 14px;border-radius:20px;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.25);border:1.5px solid #1f1f1f;' +
-        (active ? 'background:#fff;color:#1f1f1f;' : 'background:#1f1f1f;color:#fff;');
-      box.appendChild(a);
-    }
-    pill('☰ Меню', 'index.html', false);
-    if (m) {
-      pill('Десктоп', m[1] + '.dc.html', !m[2]);
-      pill('Мобильная', 'view.html?p=' + m[1] + 'Mobile.dc.html', !!m[2]);
-    }
-    document.body.appendChild(box);
-  }
-
   document.addEventListener('DOMContentLoaded', function () {
     var host = document.querySelector('x-dc');
     if (!host) return;
@@ -158,7 +140,6 @@
     }
     logic._render = render;
     render();
-    addMenuButton();
     if (location.hash) { var t = document.getElementById(location.hash.slice(1)); if (t) t.scrollIntoView(); }
   });
 })();
