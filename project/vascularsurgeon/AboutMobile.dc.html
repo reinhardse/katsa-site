@@ -116,12 +116,12 @@ h3{font-size:16px}
 <div class="g g2" style="align-items:center">
 <div>
 <p class="mut">О нас</p>
-<h1 style="margin-top:6px">Сидельников Александр Валентинович</h1>
+<h1 style="margin-top:6px">Колединский Антон Геннадьевич</h1>
 <p class="mut" style="margin-top:10px">Кардиолог · сердечно-сосудистый хирург · аритмолог</p>
 <div class="ln" style="width:92%;margin-top:20px"></div><div class="ln" style="width:80%"></div><div class="ln" style="width:65%"></div>
 <div class="row" style="margin-top:24px"><a class="btn p" href="#form">Записаться на консультацию</a></div>
 </div>
-<div class="ph" style="height:440px"><span>Портрет: Сидельников А. В.</span></div>
+<div class="ph" style="height:440px"><span>Портрет: Колединский А. Г.</span></div>
 </div>
 </div>
 </section>
@@ -199,10 +199,9 @@ h3{font-size:16px}
 
 <section class="sec" id="team">
 <div class="w">
-<span class="tag">07 · Вся команда, слайдер</span>
+<span class="tag">07 · Вся команда</span>
 <div class="row sb" style="margin-bottom:24px">
 <h2>Команда</h2>
-<div class="row"><span class="mut">{{teamInfo}}</span><button type="button" class="arr" aria-label="Назад" onClick="{{prevT}}">←</button><button type="button" class="arr" aria-label="Вперёд" onClick="{{nextT}}">→</button></div>
 </div>
 <div class="g g4">
 <sc-for list="{{team}}" as="m" hint-placeholder-count="4">
@@ -268,10 +267,7 @@ class Component extends DCLogic {
       menuOpen: menu,
       menuSign: menu ? '×' : '☰',
       toggleMenu: () => this.setState({ menu: !menu }),
-      team: [0].map((i) => ({ k: t + i + 1 })),
-      teamInfo: 'Врач ' + (t + 1) + ' из 18',
-      prevT: () => this.setState({ t: Math.max(t - 1, 0) }),
-      nextT: () => this.setState({ t: Math.min(t + 1, 17) }),
+      team: Array.from({length:18},(_,i)=>({k:i+1})),
       cOffCls: consult === 'offline' ? 'pill on' : 'pill',
       cOnCls: consult === 'online' ? 'pill on' : 'pill',
       consultLabel: consult === 'offline' ? 'офлайн-консультация' : 'онлайн-консультация',
