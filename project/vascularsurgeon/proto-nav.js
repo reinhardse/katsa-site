@@ -45,8 +45,9 @@
     var wrap = document.createElement('div'); wrap.style.cssText = 'position:relative;';
     var btn = document.createElement('button'); btn.type = 'button';
     btn.setAttribute('aria-haspopup', 'true'); btn.setAttribute('aria-expanded', 'false');
-    btn.innerHTML = 'Выбрать страницу <span aria-hidden="true" style="display:inline-block;margin-left:4px;transition:transform .15s">▴</span>';
-    btn.style.cssText = style(false) + 'padding:10px 14px;border-radius:20px;';
+    var curName = ''; PAGES.forEach(function (pg) { if (pg[0] === key) curName = pg[1]; });
+    btn.innerHTML = curName.replace(/&/g,'&amp;').replace(/</g,'&lt;') + ' <span aria-hidden="true" style="display:inline-block;margin-left:4px;transition:transform .15s">▴</span>';
+    btn.style.cssText = style(false) + 'padding:10px 14px;border-radius:20px;max-width:60vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;';
     var arrow = btn.querySelector('span');
     var list = document.createElement('div'); list.hidden = true;
     list.style.cssText = 'position:absolute;left:0;bottom:calc(100% + 8px);min-width:270px;max-width:calc(100vw - 24px);background:#fff;border:1.5px solid #1f1f1f;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.25);padding:6px;max-height:calc(100vh - 90px);overflow:auto;';
