@@ -29,13 +29,13 @@
   const images=[...scene.querySelectorAll('img')];
   // Video posters supply a complete static screen before the first decoded frame.
   const posters=[...scene.querySelectorAll('video[poster]')].map(v=>{const i=new Image();i.src=v.poster;return decode(i)});
-  await Promise.all([...images.map(decode),...posters]);
+  await Promise.race([Promise.all([...images.map(decode),...posters]),new Promise(r=>setTimeout(r,1200))]);
   // Scale projected layers before revealing the composed image.
   scene.querySelectorAll('.mockup-live-layer,.red-screen-layer,.case-exact-screen-layer').forEach(layer=>layer.style.setProperty('--scene-scale',String(scene.clientWidth/Number(layer.dataset.sceneWidth||(layer.classList.contains('red-screen-layer')?2400:1680)))));
   scene.classList.add('is-ready');
   scene.querySelectorAll('video').forEach(v=>{if(v.poster){v.classList.add('media-frame-ready')}if(v.readyState>=2)frameReady(v)});
  }
- const sceneObserver='IntersectionObserver'in window?new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){prepareScene(e.target);sceneObserver.unobserve(e.target)}}),{rootMargin:'1000px 0px'}):null;
+ const sceneObserver='IntersectionObserver'in window?new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){prepareScene(e.target);sceneObserver.unobserve(e.target)}}),{rootMargin:matchMedia('(max-width:760px)').matches?'350px 0px':'1000px 0px'}):null;
  function scan(root){
   const list=selector=>[...(root.matches?.(selector)?[root]:[]),...(root.querySelectorAll?.(selector)||[])];
   list('video').forEach(setupVideo);

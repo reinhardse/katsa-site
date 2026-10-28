@@ -304,3 +304,6 @@
 .case-media-enter.case-media-seen{clip-path:inset(0 0 0 0 round 24px)}
 .case-media-enter.case-media-seen>:is(div,img,video):not(.sun-before-after-labels){scale:1}
 @media(prefers-reduced-motion:reduce){.case-media-enter,.case-media-enter.case-media-seen{clip-path:none;transition:none}.case-media-enter>:is(div,img,video):not(.sun-before-after-labels){scale:1;transition:none}}
+
+/* Мобильные: без тяжёлой анимации clip-path/scale на больших картинках — лёгкое появление */
+@media(max-width:760px){.case-media-enter{clip-path:none;opacity:0;transition:opacity .4s ease}.case-media-enter.case-media-seen{opacity:1}.case-media-enter>:is(div,img,video):not(.sun-before-after-labels){scale:1;transition:none}}

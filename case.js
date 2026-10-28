@@ -47,8 +47,8 @@ document.querySelectorAll('.sun-before-after-stage').forEach(window.initSunCompa
   // Start after decoding, so a slow image cannot miss its entrance.
   const images=[...el.querySelectorAll('img:not(.prototype-slide),img.prototype-slide.is-active')];
   const ready=images.map(img=>{img.loading='eager';return img.decode?.().catch(()=>{})});
-  Promise.all(ready).then(()=>requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add('case-media-seen'))));
- }),{threshold:0,rootMargin:'0px 0px 400px 0px'});
+  Promise.race([Promise.all(ready),new Promise(r=>setTimeout(r,1000))]).then(()=>requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add('case-media-seen'))));
+ }),{threshold:0,rootMargin:matchMedia('(max-width:760px)').matches?'0px 0px 150px 0px':'0px 0px 400px 0px'});
  surfaces.forEach(el=>observer.observe(el));
  reduceMotion.addEventListener('change',event=>{if(event.matches){surfaces.forEach(el=>el.classList.add('case-media-seen'));observer.disconnect()}});
  addEventListener('pageshow',event=>{if(event.persisted)surfaces.forEach(el=>{if(el.getBoundingClientRect().top<innerHeight)el.classList.add('case-media-seen')})});
