@@ -5,9 +5,9 @@
  document.documentElement.classList.add('med-body-offer');
  const reduced=matchMedia('(prefers-reduced-motion:reduce)'),image=new Image();image.src='assets/medicine-particle-body.webp';
  let points=[],position,colour,size,gl,program,buffer,draw,w=1,h=1,scale=1,ox=0,oy=0,dpr=1,time=0,last=0,frame=0,visible=true,ready=false;
- let mx=-1e6,my=-1e6,pointerInside=false,moveX=0,moveY=0,lastPointer=0,oldMx=0,oldMy=0,mob=false,posed=null,touchUntil=0;
+ let mx=-1e6,my=-1e6,pointerInside=false,moveX=0,moveY=0,lastPointer=0,oldMx=0,oldMy=0,mob=false,posed=null,touchUntil=0,cbuf=null;
  // Mobile pose: arms lowered along the body and slightly shortened, so the torso and heart can be shown larger.
- function pose(m){if(posed===m)return;posed=m;for(const p of points){let x=p.bx,y=p.by;if(m){const left=x<836,sx=left?600:1072,sy=340,edge=left?(680-x)/170:(x-992)/170,k=Math.max(0,Math.min(1,edge)),wgt=k*k*(3-2*k);if(wgt>0){const a=(left?-1:1)*0.66*wgt,dx=(x-sx)*(1-.27*wgt),dy=(y-sy)*(1-.27*wgt),c=Math.cos(a),s=Math.sin(a);x=sx+dx*c-dy*s;y=sy+dx*s+dy*c}}p.hx=x;p.hy=y;p.x=x;p.y=y;p.vx=p.vy=0}}
+ function pose(m){if(posed===m)return;posed=m;for(const p of points){let x=p.bx,y=p.by,fade=1;if(m){const left=x<836,sx=left?622:1050,sy=395,edge=left?(652-x)/55:(x-1020)/55,k=Math.max(0,Math.min(1,edge)),wgt=k*k*(3-2*k);if(wgt>0){const a=(left?-1:1)*.62*wgt,dx=x-sx,dy=y-sy,c=Math.cos(a),s=Math.sin(a);x=sx+dx*c-dy*s;y=sy+dx*s+dy*c}fade=1-smooth(760,900,y)}p.hx=x;p.hy=y;p.x=x;p.y=y;p.vx=p.vy=0;p.pa=p.alpha*fade;p.hw=m?(1-smooth(215,300,p.by))*(1-smooth(110,150,Math.abs(p.bx-846))):0}if(colour){for(let i=0;i<points.length;i++)colour[i*4+3]=points[i].pa;if(gl&&cbuf){gl.bindBuffer(gl.ARRAY_BUFFER,cbuf);gl.bufferData(gl.ARRAY_BUFFER,colour,gl.STATIC_DRAW)}}}
 
  const smooth=(a,b,x)=>{const t=Math.max(0,Math.min(1,(x-a)/(b-a)));return t*t*(3-2*t)};
  function initialise(){
@@ -36,7 +36,7 @@
   function shader(type,src){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error('shader');return s}
   program=gl.createProgram();gl.attachShader(program,shader(gl.VERTEX_SHADER,vert));gl.attachShader(program,shader(gl.FRAGMENT_SHADER,frag));gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error('link');gl.useProgram(program);
   function attribute(name,data,n,usage){const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,data,usage);const a=gl.getAttribLocation(program,name);gl.enableVertexAttribArray(a);gl.vertexAttribPointer(a,n,gl.FLOAT,false,0,0);return b}
-  buffer=attribute('position',position,3,gl.DYNAMIC_DRAW);attribute('colour',colour,4,gl.STATIC_DRAW);attribute('size',size,1,gl.STATIC_DRAW);
+  buffer=attribute('position',position,3,gl.DYNAMIC_DRAW);cbuf=attribute('colour',colour,4,gl.STATIC_DRAW);attribute('size',size,1,gl.STATIC_DRAW);
   const viewport=gl.getUniformLocation(program,'viewport'),offset=gl.getUniformLocation(program,'offset'),zoom=gl.getUniformLocation(program,'scale'),density=gl.getUniformLocation(program,'density');
   gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.clearColor(0,0,0,0);
   draw=()=>{gl.viewport(0,0,canvas.width,canvas.height);gl.clear(gl.COLOR_BUFFER_BIT);gl.uniform2f(viewport,w,h);gl.uniform2f(offset,ox,oy);gl.uniform1f(zoom,scale);gl.uniform1f(density,dpr);gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferSubData(gl.ARRAY_BUFFER,0,position);gl.drawArrays(gl.POINTS,0,points.length)};canvas.dataset.renderer='particle-webgl';
@@ -48,24 +48,26 @@
   for(const p of points){const key=((Math.round(p.r*15)*16+Math.round(p.g*15))*16+Math.round(p.b*15));if(!colours.has(key))colours.set(key,total++);p.sprite=colours.get(key)}
   atlas.width=512;atlas.height=Math.ceil(total/32)*16;const a=atlas.getContext('2d');
   for(const [key,index] of colours){const r=(key>>8)*17,g=((key>>4)&15)*17,b=(key&15)*17,sx=index%32*16,sy=Math.floor(index/32)*16;const gradient=a.createRadialGradient(sx+5,sy+4,0,sx+8,sy+8,7.5);gradient.addColorStop(0,`rgb(${Math.min(255,r*1.08)},${Math.min(255,g*1.08)},${Math.min(255,b*1.08)})`);gradient.addColorStop(.45,`rgb(${r},${g},${b})`);gradient.addColorStop(1,`rgb(${r*.48},${g*.48},${b*.48})`);a.fillStyle=gradient;a.beginPath();a.arc(sx+8,sy+8,7.5,0,Math.PI*2);a.fill()}
-  draw=()=>{c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,w,h);for(let i=0;i<points.length;i++){const p=points[i],depth=1+position[i*3+2]*.0015,s=p.s*scale*depth,px=((position[i*3]-image.width*.5)*depth+image.width*.5)*scale+ox-s*.5,py=((position[i*3+1]-image.height*.5)*depth+image.height*.5)*scale+oy-s*.5;if(px< -s||px>w||py< -s||py>h)continue;c.globalAlpha=p.alpha;c.drawImage(atlas,p.sprite%32*16,Math.floor(p.sprite/32)*16,16,16,px,py,s,s)}c.globalAlpha=1};canvas.dataset.renderer='particle-canvas2d';
+  draw=()=>{c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,w,h);for(let i=0;i<points.length;i++){const p=points[i],depth=1+position[i*3+2]*.0015,s=p.s*scale*depth,px=((position[i*3]-image.width*.5)*depth+image.width*.5)*scale+ox-s*.5,py=((position[i*3+1]-image.height*.5)*depth+image.height*.5)*scale+oy-s*.5;if(px< -s||px>w||py< -s||py>h)continue;c.globalAlpha=p.pa??p.alpha;c.drawImage(atlas,p.sprite%32*16,Math.floor(p.sprite/32)*16,16,16,px,py,s,s)}c.globalAlpha=1};canvas.dataset.renderer='particle-canvas2d';
  }
  function resize(){if(!ready)return;const r=field.getBoundingClientRect();w=r.width;h=r.height;dpr=Math.min(devicePixelRatio||1,2,Math.sqrt(2100000/(w*h)));canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);mob=w<761;pose(mob);oy=mob?0:95;scale=mob?Math.min(w*.98/760,h/860):Math.min(w*.99/image.width,(h-oy)/image.height);ox=(w-image.width*scale)/2;paint(0);draw()}
  function paint(dt){
-  const radius=(mob?80:195)/scale,push=(mob?.2:.7)/scale,alive=!reduced.matches;
+  const radius=(mob?150:195)/scale,push=(mob?.6:.7)/scale,alive=!reduced.matches;
   // Touch screens: a short automatic sweep across the chest about a second after the body appears, then every 11 s.
   if(mob&&alive&&dt&&performance.now()>touchUntil){const demo=(time-1.1)%11,active=time>1.1&&demo<2.3;
    if(active){const t=demo/2.3,e=t*t*(3-2*t),nx=image.width*(.3+.42*e),ny=image.height*(.4+Math.sin(t*Math.PI)*.07);moveX=Math.max(-24/scale,Math.min(24/scale,(nx-oldMx)*.45));moveY=Math.max(-24/scale,Math.min(24/scale,(ny-oldMy)*.45));mx=oldMx=nx;my=oldMy=ny;lastPointer=performance.now();pointerInside=true}else pointerInside=false}
   const phase=time%1.02;
   const pulse=alive?(Math.exp(-Math.pow((phase-.13)/.060,2))+.58*Math.exp(-Math.pow((phase-.31)/.075,2)))*(mob?.13:.105):0;
+  const ls=Math.sin(time*Math.PI*2/8.5),yaw=mob&&alive?.78*Math.sign(ls)*Math.pow(Math.abs(ls),.45):0,yc=Math.cos(yaw),ys=Math.sin(yaw);
   for(let i=0;i<points.length;i++){
    const p=points[i],u=(p.hx-image.width*.5)/image.width,v=p.hy/image.height;
    // Continuous low-frequency 3D flow through the whole figure, not just a bobbing image.
    const drift=alive?Math.sin(time*.52+v*5.5)*12+Math.sin(time*.31+u*5+v*2)*6:0;
    const float=alive?(p.seed>.965?15:3.5):0;
-   const homeX=p.hx+drift+Math.cos(time*.63+p.seed*18)*float;
+   let turn=0,turnZ=0;if(p.hw>0&&yaw){const dx=p.hx-846,n=Math.max(-1,Math.min(1,dx/100)),z=Math.sqrt(1-n*n)*105;turn=(dx*yc+z*ys-dx)*p.hw;turnZ=(z*yc-dx*ys-z)*p.hw*.4}
+   const homeX=p.hx+turn+drift+Math.cos(time*.63+p.seed*18)*float;
    const homeY=p.hy+(alive?Math.sin(time*.40+u*4.2)*5+Math.cos(time*.69+v*4+p.seed*7)*float*.7:0);
-   const homeZ=alive?Math.sin(time*.43+u*5+v*3)*10+Math.cos(time*.57+p.seed*14)*float:0;
+   const homeZ=(alive?Math.sin(time*.43+u*5+v*3)*10+Math.cos(time*.57+p.seed*14)*float:0)+turnZ;
    if(dt){
     p.carry=Math.max(0,p.carry-dt*.006);
     const spring=p.carry>.05?.0028:.010;
@@ -80,11 +82,11 @@
       const activity=Math.max(0,1-(performance.now()-lastPointer)/950);
       const curl=(.8+Math.sin(time*1.5+p.seed*6)*.45)/scale;
       const outward=push*(.18+speed*2.4)*activity;
-      const fluid=(.35+activity*.65)*(mob?.45:1),drag=mob?.14:.30;
+      const fluid=(.35+activity*.65)*(mob?.9:1),drag=mob?.26:.30;
       p.vx+=(nx*outward-ny*curl*fluid+moveX*drag)*f*dt;
       p.vy+=(ny*outward+nx*curl*fluid+moveY*drag)*f*dt;
       p.lift+=(52/scale*f-p.lift)*.06*dt;
-      if(f>.12&&activity>.1)p.carry=Math.min(mob?.35:1,p.carry+(mob?.03:.09)*f*dt);
+      if(f>.12&&activity>.1)p.carry=Math.min(1,p.carry+.09*f*dt);
       if(p.carry>.12&&p.seed>.53){
        const angle=time*(.7+p.seed*.8)+p.seed*24;
        const r=(65+p.seed*135)/scale;
