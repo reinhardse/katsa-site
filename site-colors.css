@@ -91,3 +91,11 @@ html{animation:katsa-page-in .3s ease-out backwards}
 html.katsa-leaving{opacity:0;transition:opacity .16s ease;pointer-events:none}
 @keyframes katsa-page-in{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){html{animation:none}html.katsa-leaving{opacity:1;transition:none}}
+
+/* Главный экран на телефоне: крупный заголовок «лесенкой», «сайты.» на отдельной строке */
+@media(max-width:760px) and (min-height:560px){
+body .hero h1{font-size:min(17.5vw,88px)!important;line-height:1!important;letter-spacing:-.06em!important}
+body .hero h1 .hero-indent{margin-left:.7em!important}
+body .hero h1 .hero-l3{margin-left:.25em!important}
+body .hero h1 .hero-l3 .hero-sites{display:block;margin-left:1em}
+}
