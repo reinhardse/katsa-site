@@ -279,3 +279,8 @@ html body.medicine-page .med-experience .med-expertise-card{position:relative}
 .sx-form u{border-color:#ffffff1a}
 .sx-nav{margin-bottom:clamp(30px,4vw,52px)}
 .sx-sec:first-of-type,.sx-hero+.sx-sec{padding-top:18px}
+/* card 01: no right glow; faint warm glow from bottom-left */
+#services .service-card.has-sx:not(.request-card){background:radial-gradient(ellipse 70% 55% at 0% 100%,#ec4e2c1c,transparent 70%),#0b0d13}
+.sx-thumb{display:none}
+.sx-img{background:linear-gradient(to top right,transparent calc(50% - .5px),#ffffff12 50%,transparent calc(50% + .5px)),linear-gradient(to bottom right,transparent calc(50% - .5px),#ffffff12 50%,transparent calc(50% + .5px))}
+@media(max-width:760px){#services .service-card.has-sx:not(.request-card){background:radial-gradient(ellipse 90% 40% at 0% 100%,#ec4e2c1c,transparent 70%),#0b0d13}}
