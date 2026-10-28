@@ -86,13 +86,8 @@ body #contact .ron-contact-left>.contact-project-preview{display:none!important}
 body #contact .direct-contact h3::first-letter{text-transform:uppercase}
 }
 
-/* Мягкий переход между страницами */
-@view-transition{navigation:auto}
-.site-header{view-transition-name:site-header}
-::view-transition-old(root){animation:katsa-vt-out .22s ease both}
-::view-transition-new(root){animation:katsa-vt-in .38s ease both}
-::view-transition-group(site-header){animation-duration:0s}
-@keyframes katsa-vt-out{to{opacity:0}}
-@keyframes katsa-vt-in{from{opacity:0}}
-@supports not (view-transition-name:a){body{animation:katsa-vt-in .4s ease both}}
-@media(prefers-reduced-motion:reduce){@view-transition{navigation:none}body{animation:none!important}}
+/* Мягкий переход между страницами: плавное появление + плавное затухание при уходе (скрипт в site-colors.js) */
+html{animation:katsa-page-in .5s ease backwards}
+html.katsa-leaving{opacity:0;transition:opacity .25s ease;pointer-events:none}
+@keyframes katsa-page-in{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){html{animation:none}html.katsa-leaving{opacity:1;transition:none}}
