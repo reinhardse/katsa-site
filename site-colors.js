@@ -9,4 +9,4 @@ let u;try{u=new URL(a.href,location.href)}catch(_){return}
 if(u.origin!==location.origin||!/^https?:$/.test(u.protocol))return;
 if(u.pathname===location.pathname&&u.search===location.search)return;
 if(/\.(pdf|zip|png|jpe?g|webp|mp4|webm|svg)$/i.test(u.pathname))return;
-e.preventDefault();de.classList.add('katsa-leaving');setTimeout(()=>{location.href=u.href},240)});})();
+e.preventDefault();de.classList.add('katsa-leaving');setTimeout(()=>{location.href=u.href},300)});})();

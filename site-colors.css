@@ -87,7 +87,7 @@ body #contact .direct-contact h3::first-letter{text-transform:uppercase}
 }
 
 /* Мягкий переход между страницами: плавное появление + плавное затухание при уходе (скрипт в site-colors.js) */
-html{animation:katsa-page-in .5s ease backwards}
-html.katsa-leaving{opacity:0;transition:opacity .25s ease;pointer-events:none}
+html{animation:katsa-page-in .75s cubic-bezier(.22,.61,.36,1) .18s backwards}
+html.katsa-leaving{opacity:0;transition:opacity .3s ease;pointer-events:none}
 @keyframes katsa-page-in{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){html{animation:none}html.katsa-leaving{opacity:1;transition:none}}
