@@ -205,9 +205,3 @@ html body.medicine-page .med-experience .med-expertise-card{position:relative}
 .medicine-page .med-project-image img{scale:1;animation:none;transition:scale 1.2s cubic-bezier(.2,.7,.2,1)}
 @media(hover:hover) and (pointer:fine){html.project-cursor-ready .med-project-image{cursor:none}.medicine-page .med-project-image:hover img{scale:1.06;filter:none}}
 @media(prefers-reduced-motion:reduce){.medicine-page .med-project-image img{animation:none;scale:1}}
-
-/* Герой: барабан символов в заголовке */
-html body.medicine-page .med-hero h1 .med-reel-hero{display:inline-block!important;white-space:nowrap;color:#ec4e2c!important;-webkit-text-fill-color:#ec4e2c!important;-webkit-text-stroke:0}
-.med-reel-hero>i{height:1.2em;line-height:1.1em;margin:-.1em 0;vertical-align:top}
-.med-reel-hero>i>b>u{height:1.1em;line-height:1.1em}
-.med-reel-hero>i>b{transition-duration:2.1s}

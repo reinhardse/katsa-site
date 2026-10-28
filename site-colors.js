@@ -38,10 +38,3 @@ const paint=()=>{frame=0;cursor.style.transform=`translate3d(${x-59}px,${y-59}px
 const schedule=()=>{if(!frame)frame=requestAnimationFrame(paint)};
 document.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;x=e.clientX;y=e.clientY;inside=true;schedule()},{passive:true});
 addEventListener('scroll',schedule,{passive:true});addEventListener('resize',schedule);document.documentElement.addEventListener('pointerleave',hide);addEventListener('blur',hide);document.addEventListener('visibilitychange',()=>{if(document.hidden)hide();else schedule()});})();
-
-/* Медицина, оффер: «Цифровые» — сначала символы (# @ $ %), барабан крутится и останавливается на слове, которое становится оранжевым */
-(()=>{const h=document.querySelector('.med-hero h1');if(!h||matchMedia('(prefers-reduced-motion:reduce)').matches)return;const n=[...h.querySelectorAll('span')].map(s=>[...s.childNodes].find(x=>x.nodeType===3&&/Цифровые/.test(x.textContent))).find(Boolean);if(!n)return;const word='Цифровые',sym='#@$%&*§¤<>/{}+=?!01~^',wrap=document.createElement('span');wrap.className='med-reel med-reel-hero';wrap.setAttribute('aria-hidden','true');h.setAttribute('aria-label',h.textContent.replace(/\s+/g,' ').trim());
-[...word].forEach((ch,i)=>{const col=document.createElement('i'),strip=document.createElement('b'),rows=9+i*2;let html='';for(let k=0;k<rows;k++)html+='<u>'+(k===rows-1?ch:sym[Math.floor(Math.random()*sym.length)])+'</u>';strip.innerHTML=html;strip.style.setProperty('--end',-(rows-1)*1.1+'em');strip.style.setProperty('--d',(i*.09)+'s');col.appendChild(strip);wrap.appendChild(col)});
-n.textContent=n.textContent.replace('Цифровые','');n.parentNode.insertBefore(wrap,n);
-[...wrap.children].forEach((col,i)=>{const m=document.createElement('span');m.style.cssText='position:absolute;visibility:hidden;white-space:pre';m.textContent=word[i];wrap.appendChild(m);col.style.width=m.getBoundingClientRect().width+'px';m.remove()});
-setTimeout(()=>wrap.classList.add('go'),500)})();
