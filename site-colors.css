@@ -139,7 +139,7 @@ html body.medicine-page .med-hero h1 .dbr{display:none!important}
 html body.medicine-page .med-hero h1 span:first-child .dbr{display:inline!important}
 html body.medicine-page .med-hero h1 span{margin:0!important;padding:0!important;line-height:inherit!important;font-weight:inherit!important}
 html body.medicine-page .med-hero .med-rib-field{order:2!important;position:relative!important;z-index:3!important;inset:auto!important;width:calc(100% + 40px)!important;height:min(134vw,640px)!important;margin:-.42em -20px 0!important;font-size:min(13.4vw,60px);pointer-events:none}
-html body.medicine-page .med-hero .med-hero-details{order:3!important;position:relative!important;z-index:4!important;margin:-45vw auto 0!important;gap:20px!important}
+html body.medicine-page .med-hero .med-hero-details{order:3!important;position:relative!important;z-index:4!important;margin:-24vw auto 0!important;gap:20px!important}
 html body.medicine-page .med-hero .med-hero-details>*{order:0!important}
 html body.medicine-page .med-hero .med-hero-details>a{order:2!important}
 html body.medicine-page .med-hero .med-hero-details .med-lead{font-size:16px!important;line-height:1.5!important;color:#bdb7c7!important;max-width:330px}
