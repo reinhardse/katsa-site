@@ -116,7 +116,7 @@ body .hero .hero-directions{margin-top:40px!important}
 .dbr{display:none}
 @media(min-width:1101px){
 html body .dbr{display:inline}
-html body .med-hero h1{position:absolute!important;left:8.5%!important;width:auto!important;max-width:none!important;font-size:clamp(46px,4.83vw,78px)!important;line-height:1.02!important;letter-spacing:-.06em!important;text-align:left!important;text-wrap:nowrap!important;white-space:nowrap!important;top:calc(50% - 64px)!important;transform:translateY(-50%)!important;margin:0!important}
+html body .med-hero h1{position:absolute!important;left:8.5%!important;width:auto!important;max-width:none!important;font-size:clamp(53px,5.55vw,90px)!important;line-height:1.02!important;letter-spacing:-.06em!important;text-align:left!important;text-wrap:nowrap!important;white-space:nowrap!important;top:calc(50% - 64px)!important;transform:translateY(-50%)!important;margin:0!important}
 html body .med-hero h1 span{display:inline!important;margin:0!important;white-space:nowrap!important}
 html body .med-hero .med-hero-details{top:calc(50% - 64px)!important;transform:translateY(-50%)!important}
 }
