@@ -5,9 +5,13 @@
  const configured=new WeakSet(),prepared=new WeakSet(),near=new Set(),visible=new Set();
  const scenes='.mockup-scene,.hero-mockup-scene,.product-mockup-scene,.red-mockup-scene,.sun-macbook-device';
  const isVisible=v=>{const r=v.getBoundingClientRect();return r.width>0&&r.height>0&&r.bottom>0&&r.top<innerHeight&&r.right>0&&r.left<innerWidth};
- const load=v=>{if(v.dataset.mediaLoaded)return;v.dataset.mediaLoaded='true';v.querySelectorAll('source[data-src]').forEach(s=>{s.src=s.dataset.src});v.preload='auto';v.load()};
+ const mob=matchMedia('(max-width:760px)').matches;
+ const pageLoaded=new Promise(r=>document.readyState==='complete'?r():addEventListener('load',r,{once:true}));
+ const startLoad=v=>{v.querySelectorAll('source[data-src]').forEach(s=>{s.src=s.dataset.src});v.preload=mob?'metadata':'auto';v.load()};
+ // На телефоне видео начинает грузиться только после загрузки страницы и картинок, и только когда оказывается на экране
+ const load=v=>{if(v.dataset.mediaLoaded)return;v.dataset.mediaLoaded='true';if(mob)pageLoaded.then(()=>setTimeout(()=>startLoad(v),500));else startLoad(v)};
  const play=v=>{if(!v.isConnected||document.hidden||!isVisible(v))return;load(v);v.muted=true;v.play().catch(()=>{})};
- const preloadObserver='IntersectionObserver'in window?new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){near.add(e.target);load(e.target)}else near.delete(e.target)}),{rootMargin:'600px 0px'}):null;
+ const preloadObserver='IntersectionObserver'in window?new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){near.add(e.target);load(e.target)}else near.delete(e.target)}),{rootMargin:mob?'0px 0px':'600px 0px'}):null;
  const playbackObserver='IntersectionObserver'in window?new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){visible.add(e.target);play(e.target)}else{visible.delete(e.target);e.target.pause()}}),{threshold:0}):null;
  function frameReady(v){
   const reveal=()=>v.classList.add('media-frame-ready');
