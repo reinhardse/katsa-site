@@ -71,3 +71,17 @@ body #project-request input:not([type=checkbox]),body #project-request textarea,
 body .service-consent.consent-error,body label.consent-error{color:#ff8a8a!important}
 body .service-consent.consent-error a,body label.consent-error a{color:#ffb0b0!important}
 body input[type=checkbox].consent-error{outline:2px solid #ff5a5a!important;outline-offset:2px;border-radius:4px;box-shadow:0 0 0 4px #ff5a5a33}
+
+/* Мобильная версия блока «Контакты»: метка → заголовок → текст → форма → «или напишите нам» */
+@media(max-width:760px){
+body #contact .ron-contact-layout{display:flex!important;flex-direction:column!important;gap:0!important}
+body #contact .ron-contact-left,body #contact .ron-contact-right{display:contents!important}
+body #contact .ron-contact-left>.section-label{order:1;margin:0 0 22px}
+body #contact .ron-contact-right>h2{order:2;margin-bottom:22px!important}
+body #contact .ron-contact-left>.contact-intro{order:3;margin:0 0 34px;max-width:none}
+body #contact .ron-contact-right>form{order:4;width:100%;margin-bottom:56px}
+body #contact .ron-contact-left>.direct-contact{order:5;margin-top:0}
+body #contact .ron-contact-left>h3{display:none!important}
+body #contact .ron-contact-left>.contact-project-preview{display:none!important}
+body #contact .direct-contact h3::first-letter{text-transform:uppercase}
+}
