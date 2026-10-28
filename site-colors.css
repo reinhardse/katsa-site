@@ -179,7 +179,7 @@ html.med-body-offer body.medicine-page .med-rib-canvas{pointer-events:none;max-w
 html.med-body-offer body.medicine-page .med-experience{position:relative;z-index:1}
 
 /* Медицина: блок опыта — тёплый акцент, как сердце фигуры */
-html body.medicine-page .med-experience strong,html body.medicine-page .med-experience h2,html body.medicine-page .med-experience strong em{background:none!important;color:#c33b21!important;-webkit-text-fill-color:#c33b21!important}
+html body.medicine-page .med-experience strong,html body.medicine-page .med-experience h2,html body.medicine-page .med-experience strong em{background:none!important;color:#ec4e2c!important;-webkit-text-fill-color:#ec4e2c!important}
 html body.medicine-page .med-experience p{color:#b9b3c2!important}
 html body.medicine-page .med-experience .med-product-phrase{color:inherit!important;-webkit-text-fill-color:currentColor;background:none!important}
 html body.medicine-page .med-experience .med-expertise-card{position:relative}
