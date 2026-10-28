@@ -104,3 +104,10 @@ body .hero h1 .hero-indent:before{content:"01 — ценность"}
 body .hero h1 .hero-sites:before{content:"02 — доверие"}
 }
 @media(max-width:350px){body .hero h1 .hero-indent:before,body .hero h1 .hero-sites:before{display:none}}
+
+/* Главный экран на телефоне: оффер выше, между «сайты.» и направлениями больше воздуха */
+@media(max-width:760px) and (min-height:560px){
+body .hero{height:auto!important;min-height:calc(100svh + 60px)!important}
+body .hero h1{margin-top:auto!important;margin-bottom:auto!important}
+body .hero .hero-directions{margin-top:40px!important}
+}
