@@ -133,7 +133,7 @@ html body .med-hero .med-audiences .med-aud span{display:inline-block!important}
 /* Медицина, мобильный оффер: крупный заголовок, голова фигуры заходит на «медицины», крупное тело, ниже описание и кнопка, плашки с подписью «Кому подходит» */
 @media(max-width:760px){
 html body.medicine-page .med-hero{padding-top:110px!important;padding-bottom:20px!important;min-height:0!important}
-html body.medicine-page .med-hero h1{order:1!important;position:relative!important;z-index:1!important;font-size:min(13.4vw,60px)!important;line-height:1!important;letter-spacing:-.055em!important;-webkit-text-stroke:.045em currentColor;paint-order:stroke fill;text-align:center!important;margin:0 auto!important;width:100%!important}
+html body.medicine-page .med-hero h1{order:1!important;position:relative!important;z-index:1!important;font-size:min(12.8vw,58px)!important;line-height:1!important;letter-spacing:-.04em!important;-webkit-text-stroke:.04em currentColor;paint-order:stroke fill;text-align:center!important;margin:0 auto!important;width:100%!important}
 html body.medicine-page .med-hero h1 span{display:inline!important;white-space:normal!important}
 html body.medicine-page .med-hero h1 .dbr{display:none!important}
 html body.medicine-page .med-hero h1 span:first-child .dbr{display:inline!important}
