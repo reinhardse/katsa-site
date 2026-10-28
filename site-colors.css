@@ -196,13 +196,12 @@ html body.medicine-page .med-experience .med-expertise-card{position:relative}
 .med-reel.go>i>b{transform:translateY(var(--end))}
 
 /* Медицина: кнопка после последней карточки задач */
-.med-task-cta{display:flex;justify-content:center;padding:46px 0 10px;position:relative;z-index:6}
-.med-task-cta .glass-button{min-height:56px;padding:0 34px;font-size:17px;--action-ink:#f5f0fc;background:radial-gradient(ellipse at 50% 135%,#f28b6173,transparent 72%),linear-gradient(120deg,#33353e,#2b2c35);color:var(--action-ink);border:0;box-shadow:inset 0 1px #ffffff15,0 10px 24px -14px #f28b6166}
-@media(max-width:760px){.med-task-cta{padding:34px 0 0}.med-task-cta .glass-button{width:100%;max-width:none}}
+.med-task-cta{display:flex;justify-content:center;padding:0;margin-top:-84px;position:relative;z-index:6}
+.med-task-cta .glass-button{min-height:72px;padding:0 54px;font-size:20px;--action-ink:#f5f0fc;background:radial-gradient(ellipse at 50% 135%,#f28b6173,transparent 72%),linear-gradient(120deg,#33353e,#2b2c35);color:var(--action-ink);border:0;box-shadow:inset 0 1px #ffffff15,0 10px 24px -14px #f28b6166}
+@media(max-width:760px){.med-task-cta{margin-top:-38px}.med-task-cta .glass-button{min-height:64px;padding:0 44px;font-size:18px;width:auto}}
 
 /* Медицина: избранные проекты — как на главной (круг «Смотреть проект», зум и дрейф картинки) */
 .medicine-page .med-project-image>span{display:none!important}
-.medicine-page .med-project-image img{scale:1.06;transition:transform 1.8s cubic-bezier(.2,.7,.2,1),scale 1.2s cubic-bezier(.2,.7,.2,1);animation:project-image-drift var(--drift-duration,22s) ease-in-out var(--drift-phase,0s) infinite;animation-play-state:paused}
-.medicine-page .med-project-image.drift-visible img{animation-play-state:running}
-@media(hover:hover) and (pointer:fine){html.project-cursor-ready .med-project-image{cursor:none}.medicine-page .med-project-image:hover img{scale:1.1;filter:none}}
+.medicine-page .med-project-image img{scale:1;animation:none;transition:scale 1.2s cubic-bezier(.2,.7,.2,1)}
+@media(hover:hover) and (pointer:fine){html.project-cursor-ready .med-project-image{cursor:none}.medicine-page .med-project-image:hover img{scale:1.06;filter:none}}
 @media(prefers-reduced-motion:reduce){.medicine-page .med-project-image img{animation:none;scale:1}}
