@@ -48,3 +48,5 @@
 
 /* Keep the pin handoff compositor-only; do not filter the whole live glass surface. */
 .med-stack-face{filter:none!important;backface-visibility:hidden;will-change:transform}
+.med-stack-face{position:relative}
+.med-card-shade{position:absolute;inset:0;z-index:4;border-radius:inherit;background:#000;opacity:0;pointer-events:none}

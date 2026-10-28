@@ -60,7 +60,7 @@
   const radius=(mob?140*(1+.35*plunge):195)/scale,push=(mob?.6*(1+1.2*plunge):.7)/scale;
   const phase=time%1.02;
   const pulse=alive?(Math.exp(-Math.pow((phase-.13)/.060,2))+.58*Math.exp(-Math.pow((phase-.31)/.075,2)))*(mob?.13:.105):0;
-  const sc=mob&&alive?scatter:0;
+  const sc=alive?scatter:0;
   for(let i=0;i<points.length;i++){
    const p=points[i],u=(p.hx-image.width*.5)/image.width,v=p.hy/image.height;
    // Continuous low-frequency 3D flow through the whole figure, not just a bobbing image.
@@ -110,8 +110,8 @@
   }
   moveX*=.93;moveY*=.93;
  }
- addEventListener('scroll',()=>{const y=scrollY,raw=mob?Math.max(0,Math.min(1,y/(innerHeight*.75))):0;if(y<lastScroll-2&&raw<.75)settle=true;else if(y>lastScroll+2)settle=false;lastScroll=y;scatterTarget=settle?0:raw;start()},{passive:true});
- function tick(now){frame=0;if(!ready||!visible||document.hidden)return;if(now-last>=32){const dt=Math.min(2,(now-last)/16.667||2);last=now;time+=dt/60;scatter+=(scatterTarget-scatter)*Math.min(1,.12*dt);if(mob&&time>1){canvas.style.transition='none';canvas.style.opacity=(1-Math.pow(scatter,1.6)*.97).toFixed(3)}else if(canvas.style.opacity)canvas.style.opacity='';paint(dt);draw()}if(!reduced.matches)frame=requestAnimationFrame(tick)}
+ addEventListener('scroll',()=>{const y=scrollY,raw=Math.max(0,Math.min(1,y/(innerHeight*.75)));if(y<lastScroll-2&&raw<.75)settle=true;else if(y>lastScroll+2)settle=false;lastScroll=y;scatterTarget=settle?0:raw;start()},{passive:true});
+ function tick(now){frame=0;if(!ready||!visible||document.hidden)return;if(now-last>=32){const dt=Math.min(2,(now-last)/16.667||2);last=now;time+=dt/60;scatter+=(scatterTarget-scatter)*Math.min(1,.12*dt);if(time>1){canvas.style.transition='none';canvas.style.opacity=(1-Math.pow(scatter,1.6)*.97).toFixed(3)}paint(dt);draw()}if(!reduced.matches)frame=requestAnimationFrame(tick)}
  function start(){if(ready&&visible&&!document.hidden&&!frame&&!reduced.matches)frame=requestAnimationFrame(tick)}
  document.addEventListener('pointermove',e=>{if(!ready||e.pointerType==='touch'||reduced.matches)return;const r=canvas.getBoundingClientRect();pointerInside=e.clientY>=r.top+padT&&e.clientY<=r.bottom-30&&e.clientX>=r.left&&e.clientX<=r.right;if(!pointerInside)return;const nextX=(e.clientX-r.left-ox)/scale,nextY=(e.clientY-r.top-oy)/scale,now=performance.now();if(lastPointer&&now-lastPointer<160){moveX=Math.max(-24/scale,Math.min(24/scale,(nextX-oldMx)*.45));moveY=Math.max(-24/scale,Math.min(24/scale,(nextY-oldMy)*.45))}mx=oldMx=nextX;my=oldMy=nextY;lastPointer=now;start()},{passive:true});document.addEventListener('pointerleave',()=>{pointerInside=false});
  const touch=e=>{const t=e.touches&&e.touches[0];if(!ready||!t||reduced.matches)return;const r=canvas.getBoundingClientRect();if(t.clientY<r.top+padT||t.clientY>r.bottom){pointerInside=false;return}const nx=(t.clientX-r.left-ox)/scale,ny=(t.clientY-r.top-oy)/scale,now=performance.now();if(e.type==='touchmove'&&now-lastPointer<160){moveX=Math.max(-24/scale,Math.min(24/scale,(nx-oldMx)*.45));moveY=Math.max(-24/scale,Math.min(24/scale,(ny-oldMy)*.45))}mx=oldMx=nx;my=oldMy=ny;lastPointer=now;touchUntil=now+1500;pointerInside=true;start()};
