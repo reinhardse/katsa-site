@@ -5,7 +5,7 @@ $w = (int)($_GET['w'] ?? 900);
 if (!preg_match('~^assets/[A-Za-z0-9_\-/]+\.(webp|jpe?g|png)$~', $f) || strpos($f, '..') !== false) { http_response_code(400); exit; }
 $w = max(300, min(1600, $w));
 $src = __DIR__ . '/' . $f;
-if (!is_file($src)) { http_response_code(404); header('X-Dbg: ' . $src . ' dir=' . implode(',', array_slice((array)@scandir(__DIR__), 0, 40))); exit; }
+if (!is_file($src)) { http_response_code(404); exit; }
 $ext = strtolower(pathinfo($f, PATHINFO_EXTENSION));
 $dst = __DIR__ . '/assets/_m/' . $w . '/' . substr($f, 7);
 function orig($f) { header('Location: /' . $f, true, 302); exit; }
