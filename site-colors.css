@@ -92,13 +92,15 @@ html.katsa-leaving{opacity:0;transition:opacity .16s ease;pointer-events:none}
 @keyframes katsa-page-in{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){html{animation:none}html.katsa-leaving{opacity:1;transition:none}}
 
-/* Главный экран на телефоне: центрированная композиция, две пары строк с индексами 01 / 02 и воздухом между ними */
+/* Главный экран на телефоне: плакатный зигзаг (глаголы слева, существительные справа), блок уже колонки и по центру — воздух по бокам */
 @media(max-width:760px) and (min-height:560px){
-body .hero h1{font-size:min(calc((100vw - 44px)*.158),8.5svh)!important;line-height:1!important;letter-spacing:-.065em!important;width:100%!important;max-width:none!important;text-align:center}
-body .hero h1 .hero-line{display:block!important;width:auto!important;max-width:none!important;margin-left:0!important;text-align:center}
-body .hero h1 .hero-l3{margin-top:.75em!important}
-body .hero h1 .hero-l3 .hero-sites{display:block}
-body .hero h1 .hero-line:first-child:before,body .hero h1 .hero-l3:before{display:block;margin-bottom:1.1rem;font-size:11px;line-height:1;letter-spacing:.14em;text-transform:uppercase;font-weight:400;color:#ffffff8c;-webkit-text-fill-color:#ffffff8c;text-shadow:none}
-body .hero h1 .hero-line:first-child:before{content:"01 — ценность"}
-body .hero h1 .hero-l3:before{content:"02 — доверие"}
+body .hero h1{--hw:calc((100vw - 44px)*.86);width:var(--hw)!important;max-width:none!important;margin-left:auto!important;margin-right:auto!important;font-size:min(calc(var(--hw)*.226),10svh)!important;line-height:1!important;letter-spacing:-.07em!important;text-align:left}
+body .hero h1 .hero-line{display:block!important;width:auto!important;max-width:none!important;margin-left:0!important;position:relative}
+body .hero h1 .hero-indent{text-align:right}
+body .hero h1 .hero-l3{margin-top:.42em!important;padding-top:.36em;border-top:1px solid #ffffff24}
+body .hero h1 .hero-l3 .hero-sites{display:block;text-align:right;position:relative}
+body .hero h1 .hero-indent:before,body .hero h1 .hero-sites:before{position:absolute;left:0;top:.42em;font-size:11px;line-height:1;letter-spacing:.1em;font-weight:400;color:#ffffff8c;-webkit-text-fill-color:#ffffff8c;text-shadow:none}
+body .hero h1 .hero-indent:before{content:"01 — ценность"}
+body .hero h1 .hero-sites:before{content:"02 — доверие"}
 }
+@media(max-width:350px){body .hero h1 .hero-indent:before,body .hero h1 .hero-sites:before{display:none}}
