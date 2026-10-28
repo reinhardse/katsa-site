@@ -171,3 +171,18 @@ html body.medicine-page .med-experience{padding:56px 0 40px!important}
 html body.medicine-page .med-experience .med-expertise-card{padding:34px 0!important;gap:18px!important}
 html body.medicine-page .med-experience p{line-height:1.55!important}
 }
+
+/* Медицина: частицы не обрезаются рамкой — герой и поле без обрезки (горизонталь режет .medicine-page) */
+html.med-body-offer body.medicine-page .med-hero{overflow:visible!important}
+html.med-body-offer body.medicine-page .med-hero .med-rib-field{overflow:visible!important;-webkit-mask-image:none!important;mask-image:none!important}
+html.med-body-offer body.medicine-page .med-rib-canvas{pointer-events:none;max-width:none}
+html.med-body-offer body.medicine-page .med-experience{position:relative;z-index:1}
+
+/* Медицина: блок опыта — тёплый акцент, как сердце фигуры */
+html body.medicine-page .med-experience strong,html body.medicine-page .med-experience h2{background:linear-gradient(100deg,#ffc29e 0%,#f28b61 48%,#e2643c 100%);-webkit-background-clip:text;background-clip:text;color:transparent!important;-webkit-text-fill-color:transparent}
+html body.medicine-page .med-experience strong em{-webkit-text-fill-color:transparent}
+html body.medicine-page .med-experience p{color:#b9b3c2!important}
+html body.medicine-page .med-experience .med-product-phrase{color:inherit!important;-webkit-text-fill-color:currentColor;background:none!important}
+html body.medicine-page .med-experience .med-expertise-card{position:relative}
+@media(min-width:761px){html body.medicine-page .med-experience .med-expertise-card+article{border-left-color:#f28b6126!important}}
+@media(max-width:760px){html body.medicine-page .med-experience .med-expertise-card{border-top-color:#f28b6124!important}html body.medicine-page .med-experience .med-expertise-card:last-child{border-bottom-color:#f28b6124!important}}
