@@ -183,10 +183,14 @@ html body.medicine-page .med-experience strong{background:none!important;color:#
 html body.medicine-page .med-experience strong em,html body.medicine-page .med-experience h2{background:none!important;color:#f5f2f8!important;-webkit-text-fill-color:#f5f2f8!important}
 /* Медицинская экспертиза — главный тезис блока: крупнее, с короткой оранжевой чертой и светлым текстом */
 html body.medicine-page .med-experience .med-expertise-card:last-child h2{position:relative;font-size:40px!important;line-height:1.1!important}@media(max-width:760px){html body.medicine-page .med-experience .med-expertise-card:last-child h2{font-size:24px!important}}
-html body.medicine-page .med-experience .med-expertise-card:last-child h2:before{content:"";display:block;width:34px;height:3px;border-radius:2px;background:#ec4e2c;margin:0 auto 14px}@media(max-width:760px){html body.medicine-page .med-experience .med-expertise-card:last-child h2:before{margin:0 0 12px}}
 html body.medicine-page .med-experience .med-expertise-card:last-child p{color:#e3dfea!important}
 html body.medicine-page .med-experience p{color:#b9b3c2!important}
 html body.medicine-page .med-experience .med-product-phrase{color:inherit!important;-webkit-text-fill-color:currentColor;background:none!important}
 html body.medicine-page .med-experience .med-expertise-card{position:relative}
-@media(min-width:761px){html body.medicine-page .med-experience .med-expertise-card+article{border-left-color:#f28b6126!important}}
-@media(max-width:760px){html body.medicine-page .med-experience .med-expertise-card{border-top-color:#f28b6124!important}html body.medicine-page .med-experience .med-expertise-card:last-child{border-bottom-color:#f28b6124!important}}
+
+/* «экспертиза» — оранжевая, буквы прокручиваются как барабан */
+.med-reel{color:#ec4e2c;-webkit-text-fill-color:#ec4e2c;display:inline-block;white-space:nowrap}
+.med-reel>i{display:inline-block;height:1.1em;line-height:1.1em;overflow:hidden;vertical-align:top;text-align:center;font-style:normal}
+.med-reel>i>b{display:block;font-weight:inherit;will-change:transform;transition:transform 1.5s cubic-bezier(.16,.84,.24,1);transition-delay:var(--d,0s)}
+.med-reel>i>b>u{display:block;height:1.1em;line-height:1.1em;text-decoration:none}
+.med-reel.go>i>b{transform:translateY(var(--end))}
