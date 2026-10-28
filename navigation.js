@@ -9,7 +9,8 @@
  const pageLoaded=new Promise(r=>document.readyState==='complete'?r():addEventListener('load',r,{once:true}));
  const startLoad=v=>{v.querySelectorAll('source[data-src]').forEach(s=>{s.src=s.dataset.src});v.preload=mob?'metadata':'auto';v.load()};
  // На телефоне видео начинает грузиться только после загрузки страницы и картинок, и только когда оказывается на экране
- const load=v=>{if(v.dataset.mediaLoaded)return;v.dataset.mediaLoaded='true';if(mob)pageLoaded.then(()=>setTimeout(()=>startLoad(v),500));else startLoad(v)};
+ const cn=navigator.connection,slow=!!cn&&(cn.saveData||/^(slow-2g|2g|3g)$/.test(cn.effectiveType||''));
+ const load=v=>{if(v.dataset.mediaLoaded)return;if(slow)return;v.dataset.mediaLoaded='true';if(mob)pageLoaded.then(()=>setTimeout(()=>startLoad(v),500));else startLoad(v)};
  const play=v=>{if(!v.isConnected||document.hidden||!isVisible(v))return;load(v);v.muted=true;v.play().catch(()=>{})};
  const preloadObserver='IntersectionObserver'in window?new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){near.add(e.target);load(e.target)}else near.delete(e.target)}),{rootMargin:mob?'0px 0px':'600px 0px'}):null;
  const playbackObserver='IntersectionObserver'in window?new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){visible.add(e.target);play(e.target)}else{visible.delete(e.target);e.target.pause()}}),{threshold:0}):null;
