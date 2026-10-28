@@ -23,3 +23,6 @@ const run=()=>{if(stop)return;const y0=scrollY,top=()=>el.getBoundingClientRect(
 const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
 const step=now=>{if(stop)return;const p=Math.min(1,(now-t0)/dur);scrollTo({top:y0+(top()-y0)*ease(p),behavior:'instant'});if(p<1)requestAnimationFrame(step);else{try{history.replaceState(null,'','#'+id)}catch(_){}}};requestAnimationFrame(step)};
 if(document.readyState==='complete')setTimeout(run,500);else addEventListener('load',()=>setTimeout(run,500),{once:true});})();
+
+/* Медицина: цифра «6» отсчитывается от 0 при появлении блока */
+(()=>{const s=document.querySelector('.med-experience strong');if(!s||!s.firstChild||s.firstChild.nodeType!==3||matchMedia('(prefers-reduced-motion:reduce)').matches)return;const n=s.firstChild,end=parseInt(n.textContent,10);if(!end)return;n.textContent='0 ';let done=false;new IntersectionObserver((es,o)=>{if(done||!es[0].isIntersecting)return;done=true;o.disconnect();const t0=performance.now(),d=1200;(function step(t){const k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,3);n.textContent=Math.round(end*e)+' ';if(k<1)requestAnimationFrame(step)})(t0)},{threshold:.6}).observe(s)})();
