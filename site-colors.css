@@ -284,3 +284,6 @@ html body.medicine-page .med-experience .med-expertise-card{position:relative}
 .sx-thumb{display:none}
 .sx-img{background:linear-gradient(to top right,transparent calc(50% - .5px),#ffffff12 50%,transparent calc(50% + .5px)),linear-gradient(to bottom right,transparent calc(50% - .5px),#ffffff12 50%,transparent calc(50% + .5px))}
 @media(max-width:760px){#services .service-card.has-sx:not(.request-card){background:radial-gradient(ellipse 90% 40% at 0% 100%,#ec4e2c1c,transparent 70%),#0b0d13}}
+/* card 01: barely-there glass edge glow on the far right */
+#services .service-card.has-sx:not(.request-card){background:radial-gradient(ellipse 70% 55% at 0% 100%,#ec4e2c1c,transparent 70%),radial-gradient(ellipse 14% 80% at 100% 55%,#ec4e2c14,transparent 100%),#0b0d13}
+@media(max-width:760px){#services .service-card.has-sx:not(.request-card){background:radial-gradient(ellipse 90% 40% at 0% 100%,#ec4e2c1c,transparent 70%),radial-gradient(ellipse 22% 60% at 100% 40%,#ec4e2c12,transparent 100%),#0b0d13}}
