@@ -94,12 +94,13 @@ html.katsa-leaving{opacity:0;transition:opacity .16s ease;pointer-events:none}
 
 /* Главный экран на телефоне: плакатная вёрстка — строки в ширину колонки, зигзаг «влево / вправо», индексы 01 / 02 и волосяная линия между двумя утверждениями */
 @media(max-width:760px) and (min-height:560px){
-body .hero h1{font-size:min(calc((100vw - 44px)*.226),12svh)!important;line-height:.9!important;letter-spacing:-.07em!important;width:100%!important;max-width:none!important}
+body .hero h1{font-size:min(calc((100vw - 44px)*.185),10svh)!important;line-height:1!important;letter-spacing:-.065em!important;width:100%!important;max-width:none!important}
 body .hero h1 .hero-line{display:block!important;width:auto!important;max-width:none!important;margin-left:0!important;position:relative}
 body .hero h1 .hero-indent{text-align:right}
-body .hero h1 .hero-l3{margin-top:.16em!important;padding-top:.14em;border-top:1px solid #ffffff2e}
+body .hero h1 .hero-l3{margin-top:.42em!important;padding-top:.36em;border-top:1px solid #ffffff24}
 body .hero h1 .hero-l3 .hero-sites{display:block;text-align:right;position:relative}
-body .hero h1 .hero-indent:before,body .hero h1 .hero-sites:before{position:absolute;left:0;top:.34em;font-size:11px;line-height:1;letter-spacing:.18em;font-weight:400;color:#ffffff8c;-webkit-text-fill-color:#ffffff8c;text-shadow:none}
-body .hero h1 .hero-indent:before{content:"01 — смысл"}
-body .hero h1 .hero-sites:before{content:"02 — сайт"}
+body .hero h1 .hero-indent:before,body .hero h1 .hero-sites:before{position:absolute;left:0;top:.42em;font-size:11px;line-height:1;letter-spacing:.1em;font-weight:400;color:#ffffff8c;-webkit-text-fill-color:#ffffff8c;text-shadow:none}
+body .hero h1 .hero-indent:before{content:"01 — стратегия"}
+body .hero h1 .hero-sites:before{content:"02 — дизайн и код"}
 }
+@media(max-width:350px){body .hero h1 .hero-indent:before,body .hero h1 .hero-sites:before{display:none}}
