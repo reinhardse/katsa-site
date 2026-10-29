@@ -482,3 +482,10 @@ html body.medicine-page .med-experience .med-expertise-card{position:relative}
 #services .service-card.has-sx,#services .service-card{margin-bottom:0}
 #services .service-card:not(:first-child){margin-top:clamp(130px,26svh,240px)}
 }
+
+/* mobile: copy must not create a containing block (translate did) -> chip stayed mid-card until the reveal ended; lighter paint */
+@media(max-width:760px){
+#services .service-card.has-sx .service-copy,#services .service-card.has-sx:not(.service-seen) .service-copy{translate:none!important;transform:none!important}
+#services .service-card.has-sx .service-cta{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:#ffffff1f!important}
+}
+.sx-x{filter:none!important;box-shadow:0 0 6px #ec4e2c30}
