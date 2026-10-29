@@ -338,3 +338,31 @@ html body.medicine-page .med-experience .med-expertise-card{position:relative}
  #services .service-card.has-sx .sx-box,#services .service-card.has-sx .sx-img,#services .service-card.has-sx .sx-pill{border-color:#ffffff30}
  #services .service-card.has-sx:not(.request-card){background:radial-gradient(ellipse 90% 34% at 100% 26%,#f5946a30 0%,#f08a5f18 38%,#ec4e2c0a 66%,transparent 100%),radial-gradient(ellipse 90% 40% at 0% 100%,#f0875a1a,transparent 70%),#0b0d13}
 }
+
+/* card 02 · multipage: a site map of several pages joined by lines */
+.mp{position:absolute;left:var(--sx-l);right:var(--sx-r);top:var(--sx-t);bottom:var(--sx-b);display:flex;flex-direction:column;align-items:center;padding:clamp(14px,2vw,28px) 0 0}
+.mp *{--k:clamp(0,calc(var(--W,0)*11 - var(--d,8)),1)}
+.mp-root{width:60%;border:1px solid #ffffff1f;border-radius:12px;padding:12px 14px 16px;background:linear-gradient(180deg,#ffffff07,#ffffff02);opacity:var(--k);transform:translateY(calc(10px*(1 - var(--k))))}
+.mp-nav{display:flex;align-items:center;gap:8px;margin-bottom:16px}
+.mp-nav .w{width:34px;height:7px;border-radius:3px;background:#ffffff40;margin-right:auto;display:block}
+.mp-pill{--x:calc(var(--S,0)*4 - var(--i) - .5);--a:clamp(0,calc(1 - max(var(--x),-1*var(--x))),1);display:block;width:22px;height:6px;border-radius:3px;background:#ffffff1f;box-shadow:0 0 10px rgba(236,78,44,calc(var(--a)*.28));background:color-mix(in srgb,#ec4e2c calc(var(--a)*38%),#ffffff1f);opacity:var(--k)}
+.mp-hero{display:grid;grid-template-columns:1.2fr .8fr;gap:12px;align-items:center}
+.mp-col{display:flex;flex-direction:column;gap:7px}
+.mp-col i{display:block;border-radius:3px;height:2px;background:#ffffff26;transform-origin:0 50%;transform:scaleX(var(--k));opacity:var(--k)}
+.mp-col i.h{height:9px;background:#ffffff40}
+.mp-img{aspect-ratio:1;border:1px solid #ffffff22;border-radius:8px;opacity:var(--k);background:linear-gradient(to top right,transparent calc(50% - .5px),#ffffff12 50%,transparent calc(50% + .5px)),linear-gradient(to bottom right,transparent calc(50% - .5px),#ffffff12 50%,transparent calc(50% + .5px))}
+.mp-stem{display:block;width:1px;height:clamp(14px,2.4vw,26px);background:#ffffff33;transform-origin:50% 0;transform:scaleY(var(--k))}
+.mp-bus{display:block;height:1px;width:76%;background:#ffffff33;transform-origin:50% 50%;transform:scaleX(var(--k))}
+.mp-drops{display:grid;grid-template-columns:repeat(4,1fr);width:100%;padding:0 0;margin-bottom:0}
+.mp-drops i{display:block;justify-self:center;width:1px;height:clamp(14px,2.4vw,26px);background:#ffffff33;transform-origin:50% 0;transform:scaleY(var(--k))}
+.mp-kids{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1.2vw,14px);width:100%}
+.mp-kid{--x:calc(var(--S,0)*4 - var(--i) - .5);--a:clamp(0,calc(1 - max(var(--x),-1*var(--x))),1);display:flex;flex-direction:column;gap:7px;padding:clamp(8px,1vw,12px);aspect-ratio:3/4.1;border:1px solid color-mix(in srgb,#ec4e2c calc(var(--a)*34%),#ffffff1f);border-radius:10px;background:linear-gradient(180deg,#ffffff06,#ffffff02);box-shadow:0 0 26px rgba(236,78,44,calc(var(--a)*.16));opacity:var(--k);transform:translateY(calc(10px*(1 - var(--k)) - var(--a)*6px))}
+.mp-kid i{display:block;border-radius:2px;background:#ffffff1f;height:2px}
+.mp-kid i.h{height:7px;background:#ffffff40;border-radius:3px}
+.mp-kid i.im{height:34%;border:1px solid #ffffff1f;background:none;border-radius:6px}
+.mp-kid i.t{height:2px}.mp-kid i.t.s{width:60%}
+.mp-kid i.bx{height:15%;border:1px solid #ffffff1f;background:none;border-radius:6px}
+.mp-kid .gr{display:grid;grid-template-columns:1fr 1fr;gap:5px;flex:1}.mp-kid .gr i{height:auto;border:1px solid #ffffff1f;background:none;border-radius:5px;min-height:18px}
+.mp-kid i.in{height:13%;border:1px solid #ffffff1f;background:none;border-radius:5px}
+.mp-kid em.pl{display:block;height:11px;width:55%;border:1px solid #ec4e2c3d;border-radius:8px;margin-top:auto}
+@media(max-width:760px){.sx2 .mp{padding-top:14px}.sx2 .mp-root{width:68%}}
