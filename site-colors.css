@@ -305,7 +305,7 @@ html body.medicine-page .med-experience .med-expertise-card{position:relative}
 @media(min-width:1101px){
  #medical.medical-section{grid-template-columns:minmax(0,max-content) minmax(0,1fr) auto;padding-left:0;gap:0;margin-top:40px;margin-bottom:66px;padding-block:40px}
  #medical .medical-orbit{display:contents}
- #medical .medical-heart-drift{grid-column:2;justify-self:center;align-self:center;width:clamp(436px,32.1vw,551px);max-width:none;margin:0;translate:none;position:relative;z-index:1}
+ #medical .medical-heart-drift{grid-column:2;justify-self:center;align-self:center;width:clamp(467px,34.35vw,590px);max-width:none;margin:0;translate:none;position:relative;z-index:1}
  #medical .medical-tags{grid-column:3;translate:-8px 0;z-index:6}
  #medical .medical-content{grid-column:1;position:relative;isolation:isolate;overflow:hidden;max-width:none;padding:56px 56px 54px;border-radius:24px;background:#0b0f17;border:1px solid rgba(204,221,245,.16);box-shadow:0 -12px 32px rgba(0,0,0,.25),0 22px 48px rgba(0,0,0,.16);z-index:5}
  #medical .medical-content:before,#medical .medical-tags li:after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(95deg,rgba(9,12,18,.68),rgba(10,15,24,.22) 48%,rgba(15,22,36,.04));border-radius:inherit}
