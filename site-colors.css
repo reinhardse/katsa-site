@@ -293,3 +293,8 @@ html body.medicine-page .med-experience .med-expertise-card{position:relative}
 .sx-page i.h{background:#ffffff1f}
 .sx-page i.t,.sx-box i.t{background:#ffffff12}
 .sx-nav .w{background:#ffffff26}.sx-nav s{background:#ffffff14}
+/* softer, lighter orange corner glow */
+#services .service-card.has-sx:not(.request-card){background:radial-gradient(ellipse 70% 55% at 0% 100%,#f0875a1a,transparent 70%),radial-gradient(ellipse 60% 95% at 100% 100%,#f5946a2e 0%,#f08a5f1c 25%,#ec4e2c0e 50%,#ec4e2c05 72%,transparent 100%),#0b0d13}
+@media(max-width:760px){#services .service-card.has-sx:not(.request-card){background:radial-gradient(ellipse 90% 40% at 0% 100%,#f0875a1a,transparent 70%),radial-gradient(ellipse 100% 60% at 100% 100%,#f5946a2c 0%,#f08a5f18 30%,#ec4e2c0a 60%,transparent 100%),#0b0d13}}
+/* home medical block: no glass plate on desktop */
+@media(min-width:761px){#medical .medical-glass{display:none}}
