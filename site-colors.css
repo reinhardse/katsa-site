@@ -321,14 +321,20 @@ html body.medicine-page .med-experience .med-expertise-card{position:relative}
 @media(max-width:360px){.site-header .brand{font-size:29px}}
 /* mobile card 01: schematic leaves the card diagonally at the top, fades under the text; cards still stack */
 @media(max-width:760px){
- #services .service-card.has-sx .service-cover.sx{position:absolute;inset:0 0 auto 0;left:0;right:0;top:0;bottom:auto;width:100%;height:430px;opacity:.9;--sx-l:16%;--sx-r:-14%;--sx-t:34px;--sx-b:-60px;transform:rotate(-9deg) scale(1.12);transform-origin:50% 0;z-index:0}
+ #services .service-card.has-sx .service-cover.sx{position:absolute;inset:0 0 auto 0;left:0;right:0;top:0;bottom:auto;width:100%;height:430px;opacity:1;--sx-l:16%;--sx-r:-14%;--sx-t:34px;--sx-b:-60px;transform:rotate(-9deg) scale(1.12);transform-origin:50% 0;z-index:0}
  #services .service-card.has-sx .service-inner{justify-content:flex-start;min-height:0;gap:0}
- #services .service-card.has-sx .service-copy{margin-top:170px}
- #services .service-card.has-sx{min-height:0}
+ #services .service-card.has-sx .service-copy{margin-top:76px}
+ #services .service-card.has-sx{min-height:0!important;height:auto!important;max-height:none!important}
+ #services .service-card.has-sx .service-inner{min-height:0!important;height:auto!important}
  #services .service-card.has-sx .sx-frame{bottom:var(--sx-b);height:auto}
  #services .service-card.has-sx .sx-gb{display:block}
  #services .service-card.has-sx .sx-gl,#services .service-card.has-sx .sx-gr{-webkit-mask:none;mask:none}
  .sx-x3,.sx-x4{display:block}
  .sx-thumb,.sx-tag{display:none}
- #services .service-card.has-sx .service-veil{display:block;background:linear-gradient(0deg,#0b0d13 0%,#0b0d13f2 48%,#0b0d1399 66%,#0b0d1300 88%)}
+ #services .service-card.has-sx .service-veil{display:block;background:linear-gradient(0deg,#0b0d13 0%,#0b0d13ee 46%,#0b0d1366 62%,#0b0d1300 78%)}
+ #services .service-card.has-sx .sx-g{background:#ffffff30}
+ #services .service-card.has-sx .sx-page i.h{background:#ffffff40}
+ #services .service-card.has-sx .sx-page i.t{background:#ffffff26}
+ #services .service-card.has-sx .sx-box,#services .service-card.has-sx .sx-img,#services .service-card.has-sx .sx-pill{border-color:#ffffff30}
+ #services .service-card.has-sx:not(.request-card){background:radial-gradient(ellipse 90% 34% at 100% 26%,#f5946a30 0%,#f08a5f18 38%,#ec4e2c0a 66%,transparent 100%),radial-gradient(ellipse 90% 40% at 0% 100%,#f0875a1a,transparent 70%),#0b0d13}
 }
