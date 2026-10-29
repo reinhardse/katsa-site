@@ -452,3 +452,14 @@ html body.medicine-page .med-experience .med-expertise-card{position:relative}
 #services .service-card.has-sx .service-inner{padding-bottom:calc(30px + env(safe-area-inset-bottom,0px))}
 #services .service-card.has-sx:last-of-type{margin-bottom:24px}
 }
+
+/* mobile: "Обсудить проект" becomes a small glass chip in the top-right corner */
+@media(max-width:760px){
+#services .service-card.has-sx .service-copy{position:static}
+#services .service-card.has-sx .service-cta{position:absolute;top:20px;right:20px;z-index:6;margin:0;width:auto;min-height:0;gap:0;padding:11px 15px;font-size:15px;line-height:1.2;border-radius:30px;border:1px solid #ffffff35;background:linear-gradient(150deg,#ffffff24,#ffffff0d);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#fff}
+#services .service-card.has-sx .service-cta svg,#services .service-card.has-sx .service-cta:after,#services .service-card.has-sx .service-cta:before{display:none}
+#services .service-card.has-sx .service-inner{padding-bottom:25px}
+#services .service-card.has-sx{margin-bottom:clamp(130px,26svh,240px)}
+}
+@media(max-width:760px){#services .service-card.has-sx .service-cta{top:18px;right:18px;height:auto;min-height:0!important;padding:8px 13px!important;font-size:13px!important;line-height:1.2;background:linear-gradient(150deg,#ffffff2a,#ffffff10)!important}}
+@media(max-width:760px){#services .service-card.has-sx .service-cta{height:36px!important;min-height:36px!important;max-height:36px;display:inline-flex;align-items:center;box-sizing:border-box}}
