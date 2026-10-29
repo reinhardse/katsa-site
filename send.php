@@ -156,6 +156,39 @@ function deliver(array $cfg, array $lead): array {
 }
 
 
+// Подозрительные и отклонённые заявки: НЕ теряем, а присылаем в MAX как есть с пометкой причины
+function suspect_lead(array $cfg, string $dir, array $lead, string $reason): void {
+    $why = [
+        'honeypot'      => 'заполнено скрытое поле (похоже на бота)',
+        'too_fast'      => 'форма отправлена быстрее чем за 2 секунды (похоже на бота)',
+        'origin'        => 'отправлено не с сайта katsa.ru',
+        'no_consent'    => 'нет галочки согласия на обработку данных',
+        'short_contact' => 'контакт короче 3 символов',
+        'rate_limit'    => 'слишком много заявок с одного адреса',
+    ][$reason] ?? $reason;
+    if (!is_dir($dir)) { @mkdir($dir, 0755, true); }
+    // защита от потока: не больше 20 таких сообщений в час
+    $f = $dir . '/.suspect-rate.json';
+    $t = is_file($f) ? (json_decode((string)file_get_contents($f), true) ?: []) : [];
+    $now = time(); $t = array_values(array_filter($t, fn($x) => $x > $now - 3600));
+    $send = count($t) < 20;
+    if ($send) { $t[] = $now; @file_put_contents($f, json_encode($t), LOCK_EX); }
+    $lead['reason'] = $reason; $lead['sent'] = $send;
+    @file_put_contents($dir . '/suspect-' . date('Y-m') . '.jsonl', json_encode($lead, JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND | LOCK_EX);
+    if (!$send) { return; }
+    $lines = ['⚠️ Подозрительная заявка с katsa.ru', 'Причина: ' . $why, ''];
+    if (($lead['name'] ?? '') !== '')    { $lines[] = 'Имя: ' . $lead['name']; }
+    $lines[] = 'Контакт: ' . (($lead['contact'] ?? '') !== '' ? $lead['contact'] : '—');
+    if (($lead['service'] ?? '') !== '') { $lines[] = 'Услуга: ' . $lead['service']; }
+    if (($lead['task'] ?? '') !== '')    { $lines[] = "Задача:\n" . $lead['task']; }
+    $lines[] = '';
+    $lines[] = 'Страница: ' . ($lead['page'] ?? '');
+    if (($lead['via'] ?? '') !== '')     { $lines[] = 'Откуда: ' . $lead['via']; }
+    $lines[] = 'IP: ' . ($lead['ip'] ?? '');
+    $lines[] = 'Время: ' . ($lead['time'] ?? date('Y-m-d H:i:s'));
+    send_max($cfg, implode("\n", $lines));
+}
+
 // Журнал отклонённых заявок (не спам): по нему проверка поднимает тревогу при необычном числе отказов
 function log_reject(string $dir, string $reason, array $lead = []): void {
     if (!is_dir($dir)) { @mkdir($dir, 0755, true); }
@@ -176,7 +209,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     // Запускается по расписанию (cron на хостинге): curl -s "https://katsa.ru/send.php?heartbeat=СЕКРЕТ"
     if (isset($_GET['heartbeat'])) {
         $since = time() - 86400; $n24 = 0; $notMax = 0;
-        foreach (glob($LEADS . '/*.jsonl') ?: [] as $f) {
+        foreach (array_filter(glob($LEADS . '/*.jsonl') ?: [], fn($f) => strpos(basename($f), 'suspect-') !== 0) as $f) {
             foreach (file($f, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $line) {
                 $r = json_decode($line, true);
                 if (!$r || strtotime((string)($r['time'] ?? '')) <= $since) { continue; }
@@ -184,12 +217,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 if (!($r['max_ok'] ?? ($r['delivered'] ?? false))) { $notMax++; }
             }
         }
+        $susp = 0;
+        foreach (glob($LEADS . '/suspect-*.jsonl') ?: [] as $f) {
+            foreach (file($f, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $line) {
+                $r = json_decode($line, true);
+                if ($r && strtotime((string)($r['time'] ?? '')) > $since) { $susp++; }
+            }
+        }
         $problems = [];
         [$mok, $mmsg] = $cfg['max_token'] !== '' ? max_call($cfg, 'GET', '/me') : [false, 'токен бота MAX не задан'];
         if (!$mok) { $problems[] = 'бот MAX не отвечает'; }
         if (!(is_dir($LEADS) ? is_writable($LEADS) : is_writable($BASE))) { $problems[] = 'сервер не может сохранять заявки'; }
         if ($notMax > 0) { $problems[] = 'не дошло в MAX: ' . $notMax . ' (они сохранены на сервере)'; }
-        $period = 'Заявок за последние 24 часа (со вчерашних ' . date('H:i', $since) . '): ' . $n24;
+        $period = 'Заявок за последние 24 часа (со вчерашних ' . date('H:i', $since) . '): ' . $n24 . "\nПодозрительных за это время: " . $susp . ($susp ? ' (пришли отдельными сообщениями ⚠️)' : '');
         $text = $problems
             ? "🤖 Проверка связи\n\n⚠️ KATSA: проблема с формами\n\n• " . implode("\n• ", $problems) . "\n\n" . $period
             : "🤖 Проверка связи\n\n✅ KATSA: формы работают\n\n" . $period . "\nНе дошло в MAX: 0";
@@ -198,7 +238,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
 
     if (isset($_GET['health'])) {
-        $files = glob($LEADS . '/*.jsonl') ?: [];
+        $files = array_filter(glob($LEADS . '/*.jsonl') ?: [], fn($f) => strpos(basename($f), 'suspect-') !== 0);
         $last = null; $total = 0; $undelivered = 0;
         foreach ($files as $f) {
             foreach (file($f, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $line) {
@@ -271,10 +311,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 // ───────── Приём заявки (POST из форм сайта) ─────────
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') { out(['ok' => false, 'error' => 'method'], 405); }
 
-// 1. Проверка источника
-$origin = parse_url((string)($_SERVER['HTTP_ORIGIN'] ?? $_SERVER['HTTP_REFERER'] ?? ''), PHP_URL_HOST);
-if ($origin && !in_array($origin, $cfg['allowed_hosts'], true)) { log_reject($LEADS, 'origin'); out(['ok' => false, 'error' => 'origin'], 403); }
-
 // 2. Данные
 $lead = [
     'name'    => clean($_POST['name'] ?? '', 100),
@@ -290,12 +326,16 @@ $lead = [
     'ip'      => $_SERVER['REMOTE_ADDR'] ?? '',
 ];
 
+// 1. Проверка источника
+$origin = parse_url((string)($_SERVER['HTTP_ORIGIN'] ?? $_SERVER['HTTP_REFERER'] ?? ''), PHP_URL_HOST);
+if ($origin && !in_array($origin, $cfg['allowed_hosts'], true)) { log_reject($LEADS, 'origin', $lead); suspect_lead($cfg, $LEADS, $lead, 'origin'); out(['ok' => false, 'error' => 'origin'], 403); }
+
 // 3. Защита от спама: скрытое поле и слишком быстрая отправка (боты)
-if (clean($_POST['website'] ?? '', 50) !== '') { out(['ok' => true]); }          // бот: делаем вид, что ок
+if (clean($_POST['website'] ?? '', 50) !== '') { suspect_lead($cfg, $LEADS, $lead, 'honeypot'); out(['ok' => true]); }          // бот: делаем вид, что ок
 $elapsed = (int)($_POST['elapsed'] ?? 0);
-if ($elapsed > 0 && $elapsed < 2000) { out(['ok' => true]); }
-if (($_POST['consent'] ?? '') !== '1') { log_reject($LEADS, 'no_consent', $lead); out(['ok' => false, 'error' => 'Нужно согласие на обработку персональных данных'], 422); }
-if (mb_strlen($lead['contact']) < 3) { log_reject($LEADS, 'short_contact', $lead); out(['ok' => false, 'error' => 'Укажите любой способ связи'], 422); }
+if ($elapsed > 0 && $elapsed < 2000) { suspect_lead($cfg, $LEADS, $lead, 'too_fast'); out(['ok' => true]); }
+if (($_POST['consent'] ?? '') !== '1') { log_reject($LEADS, 'no_consent', $lead); suspect_lead($cfg, $LEADS, $lead, 'no_consent'); out(['ok' => false, 'error' => 'Нужно согласие на обработку персональных данных'], 422); }
+if (mb_strlen($lead['contact']) < 3) { log_reject($LEADS, 'short_contact', $lead); suspect_lead($cfg, $LEADS, $lead, 'short_contact'); out(['ok' => false, 'error' => 'Укажите любой способ связи'], 422); }
 
 // 4. Лимиты: не чаще 5 заявок за 10 минут с одного адреса и 60 в час всего
 if (!is_dir($LEADS)) { @mkdir($LEADS, 0755, true); }
@@ -305,7 +345,7 @@ $now = time();
 foreach ($rate as $ip => $times) { $rate[$ip] = array_values(array_filter($times, fn($t) => $t > $now - 3600)); if (!$rate[$ip]) { unset($rate[$ip]); } }
 $mine  = array_filter($rate[$lead['ip']] ?? [], fn($t) => $t > $now - 600);
 $total = array_sum(array_map('count', $rate));
-if (count($mine) >= 5 || $total >= 60) { log_reject($LEADS, 'rate_limit', $lead); out(['ok' => false, 'error' => 'Слишком много заявок, попробуйте позже'], 429); }
+if (count($mine) >= 5 || $total >= 60) { log_reject($LEADS, 'rate_limit', $lead); suspect_lead($cfg, $LEADS, $lead, 'rate_limit'); out(['ok' => false, 'error' => 'Слишком много заявок, попробуйте позже'], 429); }
 $rate[$lead['ip']][] = $now;
 @file_put_contents($rateFile, json_encode($rate), LOCK_EX);
 
