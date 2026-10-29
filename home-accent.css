@@ -52,10 +52,7 @@ html body:not(#x) .med-hero.med-hero.med-hero .med-hero-copy.med-hero-copy a.gla
 html body.medicine-page:not(#x) .med-experience strong{color:#f57f48!important;-webkit-text-fill-color:#f57f48!important}
 html body .med-reel{color:#f57f48;-webkit-text-fill-color:#f57f48}
 /* project pages: orange labels */
-html body:not(#x) .editorial-client-scope>div>span,
 html body:not(#x) .editorial-decision-main>span:first-child,
-html body:not(#x) .editorial-reason>span:first-child,
-html body:not(#x) .editorial-palette>span:first-child,
 html body:not(#x) .case-shell .section-label,
 html body:not(#x) .case-shell li>span:first-child{color:#f57f48!important}
 /* buttons: real semi-bold weight (font file only had 400) */
