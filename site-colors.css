@@ -463,3 +463,11 @@ html body.medicine-page .med-experience .med-expertise-card{position:relative}
 }
 @media(max-width:760px){#services .service-card.has-sx .service-cta{top:18px;right:18px;height:auto;min-height:0!important;padding:8px 13px!important;font-size:13px!important;line-height:1.2;background:linear-gradient(150deg,#ffffff2a,#ffffff10)!important}}
 @media(max-width:760px){#services .service-card.has-sx .service-cta{height:36px!important;min-height:36px!important;max-height:36px;display:inline-flex;align-items:center;box-sizing:border-box}}
+
+/* last card must fully slide over the previous ones: keep them stuck until it arrives */
+#services .service-stack::after{content:'';display:block;height:clamp(120px,24svh,260px)}
+@media(max-width:760px){
+#services .service-card.has-sx{min-height:600px!important}
+}
+#services .service-stack::after{height:calc(clamp(260px,44svh,480px) + 30px)}
+@media(max-width:760px){#services .service-stack::after{height:calc(clamp(130px,26svh,240px) + 30px)}}
