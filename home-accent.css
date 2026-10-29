@@ -45,3 +45,6 @@ body .site-header .header-cta:hover,body .site-header .header-cta:focus-visible{
 #services .service-card.has-sx:nth-child(4) .service-cover.sx{opacity:.85}
 #services .service-card.has-sx:nth-child(4):not(.request-card){background:radial-gradient(ellipse 90% 40% at 0% 100%,#f0875a22,transparent 70%),radial-gradient(ellipse 100% 60% at 100% 100%,#f5946a1e 0%,#ec4e2c0a 60%,transparent 100%),#0b0d13}
 }
+/* medicine hero CTA: compact, aligned with the description */
+html body:not(#x) .med-hero.med-hero.med-hero .med-hero-copy.med-hero-copy a.glass-button.glass-button{width:auto!important;min-width:0!important;min-height:44px!important;height:44px!important;padding:0 22px!important;font-size:14px!important;align-self:flex-start!important;justify-self:start!important;margin-right:auto}
+@media(max-width:760px){html body:not(#x) .med-hero.med-hero.med-hero .med-hero-copy.med-hero-copy a.glass-button.glass-button{align-self:center!important;margin:0 auto}}
