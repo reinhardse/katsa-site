@@ -17,7 +17,7 @@ body #approach .report-panel{background:radial-gradient(ellipse at 90% 0,#f57f48
 .request-glow{background:radial-gradient(ellipse at 5% 55%,#f57f4824,transparent 50%),radial-gradient(ellipse at 100% 0%,#f57f4818,transparent 52%)}
 #services .request-card input:checked+span{background:#bcd4ff;color:#14110e}
 /* contact: original black, orange light set into the corner like the calendar card */
-body #contact.ron-contact{background:radial-gradient(ellipse 85% 42% at 14% 100%,#f57f4820 0%,#f57f481a 14%,#f57f4813 28%,#f57f480c 44%,#f57f4806 60%,#f57f4802 76%,transparent 92%),radial-gradient(ellipse 48% 26% at 6% 100%,#ff8a4a18 0%,#ff8a4a0c 45%,transparent 90%),#08090d!important}
+body #contact.ron-contact{background:radial-gradient(ellipse 95% 50% at 8% 100%,#34324ad0 0%,#2a2940a0 30%,#1f1f31 55%,#14151f55 78%,transparent 96%),radial-gradient(ellipse 40% 22% at 0% 100%,#f57f4822,transparent 80%),#08090d!important}
 body #contact.ron-contact:before,body #contact.ron-contact:after{display:none!important}
 /* modal and form */
 body #contact-modal{background:radial-gradient(ellipse 60% 45% at 0% 0%,#f57f4822,transparent 70%),#111219}
@@ -36,3 +36,12 @@ body #approach .calendar-day.selected{color:#0c1424!important}
 /* header CTA: neutral hover like other buttons, 15px label */
 body .site-header .header-cta{font-size:15px}
 body .site-header .header-cta:hover,body .site-header .header-cta:focus-visible{transform:translateY(-1px)!important;border-color:#ffffff6e;box-shadow:inset 0 1px #ffffff35,0 0 0 3px #ffffff1c,0 8px 24px -16px #0009}
+
+/* mobile service cards: darker veil under text, calmer art */
+@media(max-width:760px){
+#services .service-card.has-sx:not(.request-card) .service-copy>*:not(.service-cta){position:relative;z-index:6}
+#services .service-card.has-sx:not(.request-card) .service-copy:before{content:'';position:absolute;z-index:3;left:0;right:0;bottom:0;height:64%;border-radius:0 0 24px 24px;background:linear-gradient(180deg,#0b0d1300 0%,#0b0d13cc 34%,#0b0d13f2 100%);pointer-events:none}
+#services .service-card.has-sx:not(.request-card) .service-cover.sx{opacity:.72}
+#services .service-card.has-sx:nth-child(4) .service-cover.sx{opacity:.5}
+#services .service-card.has-sx:nth-child(4):not(.request-card){background:radial-gradient(ellipse 90% 40% at 0% 100%,#f0875a0c,transparent 70%),#0b0d13}
+}
