@@ -25,7 +25,7 @@ body .contact-modal-form input:focus,body .contact-modal-form textarea:focus,#pr
 body .contact-modal-form .service-consent input,body #project-request .service-consent input{accent-color:#bcd4ff}
 body .contact-modal-form .service-consent a,.contact-form-status{color:#bcd4ff}
 /* header and mobile menu stay exactly as they were */
-.site-header,.mobile-menu{--katsa-gradient:linear-gradient(100deg,#f68a5c 0%,#ffcfb0 100%);--katsa-blue:#f68a5c;--katsa-violet:#ffcfb0}
+.site-header,.mobile-menu{--katsa-gradient:linear-gradient(100deg,#42aee6 0%,#7cc8f0 30%,#ffb089 62%,#f0743a 100%);--katsa-blue:#3ea8e0;--katsa-violet:#f0743a}
 /* interface details are ice, words are orange */
 #approach,#medical{--katsa-gradient:linear-gradient(#bcd4ff,#bcd4ff)}
 /* request card: field border back */
