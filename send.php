@@ -28,6 +28,8 @@ $cfg += [
     'secret'        => '',
     'telegram_token'=> '',
     'telegram_chat' => '',     // один id или несколько через запятую
+    'telegram_relay'        => '',  // адрес Cloudflare Worker (ретранслятор в Telegram), если сервер не достаёт до Telegram напрямую
+    'telegram_relay_secret' => '',  // общий секрет между сервером и Worker
     'max_token'     => '',     // токен бота MAX
     'max_user'      => '',     // id получателя(ей) в MAX через запятую
     'mail_to'       => '',     // куда слать копию на почту (пусто = не слать)
@@ -63,7 +65,27 @@ function http_post(string $url, array $fields): array {
     return [false, 'Telegram ответил ' . $code . ': ' . ($j['description'] ?? mb_substr((string)$body, 0, 120))];
 }
 
+function relay_call(array $cfg, array $payload): array {
+    if (!function_exists('curl_init')) { return [false, 'нет curl', null]; }
+    $ch = curl_init($cfg['telegram_relay']);
+    curl_setopt_array($ch, [
+        CURLOPT_POST => true, CURLOPT_POSTFIELDS => json_encode($payload, JSON_UNESCAPED_UNICODE),
+        CURLOPT_HTTPHEADER => ['Content-Type: application/json', 'X-Relay-Secret: ' . $cfg['telegram_relay_secret']],
+        CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 15, CURLOPT_CONNECTTIMEOUT => 8,
+    ]);
+    $body = curl_exec($ch); $code = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE); $err = curl_error($ch); curl_close($ch);
+    if ($body === false) { return [false, 'ретранслятор недоступен: ' . $err, null]; }
+    $j = json_decode((string)$body, true);
+    if ($code === 200 && ($j['ok'] ?? false)) { return [true, 'ok', $j]; }
+    return [false, 'ретранслятор ответил ' . $code . ': ' . ($j['error'] ?? mb_substr((string)$body, 0, 120)), $j];
+}
+
 function send_telegram(array $cfg, string $textHtml): array {
+    // Через ретранслятор: токен бота хранится в Worker, на хостинге его нет
+    if ($cfg['telegram_relay'] !== '') {
+        [$ok, $msg] = relay_call($cfg, ['action' => 'send', 'text' => $textHtml]);
+        return [$ok, $msg];
+    }
     if ($cfg['telegram_token'] === '' || $cfg['telegram_chat'] === '') { return [null, 'не настроен']; }
     $errors = [];
     foreach (array_filter(array_map('trim', explode(',', $cfg['telegram_chat']))) as $chat) {
@@ -74,7 +96,6 @@ function send_telegram(array $cfg, string $textHtml): array {
     }
     return $errors ? [false, implode('; ', $errors)] : [true, 'ok'];
 }
-
 
 function max_call(array $cfg, string $method, string $path, ?array $json = null): array {
     $ch = curl_init('https://platform-api.max.ru' . $path);
@@ -148,7 +169,7 @@ function secret_ok(array $cfg, string $key): bool {
 
 // ───────── Служебные запросы (GET с секретом) ─────────
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $key = (string)($_GET['selftest'] ?? $_GET['setup'] ?? $_GET['health'] ?? $_GET['nettest'] ?? '');
+    $key = (string)($_GET['selftest'] ?? $_GET['setup'] ?? $_GET['health'] ?? '');
     if ($key === '' || !secret_ok($cfg, $key)) { out(['ok' => false, 'error' => 'not found'], 404); }
 
     if (isset($_GET['health'])) {
@@ -181,39 +202,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         out([
             'status' => $problems ? 'PROBLEM' : 'ALL_OK', 'problems' => $problems,
             'ok' => !$problems, 'time' => date('c'),
-            'telegram_configured' => $cfg['telegram_token'] !== '' && $cfg['telegram_chat'] !== '',
+            'telegram_configured' => $cfg['telegram_relay'] !== '' || ($cfg['telegram_token'] !== '' && $cfg['telegram_chat'] !== ''),
             'max_configured' => $cfg['max_token'] !== '' && $cfg['max_user'] !== '',
             'mail_configured' => $cfg['mail_to'] !== '',
             'leads_total' => $total, 'rejects_24h' => $rejects24, 'leads_undelivered' => $undelivered, 'last_lead' => $last,
             'leads_dir_writable' => is_dir($LEADS) ? is_writable($LEADS) : is_writable($BASE),
         ], $problems ? 503 : 200);
-    }
-
-    if (isset($_GET['nettest'])) {
-        $tests = [
-            'telegram_auto'   => ['https://api.telegram.org/', 0],
-            'telegram_ipv4'   => ['https://api.telegram.org/', CURL_IPRESOLVE_V4],
-            'telegram_ipv6'   => ['https://api.telegram.org/', CURL_IPRESOLVE_V6],
-            'telegram_8443'   => ['https://api.telegram.org:8443/', CURL_IPRESOLVE_V4],
-            'telegram_http'   => ['http://api.telegram.org/', CURL_IPRESOLVE_V4],
-            'telegram_web'    => ['https://t.me/', CURL_IPRESOLVE_V4],
-            'cloudflare'      => ['https://www.cloudflare.com/', CURL_IPRESOLVE_V4],
-            'workers_dev'     => ['https://workers.dev/', CURL_IPRESOLVE_V4],
-            'github'          => ['https://api.github.com/', CURL_IPRESOLVE_V4],
-            'max'             => ['https://platform-api.max.ru/', CURL_IPRESOLVE_V4],
-            'ntfy'            => ['https://ntfy.sh/', CURL_IPRESOLVE_V4],
-        ];
-        $res = [];
-        foreach ($tests as $name => [$u, $ipr]) {
-            $ch = curl_init($u);
-            $o = [CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 6, CURLOPT_CONNECTTIMEOUT => 4, CURLOPT_NOBODY => true];
-            if ($ipr) { $o[CURLOPT_IPRESOLVE] = $ipr; }
-            curl_setopt_array($ch, $o);
-            curl_exec($ch);
-            $res[$name] = curl_errno($ch) ? ('ОШИБКА: ' . curl_error($ch)) : ('ответ ' . curl_getinfo($ch, CURLINFO_HTTP_CODE) . ', ip ' . curl_getinfo($ch, CURLINFO_PRIMARY_IP));
-            curl_close($ch);
-        }
-        out(['ok' => true, 'results' => $res]);
     }
 
     if (isset($_GET['setup'])) {
@@ -223,6 +217,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $walk = function ($a) use (&$walk, &$ids) { foreach ((array)$a as $k => $v) { if (is_array($v)) { $walk($v); } elseif ($k === 'user_id' && $v) { $ids[(string)$v] = 1; } } };
             $walk($j['updates'] ?? []);
             out(['ok' => $ok, 'info' => $msg, 'user_ids' => array_keys($ids), 'hint' => 'Напиши боту в MAX, открой страницу снова, id впиши в max_user']);
+        }
+        if ($cfg['telegram_relay'] !== '') {
+            [$ok, $msg, $j] = relay_call($cfg, ['action' => 'chats']);
+            out(['ok' => $ok, 'info' => $msg, 'chats' => $j['chats'] ?? [], 'hint' => 'Напиши боту любое сообщение, открой страницу снова. id впиши в TG_CHATS у Worker.']);
         }
         if ($cfg['telegram_token'] === '') { out(['ok' => false, 'error' => 'Сначала впиши telegram_token в config.php']); }
         $ch = curl_init('https://api.telegram.org/bot' . $cfg['telegram_token'] . '/getUpdates');
