@@ -17,7 +17,7 @@ body #approach .report-panel{background:radial-gradient(ellipse at 90% 0,#f26b30
 .request-glow{background:radial-gradient(ellipse at 5% 55%,#f26b3024,transparent 50%),radial-gradient(ellipse at 100% 0%,#f26b3018,transparent 52%)}
 #services .request-card input:checked+span{background:#bcd4ff;color:#14110e}
 /* contact: original black, orange light set into the corner like the calendar card */
-body #contact.ron-contact{background:#08090d!important}
+body #contact.ron-contact{background:radial-gradient(ellipse 85% 42% at 14% 100%,#f26b3040 0%,#f26b3034 14%,#f26b3026 28%,#f26b3018 44%,#f26b300c 60%,#f26b3004 76%,transparent 92%),radial-gradient(ellipse 48% 26% at 6% 100%,#ff8a4a30 0%,#ff8a4a18 45%,transparent 90%),#08090d!important}
 body #contact.ron-contact:before,body #contact.ron-contact:after{display:none!important}
 /* modal and form */
 body #contact-modal{background:radial-gradient(ellipse 60% 45% at 0% 0%,#f26b3022,transparent 70%),#111219}
