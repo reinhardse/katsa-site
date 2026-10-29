@@ -1,31 +1,31 @@
-/* Home page accent (preview): dense orange #f26b30 for words/glows, ice #bcd4ff for interface details. Loaded on index.html only. */
-:root{--katsa-blue:#bcd4ff;--katsa-violet:#bcd4ff;--katsa-gradient:linear-gradient(#f26b30,#f26b30)}
-::selection{background:#f26b3055;color:#fff}
+/* Home page accent (preview): dense orange #f57f48 for words/glows, ice #bcd4ff for interface details. Loaded on index.html only. */
+:root{--katsa-blue:#bcd4ff;--katsa-violet:#bcd4ff;--katsa-gradient:linear-gradient(#f57f48,#f57f48)}
+::selection{background:#f57f4855;color:#fff}
 /* words */
-.studio-intro h2 span,#projects .section-heading h2 span,#contact #contact-title span{background:linear-gradient(90deg,transparent 0%,transparent var(--design-fill,0%),#777784 var(--design-fill,0%),#777784 100%),linear-gradient(#f26b30,#f26b30);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-#contact h2 span,.contact-modal-intro h2 span{color:#f26b30}
+.studio-intro h2 span,#projects .section-heading h2 span,#contact #contact-title span{background:linear-gradient(90deg,transparent 0%,transparent var(--design-fill,0%),#777784 var(--design-fill,0%),#777784 100%),linear-gradient(#f57f48,#f57f48);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+#contact h2 span,.contact-modal-intro h2 span{color:#f57f48}
 /* approach / stages */
 body #approach .agenda-day{color:#bcd4ff!important}
 body #approach .timeline-stage{--stage-color:#bcd4ff!important}
 body #approach .stage-title{color:#dce8ff!important}
 body #approach .stage-description{border-color:#bcd4ff33}
-body #approach .report-panel{background:radial-gradient(ellipse at 90% 0,#f26b3024,transparent 65%),#16171f}
-#approach .project-timeline:before{background:linear-gradient(180deg,#bcd4ff6b,#ffffff20 50%,#f26b3059)}
+body #approach .report-panel{background:radial-gradient(ellipse at 90% 0,#f57f4824,transparent 65%),#16171f}
+#approach .project-timeline:before{background:linear-gradient(180deg,#bcd4ff6b,#ffffff20 50%,#f57f4859)}
 /* medical */
-#medical .medical-tags li:before,#medical .medical-section .medical-tags li:before{background:#f26b30!important;box-shadow:0 0 12px #f26b3066!important}
+#medical .medical-tags li:before,#medical .medical-section .medical-tags li:before{background:#f57f48!important;box-shadow:0 0 12px #f57f4866!important}
 /* request card */
-.request-glow{background:radial-gradient(ellipse at 5% 55%,#f26b3024,transparent 50%),radial-gradient(ellipse at 100% 0%,#f26b3018,transparent 52%)}
+.request-glow{background:radial-gradient(ellipse at 5% 55%,#f57f4824,transparent 50%),radial-gradient(ellipse at 100% 0%,#f57f4818,transparent 52%)}
 #services .request-card input:checked+span{background:#bcd4ff;color:#14110e}
 /* contact: original black, orange light set into the corner like the calendar card */
-body #contact.ron-contact{background:radial-gradient(ellipse 85% 42% at 14% 100%,#f26b3040 0%,#f26b3034 14%,#f26b3026 28%,#f26b3018 44%,#f26b300c 60%,#f26b3004 76%,transparent 92%),radial-gradient(ellipse 48% 26% at 6% 100%,#ff8a4a30 0%,#ff8a4a18 45%,transparent 90%),#08090d!important}
+body #contact.ron-contact{background:radial-gradient(ellipse 85% 42% at 14% 100%,#f57f4820 0%,#f57f481a 14%,#f57f4813 28%,#f57f480c 44%,#f57f4806 60%,#f57f4802 76%,transparent 92%),radial-gradient(ellipse 48% 26% at 6% 100%,#ff8a4a18 0%,#ff8a4a0c 45%,transparent 90%),#08090d!important}
 body #contact.ron-contact:before,body #contact.ron-contact:after{display:none!important}
 /* modal and form */
-body #contact-modal{background:radial-gradient(ellipse 60% 45% at 0% 0%,#f26b3022,transparent 70%),#111219}
+body #contact-modal{background:radial-gradient(ellipse 60% 45% at 0% 0%,#f57f4822,transparent 70%),#111219}
 body .contact-modal-form input:focus,body .contact-modal-form textarea:focus,#project-request label:focus-within{border-color:#bcd4ff}
 body .contact-modal-form .service-consent input,body #project-request .service-consent input{accent-color:#bcd4ff}
 body .contact-modal-form .service-consent a,.contact-form-status{color:#bcd4ff}
 /* header and mobile menu stay exactly as they were */
-.site-header,.mobile-menu{--katsa-gradient:linear-gradient(100deg,#f2561a 0%,#ffb685 100%);--katsa-blue:#f2561a;--katsa-violet:#ffb685}
+.site-header,.mobile-menu{--katsa-gradient:linear-gradient(100deg,#f68a5c 0%,#ffcfb0 100%);--katsa-blue:#f68a5c;--katsa-violet:#ffcfb0}
 /* interface details are ice, words are orange */
 #approach,#medical{--katsa-gradient:linear-gradient(#bcd4ff,#bcd4ff)}
 /* request card: field border back */
