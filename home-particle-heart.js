@@ -4,7 +4,7 @@
  const fallback=field.querySelector('img');if(fallback){fallback.src='assets/home-particle-heart.webp';fallback.alt='Сердце из синих и оранжевых частиц';}
  let canvas=document.createElement('canvas');canvas.setAttribute('aria-hidden','true');field.append(canvas);
  const reduced=matchMedia('(prefers-reduced-motion:reduce)'),image=new Image();image.src='assets/home-particle-heart.webp';
- let points=[],position,colour,size,gl,program,buffer,draw,w=1,h=1,scale=1,ox=0,oy=0,dpr=1,time=0,last=0,frame=0,visible=true,ready=false;
+ let MX=400,MY=400,points=[],position,colour,size,gl,program,buffer,draw,w=1,h=1,scale=1,ox=0,oy=0,dpr=1,time=0,last=0,frame=0,visible=true,ready=false;
  let mx=-1e6,my=-1e6,pointerInside=false,moveX=0,moveY=0,lastPointer=0,oldMx=0,oldMy=0;
  const smooth=(a,b,x)=>{const t=Math.max(0,Math.min(1,(x-a)/(b-a)));return t*t*(3-2*t)};
  function initialise(){
@@ -54,7 +54,7 @@
  function glass(){if(innerWidth<=1100||!panes.length)return;const cr=canvas.getBoundingClientRect();if(!cr.width)return;const kx=canvas.width/cr.width,ky=canvas.height/cr.height;for(const p of panes){const r=p.el.getBoundingClientRect();const gw=Math.max(1,Math.round(r.width/3)),gh=Math.max(1,Math.round(r.height/3));if(p.c.width!==gw||p.c.height!==gh){p.c.width=gw;p.c.height=gh}p.ctx.clearRect(0,0,gw,gh);if(r.right<cr.left||r.left>cr.right||r.bottom<cr.top||r.top>cr.bottom)continue;p.ctx.drawImage(canvas,(r.left-cr.left)*kx,(r.top-cr.top)*ky,r.width*kx,r.height*ky,0,0,gw,gh)}}
  function drawAll(){draw();glass()}
  makePanes();
- function resize(){if(!ready)return;const r=field.getBoundingClientRect();w=r.width+800;h=r.height+800;dpr=Math.min(devicePixelRatio||1,2,Math.sqrt(2100000/(w*h)));canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);scale=Math.min(r.width*.96/image.width,r.height*.96/image.height)*(innerWidth>760?1.445:1.55);oy=(h-image.height*scale)/2;ox=(w-image.width*scale)/2;
+ function resize(){if(!ready)return;const r=field.getBoundingClientRect();MX=innerWidth>1100?Math.min(900,Math.round(innerWidth*.45)):400;MY=innerWidth>1100?460:400;field.style.setProperty('--mx',MX+'px');field.style.setProperty('--my',MY+'px');w=r.width+MX*2;h=r.height+MY*2;dpr=Math.min(devicePixelRatio||1,2,Math.sqrt((innerWidth>1100?4200000:2100000)/(w*h)));canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);scale=Math.min(r.width*.96/image.width,r.height*.96/image.height)*(innerWidth>760?1.445:1.55);oy=(h-image.height*scale)/2;ox=(w-image.width*scale)/2;
  paint(0);drawAll()}
  function paint(dt){
   // A quiet demonstration on touch screens: sweep, release, and allow recovery.
@@ -114,7 +114,7 @@
  }
  function tick(now){frame=0;if(!ready||!visible||document.hidden)return;if(now-last>=32){const dt=Math.min(2,(now-last)/16.667||2);last=now;time+=dt/60;paint(dt);drawAll()}if(!reduced.matches)frame=requestAnimationFrame(tick)}
  function start(){if(ready&&visible&&!document.hidden&&!frame&&!reduced.matches)frame=requestAnimationFrame(tick)}
- hero.addEventListener('pointermove',e=>{if(!ready||e.pointerType==='touch'||reduced.matches)return;const r=field.getBoundingClientRect();pointerInside=e.clientY>=r.top-400&&e.clientY<=r.bottom+400;const nextX=(e.clientX-r.left+400-ox)/scale,nextY=(e.clientY-r.top+400-oy)/scale,now=performance.now();if(lastPointer&&now-lastPointer<160){moveX=Math.max(-24/scale,Math.min(24/scale,(nextX-oldMx)*.45));moveY=Math.max(-24/scale,Math.min(24/scale,(nextY-oldMy)*.45))}mx=oldMx=nextX;my=oldMy=nextY;lastPointer=now;start()},{passive:true});hero.addEventListener('pointerleave',()=>{pointerInside=false});
+ hero.addEventListener('pointermove',e=>{if(!ready||e.pointerType==='touch'||reduced.matches)return;const r=field.getBoundingClientRect();pointerInside=e.clientY>=r.top-MY&&e.clientY<=r.bottom+MY;const nextX=(e.clientX-r.left+MX-ox)/scale,nextY=(e.clientY-r.top+MY-oy)/scale,now=performance.now();if(lastPointer&&now-lastPointer<160){moveX=Math.max(-24/scale,Math.min(24/scale,(nextX-oldMx)*.45));moveY=Math.max(-24/scale,Math.min(24/scale,(nextY-oldMy)*.45))}mx=oldMx=nextX;my=oldMy=nextY;lastPointer=now;start()},{passive:true});hero.addEventListener('pointerleave',()=>{pointerInside=false});
 
  new ResizeObserver(resize).observe(field);new IntersectionObserver(e=>{visible=e[0].isIntersecting;if(visible)start();else{cancelAnimationFrame(frame);frame=0;pointerInside=false}}).observe(hero);
  document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(frame);frame=0}else start()});reduced.addEventListener('change',()=>{cancelAnimationFrame(frame);frame=0;pointerInside=false;if(ready){paint(0);drawAll()}start()});

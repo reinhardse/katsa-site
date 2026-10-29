@@ -495,7 +495,7 @@
 @media(max-width:760px){#medical .medical-heart-drift{width:115%;max-width:450px;margin-left:-7.5%}}
 
 #medical .medical-heart-drift{z-index:1;overflow:visible}
-#medical .medical-heart-drift canvas{inset:auto;left:-400px;top:-400px;width:calc(100% + 800px);height:calc(100% + 800px)}
+#medical .medical-heart-drift canvas{inset:auto;left:calc(-1*var(--mx,400px));top:calc(-1*var(--my,400px));width:calc(100% + 2*var(--mx,400px));height:calc(100% + 2*var(--my,400px))}
 #medical .medical-orbit{overflow:visible}
 #medical .medical-content{z-index:3}
 #medical .medical-tags{z-index:6}
