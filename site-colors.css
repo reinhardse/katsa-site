@@ -316,3 +316,6 @@ html body.medicine-page .med-experience .med-expertise-card{position:relative}
 }
 /* heart particles may fly anywhere: the section itself no longer clips them (body still prevents horizontal scroll) */
 @media(min-width:761px){#medical.medical-section{overflow:visible}}
+/* mobile header: slightly larger logo */
+@media(max-width:760px){.site-header .brand{font-size:33px}}
+@media(max-width:360px){.site-header .brand{font-size:29px}}
