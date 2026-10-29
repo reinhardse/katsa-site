@@ -169,8 +169,47 @@ function secret_ok(array $cfg, string $key): bool {
 
 // ───────── Служебные запросы (GET с секретом) ─────────
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $key = (string)($_GET['selftest'] ?? $_GET['setup'] ?? $_GET['health'] ?? '');
+    $key = (string)($_GET['selftest'] ?? $_GET['setup'] ?? $_GET['health'] ?? $_GET['heartbeat'] ?? '');
     if ($key === '' || !secret_ok($cfg, $key)) { out(['ok' => false, 'error' => 'not found'], 404); }
+
+    // Ежедневная отбивка в MAX: формы живы, сколько заявок пришло, есть ли проблемы.
+    // Запускается по расписанию (cron на хостинге): curl -s "https://katsa.ru/send.php?heartbeat=СЕКРЕТ"
+    if (isset($_GET['heartbeat'])) {
+        $stamp = $LEADS . '/.heartbeat';
+        $today = date('Y-m-d');
+        if (!isset($_GET['force']) && is_file($stamp) && trim((string)@file_get_contents($stamp)) === $today) { out(['ok' => true, 'skipped' => 'уже отправлено сегодня']); }
+        $since = time() - 86400; $n24 = 0; $bad24 = 0; $undelivered = 0; $last = null; $total = 0;
+        foreach (glob($LEADS . '/*.jsonl') ?: [] as $f) {
+            foreach (file($f, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $line) {
+                $r = json_decode($line, true); if (!$r) { continue; }
+                $t = strtotime((string)($r['time'] ?? '')); $total++; $last = $r['time'] ?? $last;
+                if ($t > $since) { $n24++; if (!($r['delivered'] ?? false)) { $bad24++; } }
+                if (!($r['delivered'] ?? false) && $t > time() - 3 * 86400) { $undelivered++; }
+            }
+        }
+        $rej = 0;
+        if (is_file($LEADS . '/rejects.log')) {
+            foreach (file($LEADS . '/rejects.log', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [] as $line) {
+                $r = json_decode($line, true);
+                if ($r && strtotime((string)($r['time'] ?? '')) > $since) { $rej++; }
+            }
+        }
+        $problems = [];
+        [$mok, $mmsg] = $cfg['max_token'] !== '' ? max_call($cfg, 'GET', '/me') : [false, 'токен MAX не задан'];
+        if (!$mok) { $problems[] = 'MAX: ' . $mmsg; }
+        if ($undelivered > 0) { $problems[] = 'недоставленных заявок за 3 дня: ' . $undelivered; }
+        if ($rej > 5) { $problems[] = 'много отказанных заявок за сутки: ' . $rej; }
+        if (!(is_dir($LEADS) ? is_writable($LEADS) : is_writable($BASE))) { $problems[] = 'папка заявок недоступна для записи'; }
+        $word = function (int $n) { $m = $n % 100; $d = $n % 10; return ($m > 10 && $m < 20) ? 'заявок' : ($d === 1 ? 'заявка' : (($d >= 2 && $d <= 4) ? 'заявки' : 'заявок')); };
+        $text = $problems
+            ? "⚠️ KATSA: есть проблема с формами\n\n• " . implode("\n• ", $problems) . "\n\nЗаявок за сутки: " . $n24
+            : "✅ KATSA: формы работают\n\nЗа сутки: " . $n24 . ' ' . $word($n24) . ($n24 ? ' (все доставлены)' : '') . ($rej ? ', отказов: ' . $rej : '') . "\nВсего с запуска: " . $total . "\nПоследняя заявка: " . ($last ?: 'ещё не было') . "\nСервер: " . date('d.m.Y H:i') . ' МСК';
+        $mx = send_max($cfg, $text);
+        if ($mx[0] === true || $problems) { @file_put_contents($stamp, $today); }
+        $tg = ['telegram' => null];
+        if ($cfg['telegram_relay'] !== '') { $tg = send_telegram($cfg, htmlspecialchars($text, ENT_QUOTES, 'UTF-8')); }
+        out(['ok' => $mx[0] === true, 'status' => $problems ? 'PROBLEM' : 'ALL_OK', 'problems' => $problems, 'max' => $mx, 'telegram' => $tg]);
+    }
 
     if (isset($_GET['health'])) {
         $files = glob($LEADS . '/*.jsonl') ?: [];
