@@ -17,7 +17,7 @@ body #approach .report-panel{background:radial-gradient(ellipse at 90% 0,#f57f48
 .request-glow{background:radial-gradient(ellipse at 5% 55%,#f57f4824,transparent 50%),radial-gradient(ellipse at 100% 0%,#f57f4818,transparent 52%)}
 #services .request-card input:checked+span{background:#bcd4ff;color:#14110e}
 /* contact: original black, orange light set into the corner like the calendar card */
-body #contact.ron-contact{background:radial-gradient(ellipse 150% 90% at -5% 112%,#34334eb0 0%,#2f2e4852 18%,#2b2a4040 34%,#25253829 48%,#1f1f2e16 62%,#17182209 76%,#0f101804 88%,transparent 100%),radial-gradient(ellipse 70% 45% at -5% 112%,#f57f480f 0%,#f57f4806 50%,transparent 100%),#08090d!important}
+body #contact.ron-contact{background:radial-gradient(ellipse 150% 90% at -5% 112%,#3a3956d0 0%,#34334e74 18%,#2f2e4858 34%,#29293e3c 48%,#22223024 62%,#1a1b2610 76%,#11121a06 88%,transparent 100%),radial-gradient(ellipse 70% 45% at -5% 112%,#f57f480f 0%,#f57f4806 50%,transparent 100%),#08090d!important}
 body #contact.ron-contact:before,body #contact.ron-contact:after{display:none!important}
 /* modal and form */
 body #contact-modal{background:radial-gradient(ellipse 60% 45% at 0% 0%,#f57f4822,transparent 70%),#111219}
