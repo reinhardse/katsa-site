@@ -314,3 +314,5 @@ html body.medicine-page .med-experience .med-expertise-card{position:relative}
  #medical .medical-tags li{position:relative;isolation:isolate;overflow:hidden;background:#0b0f17;border:1px solid rgba(204,221,245,.16);box-shadow:0 10px 26px rgba(0,0,0,.2);backdrop-filter:none;-webkit-backdrop-filter:none}
  #medical .medical-tags li:before{position:relative;z-index:2}
 }
+/* heart particles may fly anywhere: the section itself no longer clips them (body still prevents horizontal scroll) */
+@media(min-width:761px){#medical.medical-section{overflow:visible}}
