@@ -490,7 +490,7 @@ html body.medicine-page .med-experience .med-expertise-card{position:relative}
 }
 .sx-x{filter:none!important;box-shadow:0 0 6px #ec4e2c30}
 /* ===== Unified button system: one geometry, one glass material, one hover response ===== */
-:root{--btn-ring:#f5966e26;--btn-edge:#f5966e88;--btn-glow:#f5966e55}
+:root{--btn-ring:#ffffff1c;--btn-edge:#ffffff6e;--btn-glow:#ffffff2e}
 html body :is(.glass-button,.medical-primary,.medical-secondary,.contact-send button,#service-request button[type="submit"],.service-cta,.med-task-cta .glass-button):not(.header-cta):not(.mobile-menu-cta){
  box-sizing:border-box!important;height:52px!important;min-height:52px!important;max-height:none;padding:0 26px!important;font-size:15px!important;font-weight:500!important;line-height:1!important;border-radius:999px!important;
  display:inline-flex!important;align-items:center;justify-content:center;gap:10px!important;white-space:nowrap;text-decoration:none;cursor:pointer;
