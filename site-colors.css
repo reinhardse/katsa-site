@@ -520,3 +520,10 @@ html body :is(.glass-button,.medical-primary,.contact-send button,#service-reque
 @media(hover:none){html body :is(.glass-button,.medical-primary,.contact-send button,.service-cta):not(.header-cta):not(.mobile-menu-cta):not(.medical-secondary):not(#more-projects):hover{background:#f4efe9!important;color:#14110e!important;border-color:#fff!important;box-shadow:0 10px 30px -12px #ffffff40!important}}
 html body :is(.medical-secondary,#more-projects):not(.header-cta):not(.mobile-menu-cta){background:linear-gradient(150deg,#ffffff1f,#ffffff08)!important;color:#fff!important;border-color:#ffffff38!important;box-shadow:inset 0 1px #ffffff30!important}
 html body :is(.medical-secondary,#more-projects):not(.header-cta):not(.mobile-menu-cta):is(:hover,:focus-visible){border-color:var(--btn-edge)!important;box-shadow:inset 0 1px #ffffff30,0 0 0 4px var(--btn-ring)!important;transform:translateY(-1px)!important}
+
+/* desktop: full menu from 1101px, burger only on tablets/phones */
+@media(min-width:1101px){
+.site-header nav{display:flex!important}
+.site-header .menu-toggle,.mobile-menu{display:none!important}
+.site-header .header-cta{display:inline-flex!important}
+}
