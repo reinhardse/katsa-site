@@ -47,9 +47,15 @@
   for(const [key,index] of colours){const r=(key>>8)*17,g=((key>>4)&15)*17,b=(key&15)*17,sx=index%32*16,sy=Math.floor(index/32)*16;const gradient=a.createRadialGradient(sx+5,sy+4,0,sx+8,sy+8,7.5);gradient.addColorStop(0,`rgb(${Math.min(255,r*1.08)},${Math.min(255,g*1.08)},${Math.min(255,b*1.08)})`);gradient.addColorStop(.45,`rgb(${r},${g},${b})`);gradient.addColorStop(1,`rgb(${r*.48},${g*.48},${b*.48})`);a.fillStyle=gradient;a.beginPath();a.arc(sx+8,sy+8,7.5,0,Math.PI*2);a.fill()}
   draw=()=>{c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,w,h);for(let i=0;i<points.length;i++){const p=points[i],depth=1+position[i*3+2]*.0015,s=p.s*scale*depth,px=((position[i*3]-image.width*.5)*depth+image.width*.5)*scale+ox-s*.5,py=((position[i*3+1]-image.height*.5)*depth+image.height*.5)*scale+oy-s*.5;if(px< -s||px>w||py< -s||py>h)continue;c.globalAlpha=p.alpha;c.drawImage(atlas,p.sprite%32*16,Math.floor(p.sprite/32)*16,16,16,px,py,s,s)}c.globalAlpha=1};canvas.dataset.renderer='particle-canvas2d';
  }
+
+ // Glass panes (copy + tags): each samples the live particle canvas, like the medicine task cards.
+ const panes=[];
+ function makePanes(){if(panes.length)return;const host=[hero.querySelector('.medical-content'),...hero.querySelectorAll('.medical-tags li')].filter(Boolean);host.forEach(el=>{const c=document.createElement('canvas');c.className='medical-glass-wave';c.setAttribute('aria-hidden','true');el.prepend(c);panes.push({el,c,ctx:c.getContext('2d')})})}
+ function glass(){if(innerWidth<=1100||!panes.length)return;const cr=canvas.getBoundingClientRect();if(!cr.width)return;const kx=canvas.width/cr.width,ky=canvas.height/cr.height;for(const p of panes){const r=p.el.getBoundingClientRect();const gw=Math.max(1,Math.round(r.width/3)),gh=Math.max(1,Math.round(r.height/3));if(p.c.width!==gw||p.c.height!==gh){p.c.width=gw;p.c.height=gh}p.ctx.clearRect(0,0,gw,gh);if(r.right<cr.left||r.left>cr.right||r.bottom<cr.top||r.top>cr.bottom)continue;p.ctx.drawImage(canvas,(r.left-cr.left)*kx,(r.top-cr.top)*ky,r.width*kx,r.height*ky,0,0,gw,gh)}}
+ function drawAll(){draw();glass()}
+ makePanes();
  function resize(){if(!ready)return;const r=field.getBoundingClientRect();w=r.width+800;h=r.height+800;dpr=Math.min(devicePixelRatio||1,2,Math.sqrt(2100000/(w*h)));canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);scale=Math.min(r.width*.96/image.width,r.height*.96/image.height)*(innerWidth>760?1.445:1.55);oy=(h-image.height*scale)/2;ox=(w-image.width*scale)/2;
- if(innerWidth>760){const copy=hero.querySelector('.medical-description')?.getBoundingClientRect();if(copy){let edge=Infinity;for(const p of points){const screenY=r.top-400+oy+p.hy*scale;if(screenY>=copy.top-25&&screenY<=copy.bottom+25)edge=Math.min(edge,p.hx*scale);}if(Number.isFinite(edge))ox=copy.right+14-(r.left-400)-edge;}}
- paint(0);draw()}
+ paint(0);drawAll()}
  function paint(dt){
   // A quiet demonstration on touch screens: sweep, release, and allow recovery.
   if(innerWidth<=760&&!reduced.matches){const demo=(time+10)%13;const active=demo>=3&&demo<5.2;
@@ -106,11 +112,11 @@
   }
   moveX*=.93;moveY*=.93;
  }
- function tick(now){frame=0;if(!ready||!visible||document.hidden)return;if(now-last>=32){const dt=Math.min(2,(now-last)/16.667||2);last=now;time+=dt/60;paint(dt);draw()}if(!reduced.matches)frame=requestAnimationFrame(tick)}
+ function tick(now){frame=0;if(!ready||!visible||document.hidden)return;if(now-last>=32){const dt=Math.min(2,(now-last)/16.667||2);last=now;time+=dt/60;paint(dt);drawAll()}if(!reduced.matches)frame=requestAnimationFrame(tick)}
  function start(){if(ready&&visible&&!document.hidden&&!frame&&!reduced.matches)frame=requestAnimationFrame(tick)}
  hero.addEventListener('pointermove',e=>{if(!ready||e.pointerType==='touch'||reduced.matches)return;const r=field.getBoundingClientRect();pointerInside=e.clientY>=r.top-400&&e.clientY<=r.bottom+400;const nextX=(e.clientX-r.left+400-ox)/scale,nextY=(e.clientY-r.top+400-oy)/scale,now=performance.now();if(lastPointer&&now-lastPointer<160){moveX=Math.max(-24/scale,Math.min(24/scale,(nextX-oldMx)*.45));moveY=Math.max(-24/scale,Math.min(24/scale,(nextY-oldMy)*.45))}mx=oldMx=nextX;my=oldMy=nextY;lastPointer=now;start()},{passive:true});hero.addEventListener('pointerleave',()=>{pointerInside=false});
 
  new ResizeObserver(resize).observe(field);new IntersectionObserver(e=>{visible=e[0].isIntersecting;if(visible)start();else{cancelAnimationFrame(frame);frame=0;pointerInside=false}}).observe(hero);
- document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(frame);frame=0}else start()});reduced.addEventListener('change',()=>{cancelAnimationFrame(frame);frame=0;pointerInside=false;if(ready){paint(0);draw()}start()});
+ document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(frame);frame=0}else start()});reduced.addEventListener('change',()=>{cancelAnimationFrame(frame);frame=0;pointerInside=false;if(ready){paint(0);drawAll()}start()});
  document.fonts.ready.then(resize);image.onload=initialise;if(image.complete&&image.naturalWidth)initialise();
 })();
