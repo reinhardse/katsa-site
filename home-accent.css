@@ -61,3 +61,5 @@ html body:not(#x) .case-shell li>span:first-child{color:#f57f48!important}
 html body:not(#x) :is(.glass-button,.medical-primary,.medical-secondary,.contact-send button,#service-request button[type="submit"],.service-cta,.med-task-cta .glass-button,.header-cta,.mobile-menu-cta){font-family:KatsaBtn,KatsaSans,Arial,sans-serif!important;font-weight:600!important;letter-spacing:0}
 /* mobile service chips: smaller */
 @media(max-width:760px){html body:not(#x) #services .service-card.has-sx .service-cta{padding:0 16px!important;font-size:14px!important;height:38px!important;min-height:38px!important;border-radius:22px!important;top:18px;right:18px}}
+/* header CTA: keep original footprint */
+html body:not(#x) .site-header .header-cta{font-size:15px!important;height:44px!important;min-height:44px!important;max-height:44px!important;padding:0 21px!important}
