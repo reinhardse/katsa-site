@@ -1,0 +1,8 @@
+# Clean URLs: /medicine instead of /medicine.html
+RewriteEngine On
+RewriteCond %{THE_REQUEST} \s/(medicine|contacts|case-[a-z-]+)\.html[\s?] [NC]
+RewriteRule ^(.+)\.html$ /$1 [R=301,L]
+RewriteCond %{THE_REQUEST} \s/index\.html[\s?] [NC]
+RewriteRule ^index\.html$ / [R=301,L]
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+RewriteRule ^(medicine|contacts|case-[a-z-]+)$ $1.html [L]
