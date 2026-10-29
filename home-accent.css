@@ -33,3 +33,6 @@ body #service-request .service-contact-label input{border:1px solid #ffffff3d!im
 body #service-request .service-contact-label input:focus{border-color:#bcd4ff!important;box-shadow:0 0 0 3px #bcd4ff22}
 /* calendar: dark number on the light-blue pill */
 body #approach .calendar-day.selected{color:#0c1424!important}
+/* header CTA: neutral hover like other buttons, 15px label */
+body .site-header .header-cta{font-size:15px}
+body .site-header .header-cta:hover,body .site-header .header-cta:focus-visible{transform:translateY(-1px)!important;border-color:#ffffff6e;box-shadow:inset 0 1px #ffffff35,0 0 0 3px #ffffff1c,0 8px 24px -16px #0009}
