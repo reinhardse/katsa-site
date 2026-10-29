@@ -189,9 +189,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         if (!$mok) { $problems[] = 'бот MAX не отвечает'; }
         if (!(is_dir($LEADS) ? is_writable($LEADS) : is_writable($BASE))) { $problems[] = 'сервер не может сохранять заявки'; }
         if ($notMax > 0) { $problems[] = 'не дошло в MAX: ' . $notMax . ' (они сохранены на сервере)'; }
+        $period = 'Заявок за последние 24 часа (со вчерашних ' . date('H:i', $since) . '): ' . $n24;
         $text = $problems
-            ? "⚠️ KATSA: проблема с формами\n\n• " . implode("\n• ", $problems) . "\n\nЗаявок за сутки: " . $n24
-            : "✅ KATSA: формы работают\n\nЗаявок за сутки: " . $n24 . "\nНе дошло в MAX: 0";
+            ? "🤖 Проверка связи\n\n⚠️ KATSA: проблема с формами\n\n• " . implode("\n• ", $problems) . "\n\n" . $period
+            : "🤖 Проверка связи\n\n✅ KATSA: формы работают\n\n" . $period . "\nНе дошло в MAX: 0";
         $mx = send_max($cfg, $text);
         out(['ok' => $mx[0] === true, 'status' => $problems ? 'PROBLEM' : 'ALL_OK', 'problems' => $problems, 'max' => $mx]);
     }
