@@ -1,27 +1,27 @@
 /* Shared KATSA colour system. */
-:root{--katsa-blue:#f5966e;--katsa-violet:#eabdab;--katsa-gradient:linear-gradient(110deg,#a15b3d 0%,#f5966e 50%,#eabdab 100%)}
-.site-header a[href="medicine.html"],.mobile-menu a[href="medicine.html"]{background-image:linear-gradient(110deg,#f5966e 0%,#eb8a61 38%,#ed986a 76%,#edc27d 100%);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-#medical .medical-tags li:before{background:var(--katsa-gradient);box-shadow:0 0 12px #f5966e22}
+:root{--katsa-blue:#719cf2;--katsa-violet:#acbce8;--katsa-gradient:linear-gradient(110deg,#3f5a9f 0%,#719cf2 50%,#acbce8 100%)}
+.site-header a[href="medicine.html"],.mobile-menu a[href="medicine.html"]{background-image:linear-gradient(110deg,#719cf2 0%,#8564e8 38%,#ed986a 76%,#edc27d 100%);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+#medical .medical-tags li:before{background:var(--katsa-gradient);box-shadow:0 0 12px #719cf222}
 #medical .medical-primary{--action-fill:var(--katsa-gradient);--action-ink:#fff}
-#medical .medical-primary:hover{--action-fill:linear-gradient(110deg,#ff9060,#f79870)}
+#medical .medical-primary:hover{--action-fill:linear-gradient(110deg,#6078ff,#9273f4)}
 .case-number,.case-flow li>span,.case-kind,.med-current-number{background:var(--katsa-gradient);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.case-flow{background:radial-gradient(ellipse at 100% 0%,#f5966e23,transparent 65%),linear-gradient(135deg,#1d202d,#12141d)}
-.case-flow li i{color:#d99e85}
-.case-result-note,.case-decision-body .case-why{border-left-color:#f5966e60}
+.case-flow{background:radial-gradient(ellipse at 100% 0%,#719cf223,transparent 65%),linear-gradient(135deg,#1d202d,#12141d)}
+.case-flow li i{color:#8799d7}
+.case-result-note,.case-decision-body .case-why{border-left-color:#719cf260}
 .prototype-dots button,.prototype-dots button.is-active,.prototype-dots button[aria-current="true"]{background:transparent!important;box-shadow:none!important;border:0!important}
 .prototype-dot.is-active:after,.prototype-dot[aria-current="true"]:after{background:var(--katsa-gradient)!important}
-body #approach .report-panel{background:radial-gradient(ellipse at 90% 0,#f5966e26,transparent 65%),#16171f}
+body #approach .report-panel{background:radial-gradient(ellipse at 90% 0,#719cf226,transparent 65%),#16171f}
 body #approach .calendar-day.selected{background:var(--katsa-gradient)!important;color:#fff!important}
 body #approach .calendar-day.has-event:after{background:var(--katsa-gradient)}
-body #approach .agenda-day{color:#eaaa8f!important}
-body #approach .timeline-stage{--stage-color:#eaaa8f!important}
-body #approach .stage-title{color:#eec5b4!important}
+body #approach .agenda-day{color:#91ade8!important}
+body #approach .timeline-stage{--stage-color:#91ade8!important}
+body #approach .stage-title{color:#b5c7ed!important}
 body #approach .stage-title>span{background:var(--katsa-gradient);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:1}
-body #approach .stage-description{border-color:#f5966e40}
-body #approach .chat-message.studio{background:linear-gradient(135deg,#edcfc2,#e6c3b4);color:#442d23}
-body #approach .studio .chat-author{color:#916857}
-body #contact.ron-contact{width:auto!important;max-width:none!important;margin:0!important;padding:130px var(--space) 35px!important;isolation:isolate;overflow:hidden;border:0!important;background:radial-gradient(ellipse at 8% 62%,#a15b3d3d,transparent 63%),#08090d!important}
-body #contact.ron-contact:before{display:block!important;content:'';position:absolute;z-index:-1;pointer-events:none;left:-180px;bottom:100px;width:min(780px,85vw);height:600px;background:radial-gradient(ellipse at 34% 45%,#f5966e35,transparent 62%);filter:blur(45px);animation:contact-atmosphere 20s ease-in-out infinite alternate}
+body #approach .stage-description{border-color:#719cf240}
+body #approach .chat-message.studio{background:linear-gradient(135deg,#c3ccec,#b5bfe5);color:#242b43}
+body #approach .studio .chat-author{color:#586890}
+body #contact.ron-contact{width:auto!important;max-width:none!important;margin:0!important;padding:130px var(--space) 35px!important;isolation:isolate;overflow:hidden;border:0!important;background:radial-gradient(ellipse at 8% 62%,#3f5a9f3d,transparent 63%),#08090d!important}
+body #contact.ron-contact:before{display:block!important;content:'';position:absolute;z-index:-1;pointer-events:none;left:-180px;bottom:100px;width:min(780px,85vw);height:600px;background:radial-gradient(ellipse at 34% 45%,#719cf235,transparent 62%);filter:blur(45px);animation:contact-atmosphere 20s ease-in-out infinite alternate}
 body #contact .ron-contact-layout{display:grid;grid-template-columns:35% 1fr;gap:10%;align-items:start}
 body #contact h2,body #contact h3{color:#f2f2f4!important}
 body #contact h2{font-size:clamp(44px,5.5vw,78px)!important}
@@ -32,22 +32,22 @@ body #contact .footer-brand{color:#f2f2f4!important}
 body #contact .footer nav,body #contact .footer-bottom{color:#b9b5c6!important}
 body #contact #contact-title span,body.medicine-page #med-projects .med-projects-fill{background:linear-gradient(90deg,transparent 0%,transparent var(--design-fill,0%),#777784 var(--design-fill,0%),#777784 100%),var(--katsa-gradient)!important;background-clip:text!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important;color:#777784!important}
 body.medicine-page #med-projects .med-projects-fill{background:linear-gradient(90deg,transparent 0%,transparent var(--project-fill,0%),#777784 var(--project-fill,0%),#777784 100%),var(--katsa-gradient)!important;background-clip:text!important;-webkit-background-clip:text!important}
-body #contact-modal{background:radial-gradient(ellipse at 0% 0%,#f5966e2e,transparent 65%),#111219}
+body #contact-modal{background:radial-gradient(ellipse at 0% 0%,#719cf22e,transparent 65%),#111219}
 body .contact-modal-intro h2 span{background:var(--katsa-gradient);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-body .contact-modal-form input:focus,body .contact-modal-form textarea:focus{border-color:#f5966e}
-body .contact-modal-form .service-consent input,body #project-request .service-consent input{accent-color:#f5966e}
-body .contact-modal-form .service-consent a{color:#edc1af}
+body .contact-modal-form input:focus,body .contact-modal-form textarea:focus{border-color:#719cf2}
+body .contact-modal-form .service-consent input,body #project-request .service-consent input{accent-color:#719cf2}
+body .contact-modal-form .service-consent a{color:#b0bdec}
 body[data-contacts-page] #contact{min-height:100svh;padding-top:170px!important}
 @media(max-width:760px){body #contact.ron-contact{padding:80px 22px 25px!important}body #contact .ron-contact-layout{display:flex;flex-direction:column-reverse;gap:65px}body #contact h2{font-size:clamp(34px,10vw,48px)!important}body #contact.ron-contact:before{left:-100px;height:450px;bottom:120px}body[data-contacts-page] #contact{padding-top:130px!important}}
 @media(prefers-reduced-motion:reduce){body #contact.ron-contact:before{animation:none}}
 .site-header a[href="medicine.html"] span,.mobile-menu a[href="medicine.html"] span{background:inherit;background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 /* Keep navigation's colour sweep, including the header's existing inner label. */
-.site-header a[href="medicine.html"]{background-image:linear-gradient(110deg,#f5966e 0%,#eb8a61 38%,#ed986a 76%,#edc27d 100%)!important;background-clip:text!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important}
-body .site-header nav a.nav-medical span,body .mobile-menu a.nav-medical span{background:linear-gradient(110deg,#f5966e 0%,#eb8a61 38%,#ed986a 76%,#edc27d 100%)!important;background-clip:text!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important}
+.site-header a[href="medicine.html"]{background-image:linear-gradient(110deg,#719cf2 0%,#8564e8 38%,#ed986a 76%,#edc27d 100%)!important;background-clip:text!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important}
+body .site-header nav a.nav-medical span,body .mobile-menu a.nav-medical span{background:linear-gradient(110deg,#719cf2 0%,#8564e8 38%,#ed986a 76%,#edc27d 100%)!important;background-clip:text!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important}
 body #contact #project-request label:not(.service-consent){color:#b8b5c2!important}
 body #contact #project-request input:not([type=checkbox]),body #contact #project-request textarea{background:#ffffff05!important;color:#f2f2f4!important;border-color:#ffffff20!important}
 body #contact #project-request .service-consent{color:#b7b3c5!important}
-body #contact #project-request .service-consent a{color:#e7dedb!important}
+body #contact #project-request .service-consent a{color:#dedbe7!important}
 body #contact #project-request .contact-send button{--action-fill:var(--action-neutral);--action-ink:#f4f4f6}
 body #contact .footer nav a,body #contact .footer-bottom a{color:inherit!important}
 
@@ -58,7 +58,7 @@ body #contact .footer nav a,body #contact .footer-bottom a{color:inherit!importa
 .med-stack-number .med-total-number{background:none!important;-webkit-text-fill-color:#fff!important;color:#fff!important}
 #med-projects h2 .med-projects-white{color:#f2f2f4;-webkit-text-fill-color:#f2f2f4;background:none}
 body #approach .agenda-day{background:var(--katsa-gradient);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-body #approach .stage-title{color:#eec5b4!important}
+body #approach .stage-title{color:#b5c7ed!important}
 body #approach .stage-title h4{background:var(--katsa-gradient);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 #medical .medical-primary:hover{--action-fill:var(--katsa-gradient)}
 body .site-header nav a.nav-medical span,body .mobile-menu a.nav-medical span{background:var(--katsa-gradient)!important;background-clip:text!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important}
@@ -180,10 +180,10 @@ html.med-body-offer body.medicine-page .med-experience{position:relative;z-index
 
 /* Медицина: блок опыта — тёплый акцент, как сердце фигуры */
 html body.medicine-page .med-experience strong{background:none!important;color:#ec4e2c!important;-webkit-text-fill-color:#ec4e2c!important}
-html body.medicine-page .med-experience strong em,html body.medicine-page .med-experience h2{background:none!important;color:#f8f4f2!important;-webkit-text-fill-color:#f8f4f2!important}
+html body.medicine-page .med-experience strong em,html body.medicine-page .med-experience h2{background:none!important;color:#f5f2f8!important;-webkit-text-fill-color:#f5f2f8!important}
 /* Медицинская экспертиза — главный тезис блока: крупнее, с короткой оранжевой чертой и светлым текстом */
 html body.medicine-page .med-experience .med-expertise-card:last-child h2{position:relative;font-size:40px!important;line-height:1.1!important}@media(max-width:760px){html body.medicine-page .med-experience .med-expertise-card:last-child h2{font-size:24px!important}}
-html body.medicine-page .med-experience .med-expertise-card:last-child p{color:#eae2df!important}
+html body.medicine-page .med-experience .med-expertise-card:last-child p{color:#e3dfea!important}
 html body.medicine-page .med-experience p{color:#b9b3c2!important}
 html body.medicine-page .med-experience .med-product-phrase{color:inherit!important;-webkit-text-fill-color:currentColor;background:none!important}
 html body.medicine-page .med-experience .med-expertise-card{position:relative}
@@ -197,7 +197,7 @@ html body.medicine-page .med-experience .med-expertise-card{position:relative}
 
 /* Медицина: кнопка после последней карточки задач */
 .med-task-cta{display:flex;justify-content:center;padding:0;margin-top:-84px;position:relative;z-index:6}
-.med-task-cta .glass-button{min-height:72px;padding:0 54px;font-size:20px;--action-ink:#fcf3f0;background:radial-gradient(ellipse at 50% 135%,#f28b6173,transparent 72%),linear-gradient(120deg,#33353e,#2b2c35);color:var(--action-ink);border:0;box-shadow:inset 0 1px #ffffff15,0 10px 24px -14px #f28b6166}
+.med-task-cta .glass-button{min-height:72px;padding:0 54px;font-size:20px;--action-ink:#f5f0fc;background:radial-gradient(ellipse at 50% 135%,#f28b6173,transparent 72%),linear-gradient(120deg,#33353e,#2b2c35);color:var(--action-ink);border:0;box-shadow:inset 0 1px #ffffff15,0 10px 24px -14px #f28b6166}
 @media(max-width:760px){.med-task-cta{margin-top:-38px}.med-task-cta .glass-button{min-height:64px;padding:0 44px;font-size:18px;width:auto}}
 
 /* Медицина: избранные проекты — как на главной (круг «Смотреть проект», зум и дрейф картинки) */
@@ -234,7 +234,7 @@ html body.medicine-page .med-experience .med-expertise-card{position:relative}
 .sx-pill{display:block;width:62px;height:20px;border:1px solid #ffffff59;border-radius:12px;opacity:var(--k)}
 .sx-hero{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(14px,2vw,28px);align-items:start;margin-bottom:clamp(34px,4vw,56px)}
 .sx-col{display:flex;flex-direction:column;gap:9px}
-.sx-page i.h{height:clamp(10px,1.1vw,15px);background:#f8f4f2;border-radius:3px}
+.sx-page i.h{height:clamp(10px,1.1vw,15px);background:#f5f2f8;border-radius:3px}
 .sx-page i.t{height:2px;background:#ffffff40;width:80%}.sx-page i.t.s{width:52%}
 .sx-col i.t:first-of-type{margin-top:8px}
 .sx-cta{display:inline-flex;align-items:center;width:max-content;margin-top:10px;padding:0 18px;height:28px;border:1px solid #ec4e2c;border-radius:16px;opacity:var(--k);transform:translateY(calc(8px*(1 - var(--k))))}
@@ -489,10 +489,9 @@ html body.medicine-page .med-experience .med-expertise-card{position:relative}
 #services .service-card.has-sx .service-cta{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:#ffffff1f!important}
 }
 .sx-x{filter:none!important;box-shadow:0 0 6px #ec4e2c30}
-
 /* ===== Unified button system: one geometry, one glass material, one hover response ===== */
 :root{--btn-ring:#f5966e26;--btn-edge:#f5966e88;--btn-glow:#f5966e55}
-html body :is(.glass-button,.medical-primary,.medical-secondary,.contact-send button,#service-request button[type="submit"],.service-cta,.med-task-cta .glass-button){
+html body :is(.glass-button,.medical-primary,.medical-secondary,.contact-send button,#service-request button[type="submit"],.service-cta,.med-task-cta .glass-button):not(.header-cta):not(.mobile-menu-cta){
  box-sizing:border-box!important;height:52px!important;min-height:52px!important;max-height:none;padding:0 26px!important;font-size:15px!important;font-weight:500!important;line-height:1!important;border-radius:999px!important;
  display:inline-flex!important;align-items:center;justify-content:center;gap:10px!important;white-space:nowrap;text-decoration:none;cursor:pointer;
  color:#fff!important;border:1px solid #ffffff3d!important;
@@ -500,27 +499,24 @@ html body :is(.glass-button,.medical-primary,.medical-secondary,.contact-send bu
  box-shadow:inset 0 1px #ffffff40,0 10px 30px -14px var(--btn-glow)!important;
  -webkit-backdrop-filter:blur(14px)!important;backdrop-filter:blur(14px)!important;filter:none!important;scale:1;
  transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .3s,background .3s,border-color .3s!important}
-html body :is(.glass-button,.medical-primary,.medical-secondary,.contact-send button,#service-request button[type="submit"],.service-cta,.med-task-cta .glass-button):is(:hover,:focus-visible){
+html body :is(.glass-button,.medical-primary,.medical-secondary,.contact-send button,#service-request button[type="submit"],.service-cta,.med-task-cta .glass-button):not(.header-cta):not(.mobile-menu-cta):is(:hover,:focus-visible){
  background:linear-gradient(150deg,#ffffff38,#ffffff14)!important;border-color:var(--btn-edge)!important;color:#fff!important;filter:none!important;
  box-shadow:inset 0 1px #ffffff55,0 0 0 4px var(--btn-ring),0 14px 34px -12px var(--btn-glow)!important;transform:translateY(-1px)!important}
-html body :is(.glass-button,.medical-primary,.medical-secondary,.contact-send button,#service-request button[type="submit"],.service-cta,.med-task-cta .glass-button):active{transform:scale(.97)!important}
-html body :is(.glass-button,.medical-primary,.medical-secondary,.contact-send button,.service-cta):focus-visible{outline:2px solid #fff;outline-offset:3px}
-/* small variant: header and in-card chips */
-html body .site-header .header-cta{height:40px!important;min-height:40px!important;padding:0 18px!important;font-size:13px!important}
+html body :is(.glass-button,.medical-primary,.medical-secondary,.contact-send button,#service-request button[type="submit"],.service-cta,.med-task-cta .glass-button):not(.header-cta):not(.mobile-menu-cta):active{transform:scale(.97)!important}
+html body :is(.glass-button,.medical-primary,.medical-secondary,.contact-send button,.service-cta):not(.header-cta):not(.mobile-menu-cta):focus-visible{outline:2px solid #fff;outline-offset:3px}
 @media(max-width:760px){html body #services .service-card.has-sx .service-cta{height:36px!important;min-height:36px!important;max-height:36px;padding:0 14px!important;font-size:13px!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}}
 html body .contact-modal-form .contact-send button,html body .contact-send button{width:100%}
 @media(min-width:761px){html body .contact-send button{width:auto}html body .contact-modal-form .contact-send button{width:100%}}
 html body.medicine-page .med-hero .med-hero-details>a.glass-button{width:100%!important;max-width:none!important}
-@media(hover:none){html body :is(.glass-button,.medical-primary,.medical-secondary,.contact-send button,.service-cta):hover{transform:none!important;box-shadow:inset 0 1px #ffffff40,0 10px 30px -14px var(--btn-glow)!important;background:linear-gradient(150deg,#ffffff26,#ffffff0b)!important;border-color:#ffffff3d!important}}
+@media(hover:none){html body :is(.glass-button,.medical-primary,.medical-secondary,.contact-send button,.service-cta):not(.header-cta):not(.mobile-menu-cta):hover{transform:none!important;box-shadow:inset 0 1px #ffffff40,0 10px 30px -14px var(--btn-glow)!important;background:linear-gradient(150deg,#ffffff26,#ffffff0b)!important;border-color:#ffffff3d!important}}
 
 /* Style B: primary = light fill, secondary = glass */
-html body :is(.glass-button,.medical-primary,.contact-send button,#service-request button[type="submit"],.service-cta,.med-task-cta .glass-button):not(.medical-secondary):not(#more-projects){
+html body :is(.glass-button,.medical-primary,.contact-send button,#service-request button[type="submit"],.service-cta,.med-task-cta .glass-button):not(.header-cta):not(.mobile-menu-cta):not(.medical-secondary):not(#more-projects){
  background:#f4efe9!important;color:#14110e!important;border-color:#ffffff!important;
  box-shadow:0 10px 30px -12px #ffffff40!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
-html body :is(.glass-button,.medical-primary,.contact-send button,#service-request button[type="submit"],.service-cta,.med-task-cta .glass-button):not(.medical-secondary):not(#more-projects):is(:hover,:focus-visible){
+html body :is(.glass-button,.medical-primary,.contact-send button,#service-request button[type="submit"],.service-cta,.med-task-cta .glass-button):not(.header-cta):not(.mobile-menu-cta):not(.medical-secondary):not(#more-projects):is(:hover,:focus-visible){
  background:#fff!important;color:#14110e!important;border-color:#fff!important;
  box-shadow:0 0 0 4px var(--btn-ring),0 14px 40px -10px var(--btn-glow)!important}
-html body .site-header .header-cta,html body .mobile-menu-cta{background:#f4efe9!important;color:#14110e!important;border-color:#fff!important;box-shadow:0 10px 30px -12px #ffffff40!important}
-@media(hover:none){html body :is(.glass-button,.medical-primary,.contact-send button,.service-cta):not(.medical-secondary):not(#more-projects):hover{background:#f4efe9!important;color:#14110e!important;border-color:#fff!important;box-shadow:0 10px 30px -12px #ffffff40!important}}
-html body :is(.medical-secondary,#more-projects){background:linear-gradient(150deg,#ffffff1f,#ffffff08)!important;color:#fff!important;border-color:#ffffff38!important;box-shadow:inset 0 1px #ffffff30!important}
-html body :is(.medical-secondary,#more-projects):is(:hover,:focus-visible){border-color:var(--btn-edge)!important;box-shadow:inset 0 1px #ffffff30,0 0 0 4px var(--btn-ring)!important;transform:translateY(-1px)!important}
+@media(hover:none){html body :is(.glass-button,.medical-primary,.contact-send button,.service-cta):not(.header-cta):not(.mobile-menu-cta):not(.medical-secondary):not(#more-projects):hover{background:#f4efe9!important;color:#14110e!important;border-color:#fff!important;box-shadow:0 10px 30px -12px #ffffff40!important}}
+html body :is(.medical-secondary,#more-projects):not(.header-cta):not(.mobile-menu-cta){background:linear-gradient(150deg,#ffffff1f,#ffffff08)!important;color:#fff!important;border-color:#ffffff38!important;box-shadow:inset 0 1px #ffffff30!important}
+html body :is(.medical-secondary,#more-projects):not(.header-cta):not(.mobile-menu-cta):is(:hover,:focus-visible){border-color:var(--btn-edge)!important;box-shadow:inset 0 1px #ffffff30,0 0 0 4px var(--btn-ring)!important;transform:translateY(-1px)!important}

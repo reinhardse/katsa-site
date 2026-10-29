@@ -2,9 +2,9 @@ html{background:#08090d}
 body{margin:0;background:#08090d;color:#d9d6e2;font:17px/1.65 Manrope,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased}
 .legal-header,.legal-footer{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;max-width:900px;margin:0 auto;padding:28px 24px}
 .brand{color:#fff;text-decoration:none;font-size:28px;letter-spacing:-.04em}.brand span{font-size:.4em;vertical-align:super}
-.legal-back,.legal-footer a{color:#ffc6ae;text-decoration:none}.legal-back:hover,.legal-footer a:hover{text-decoration:underline}
+.legal-back,.legal-footer a{color:#aeb7ff;text-decoration:none}.legal-back:hover,.legal-footer a:hover{text-decoration:underline}
 .legal{max-width:900px;margin:0 auto;padding:16px 24px 64px}
 .legal h1{color:#fff;font-size:clamp(30px,5vw,48px);line-height:1.1;letter-spacing:-.03em;margin:24px 0 32px}
 .legal h2{color:#fff;font-size:clamp(21px,3vw,27px);line-height:1.25;margin:44px 0 14px}
-.legal p{margin:0 0 14px;overflow-wrap:anywhere}.legal a{color:#ffc6ae}
+.legal p{margin:0 0 14px;overflow-wrap:anywhere}.legal a{color:#aeb7ff}
 .legal-footer{border-top:1px solid #ffffff1a;font-size:14px;color:#8f8a9c;padding-top:24px;padding-bottom:40px}

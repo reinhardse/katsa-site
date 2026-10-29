@@ -26,7 +26,7 @@
 .site-header .brand{flex:0 1 auto;min-width:0;font-size:28px}.site-header .header-actions{display:flex;flex-wrap:nowrap;align-items:center;gap:7px;flex:0 0 auto;margin-left:auto}
 .site-header .header-social,.site-header .menu-toggle{display:grid;place-items:center;flex:0 0 40px;width:40px;height:40px;min-height:40px;padding:0;border:0;border-radius:13px;background:linear-gradient(135deg,#ffffff20,#ffffff0a);box-shadow:none;color:#fff}
 .site-header .header-social:hover,.site-header .menu-toggle:hover{background:#ffffff29;transform:none}.site-header .menu-toggle svg{width:23px;height:23px}.site-header .header-icon{width:23px;height:23px}.site-header .header-icon-max{width:21px;height:21px}
-.hero{height:100svh;min-height:580px;max-height:none;padding-top:120px;padding-bottom:max(24px,env(safe-area-inset-bottom));gap:25px;justify-content:flex-start}.hero h1{font-size:clamp(48px,9.7vw,98px);margin-top:auto;margin-bottom:0}.hero .hero-directions{margin-top:auto;flex-shrink:0}.hero .hero-outline{display:inline;background:linear-gradient(110deg,#ffffff,#ecd2c7 60%,#dabaad);background-clip:text;-webkit-background-clip:text;color:transparent;-webkit-text-stroke:0}
+.hero{height:100svh;min-height:580px;max-height:none;padding-top:120px;padding-bottom:max(24px,env(safe-area-inset-bottom));gap:25px;justify-content:flex-start}.hero h1{font-size:clamp(48px,9.7vw,98px);margin-top:auto;margin-bottom:0}.hero .hero-directions{margin-top:auto;flex-shrink:0}.hero .hero-outline{display:inline;background:linear-gradient(110deg,#ffffff,#d9c8eb 60%,#aecbd9);background-clip:text;-webkit-background-clip:text;color:transparent;-webkit-text-stroke:0}
 #medical .medical-orbit{position:relative;height:410px;min-height:410px;width:100%;translate:none}#medical .medical-heart-drift{width:300px;max-width:85%;top:50%;left:50%;right:auto;bottom:auto;translate:-50% -50%;margin:0}#medical .medical-heart{max-height:400px}
 #medical .medical-tags{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:none;translate:none;align-self:stretch}#medical .medical-tags li{position:absolute;width:max-content;max-width:100%;margin:0;translate:none}
 #medical .medical-tags li:nth-child(1){top:7%;left:2%;right:auto;bottom:auto}#medical .medical-tags li:nth-child(2){top:21%;right:0;left:auto;bottom:auto}#medical .medical-tags li:nth-child(3){top:42%;left:0;right:auto;bottom:auto}#medical .medical-tags li:nth-child(4){top:60%;right:0;left:auto;bottom:auto}#medical .medical-tags li:nth-child(5){top:78%;left:1%;right:auto;bottom:auto}#medical .medical-tags li:nth-child(6){top:92%;right:5%;left:auto;bottom:auto}
@@ -36,7 +36,7 @@
 #approach .timeline-stage{position:relative;padding:20px!important;border-radius:22px;background:linear-gradient(120deg,#ffffff08,#ffffff02);border:0}
 #approach .timeline-stage .stage-title,#approach .timeline-stage.is-open .stage-title{display:grid;grid-template-columns:45px 1fr;gap:16px;padding:0;border:0;border-radius:0;background:none;box-shadow:none;min-height:40px;transform:none;clip-path:none}
 #approach .stage-title>span{font-size:32px;line-height:1;font-weight:400;letter-spacing:-.06em;color:var(--stage-color);opacity:.8}
-#approach .stage-title h4{font-size:22px;line-height:1.2;letter-spacing:-.025em;color:#f5f0ee}
+#approach .stage-title h4{font-size:22px;line-height:1.2;letter-spacing:-.025em;color:#f0eef5}
 #approach .stage-description{padding-left:61px}#approach .stage-description p{padding:12px 0 0;font-size:15px;line-height:1.55;color:#aaa6b7}
 }
 @media(max-width:760px){.hero h1{font-size:clamp(44px,12vw,82px)}.hero-line.hero-indent{margin-left:6%}.hero-line:last-child{margin-left:8%;font-size:.9em}#medical .medical-orbit{height:370px;min-height:370px}#medical .medical-heart-drift{width:270px;max-width:90%}#medical .medical-heart{max-height:365px}}
@@ -47,10 +47,10 @@
 .site-header .header-icon{width:26px;height:26px}.site-header .header-icon-max{width:24px;height:24px}.site-header .menu-toggle svg{width:26px;height:26px}
 .mobile-menu{top:84px;max-height:calc(100dvh - 100px)}
 /* A single connected sequence replaces the five isolated boxes. */
-#approach .timeline-panel{padding:30px 22px;background:radial-gradient(ellipse at 100% 0%,#a37e6f1a,transparent 55%),#101117;border-radius:28px}
+#approach .timeline-panel{padding:30px 22px;background:radial-gradient(ellipse at 100% 0%,#8270a21a,transparent 55%),#101117;border-radius:28px}
 #approach .timeline-header{padding-bottom:32px}#approach .timeline-header h3{font-size:30px;font-weight:400;line-height:1.08;max-width:300px}
 #approach .project-timeline{position:relative;gap:0}
-#approach .project-timeline:before{content:'';position:absolute;top:24px;bottom:55px;left:24px;width:1px;background:linear-gradient(180deg,#d3afa06b,#ffffff20 50%,#d99b7259)}
+#approach .project-timeline:before{content:'';position:absolute;top:24px;bottom:55px;left:24px;width:1px;background:linear-gradient(180deg,#b2a1d26b,#ffffff20 50%,#d99b7259)}
 #approach .timeline-stage{padding:0 0 28px!important;margin:0 0 24px;background:none;border-radius:0;border-bottom:1px solid #ffffff0c}
 #approach .timeline-stage:last-child{margin:0;padding-bottom:0!important;border-bottom:0}
 #approach .timeline-stage .stage-title,#approach .timeline-stage.is-open .stage-title{grid-template-columns:50px 1fr;gap:20px;align-items:center;min-height:52px}
