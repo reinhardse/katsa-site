@@ -471,3 +471,14 @@ html body.medicine-page .med-experience .med-expertise-card{position:relative}
 }
 #services .service-stack::after{height:calc(clamp(260px,44svh,480px) + 30px)}
 @media(max-width:760px){#services .service-stack::after{height:calc(clamp(130px,26svh,240px) + 30px)}}
+
+/* dwell goes on the NEXT card's top margin: the stack is released only when the last card has fully arrived, then all leave together */
+#services .service-stack::after{display:none}
+@media(min-width:761px){
+#services .service-card,#services .service-card:not(:last-child){margin-bottom:0}
+#services .service-card:not(:first-child){margin-top:clamp(260px,44svh,480px)}
+}
+@media(max-width:760px){
+#services .service-card.has-sx,#services .service-card{margin-bottom:0}
+#services .service-card:not(:first-child){margin-top:clamp(130px,26svh,240px)}
+}
