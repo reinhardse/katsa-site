@@ -1,11 +1,11 @@
-#contact-modal{width:min(980px,calc(100vw - 40px));max-width:980px;max-height:calc(100dvh - 40px);margin:auto;padding:46px;border-radius:32px;border:1px solid #ffffff20;color:#f2f2f4;background:radial-gradient(ellipse at 0% 0%,#8570b32e,transparent 65%),#111219;box-shadow:0 40px 120px #0008;overflow:auto}
+#contact-modal{width:min(980px,calc(100vw - 40px));max-width:980px;max-height:calc(100dvh - 40px);margin:auto;padding:46px;border-radius:32px;border:1px solid #ffffff20;color:#f2f2f4;background:radial-gradient(ellipse at 0% 0%,#b5836e2e,transparent 65%),#111219;box-shadow:0 40px 120px #0008;overflow:auto}
 #contact-modal::backdrop{background:#03040ab8;backdrop-filter:blur(12px)}
 .contact-modal-layout{display:grid;grid-template-columns:1fr 1.05fr;gap:42px}
 .contact-modal-close{position:absolute;right:16px;top:12px;width:36px;height:36px;display:grid;place-items:center;border:0;border-radius:50%;background:#ffffff0a;color:#fff;font-size:28px;cursor:pointer;transition:background .2s}
 .contact-modal-close:hover{background:#ffffff20}
 .contact-modal-intro>.section-label{font-size:11px;margin-bottom:25px}
 .contact-modal-intro h2{font-size:clamp(30px,3vw,42px);font-weight:400;line-height:1.12;letter-spacing:-.045em}
-.contact-modal-intro h2 span{color:#a994c9}
+.contact-modal-intro h2 span{color:#caa393}
 .contact-modal-description{font-size:16px;line-height:1.55;color:#aaa5b8;margin-top:22px}
 .contact-modal-socials{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:28px}
 .contact-modal-social{display:flex;align-items:center;gap:10px;padding:13px 12px;min-width:0;border-radius:18px;border:1px solid #ffffff19;background:linear-gradient(135deg,#ffffff0c,#ffffff04);font-size:14px;transition:background .25s}
@@ -14,25 +14,25 @@
 .contact-modal-social:last-child{grid-column:auto}
 .contact-modal-form form{display:grid;gap:18px}
 .contact-modal-form .contact-inputs{display:grid;grid-template-columns:1fr;gap:18px}
-.contact-modal-form label:not(.service-consent){display:grid;gap:9px;font-size:16px;color:#e6e2ed}
+.contact-modal-form label:not(.service-consent){display:grid;gap:9px;font-size:16px;color:#ede5e2}
 .contact-modal-form input:not([type=checkbox]),.contact-modal-form textarea{width:100%;min-width:0;padding:13px 15px;border:1px solid #ffffff20;border-radius:14px;background:#ffffff05;color:#fff;font:inherit;font-size:15px;outline:none;box-sizing:border-box}
-.contact-modal-form input:focus,.contact-modal-form textarea:focus{border-color:#a994c9}
+.contact-modal-form input:focus,.contact-modal-form textarea:focus{border-color:#caa393}
 .contact-modal-form textarea{height:98px;min-height:80px;resize:vertical}
 .contact-modal-form .service-consent{display:flex;align-items:flex-start;gap:10px;font-size:12px;line-height:1.55;color:#aaa5b8;margin:0}
-.contact-modal-form .service-consent input{width:17px;height:17px;flex:0 0 17px;margin-top:2px;accent-color:#a994c9}
-.contact-modal-form .service-consent a{color:#c5b4e0;text-decoration:underline;text-underline-offset:3px}
+.contact-modal-form .service-consent input{width:17px;height:17px;flex:0 0 17px;margin-top:2px;accent-color:#caa393}
+.contact-modal-form .service-consent a{color:#e1c1b3;text-decoration:underline;text-underline-offset:3px}
 .contact-modal-form .contact-send{margin:0;display:block}
 .contact-modal-form .contact-send button{width:100%;height:50px;padding:12px 24px;border:1px solid #ffffff30;border-radius:999px;background:linear-gradient(145deg,#ffffff20,#ffffff09);box-shadow:inset 0 1px #ffffff25;color:#fff;font:inherit;font-size:17px;cursor:pointer;transition:background .25s,transform .25s}
 .contact-modal-form .contact-send button:hover{background:#ffffff25;transform:scale(1.015)}
 @media(max-width:760px){#contact-modal{width:calc(100vw - 24px);max-height:calc(100dvh - 24px);padding:34px 24px 24px;border-radius:24px}.contact-modal-layout{grid-template-columns:1fr;gap:28px}.contact-modal-intro>.section-label{margin-bottom:18px}.contact-modal-intro h2{font-size:34px}.contact-modal-description{font-size:15px;margin-top:16px}.contact-modal-socials{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:20px}.contact-modal-social{padding:10px 12px;font-size:13px}.contact-modal-form form,.contact-modal-form .contact-inputs{gap:15px}}
 @media(prefers-reduced-motion:reduce){#contact-modal *{transition:none!important}}
 
-.contact-modal-social span{white-space:nowrap}.contact-modal-social[href^="mailto:"] span{font-size:12px}.contact-modal-intro h2{color:#f2f2f4}.contact-modal-intro h2 span{color:#b69bdf}
+.contact-modal-social span{white-space:nowrap}.contact-modal-social[href^="mailto:"] span{font-size:12px}.contact-modal-intro h2{color:#f2f2f4}.contact-modal-intro h2 span{color:#e1af99}
 @media(max-width:420px){.contact-modal-social{gap:7px;padding:11px 9px}.contact-modal-social svg{width:19px;height:19px;flex-basis:19px}.contact-modal-social[href^="mailto:"] span{font-size:11px}}
 /* Distinguish sending a request from writing directly. */
 .contact-modal-layout{grid-template-columns:1fr 1.05fr;grid-template-rows:auto 1fr;gap:28px 42px;align-items:start}
 .contact-modal-intro{grid-column:1;grid-row:1}.contact-modal-form{grid-column:2;grid-row:1/span 2}.contact-modal-connect{grid-column:1;grid-row:2;min-width:0}
-.contact-modal-connect h3{font-size:18px;font-weight:400;line-height:1.3;color:#e5e1ed;margin:0 0 14px}.contact-modal-connect .contact-modal-socials{margin-top:0}
+.contact-modal-connect h3{font-size:18px;font-weight:400;line-height:1.3;color:#ede4e1;margin:0 0 14px}.contact-modal-connect .contact-modal-socials{margin-top:0}
 @media(max-width:760px){.contact-modal-layout{display:flex;flex-direction:column;gap:26px}.contact-modal-intro,.contact-modal-form,.contact-modal-connect{width:100%}.contact-modal-intro{order:0}.contact-modal-form{order:1}.contact-modal-connect{order:2;padding-top:22px;border-top:1px solid #ffffff15}.contact-modal-connect h3{font-size:18px;margin-bottom:14px}}
 @media(max-width:760px){.contact-modal-connect{order:1;padding-top:0;border-top:0}.contact-modal-form{order:2}.contact-modal-social[href^="mailto:"] span{font-size:13px}.contact-modal-social[href^="mailto:"]{gap:7px;padding-inline:9px}}
 @media(max-width:360px){.contact-modal-social[href^="mailto:"] span{font-size:12px}.contact-modal-social[href^="mailto:"] svg{width:17px;height:17px;flex-basis:17px}.contact-modal-social[href^="mailto:"]{gap:5px;padding-inline:7px}}

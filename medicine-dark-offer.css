@@ -1,27 +1,27 @@
 /* Optional hero-only study. The standard medical page remains white. */
-.med-dark-offer .medicine-page .med-hero{background:#08090d;color:#f5f2f8}
+.med-dark-offer .medicine-page .med-hero{background:#08090d;color:#f8f4f2}
 .med-dark-offer .med-hero .med-rib-field{background:#08090d}
-.med-dark-offer .med-hero h1,.med-dark-offer .med-hero h1 span{color:#f5f2f8}
+.med-dark-offer .med-hero h1,.med-dark-offer .med-hero h1 span{color:#f8f4f2}
 .med-dark-offer .med-hero .med-lead{color:#b4a9bf}
-.med-dark-offer .medicine-page .med-hero .med-hero-copy>a.glass-button{--action-fill:linear-gradient(120deg,#ffffff2e,#cab5e62c);--action-ink:#f5f0fc;background:var(--action-fill);color:var(--action-ink);border:0;box-shadow:inset 0 1px #ffffff15,0 7px 25px #0002}
+.med-dark-offer .medicine-page .med-hero .med-hero-copy>a.glass-button{--action-fill:linear-gradient(120deg,#ffffff2e,#e7c3b42c);--action-ink:#fcf3f0;background:var(--action-fill);color:var(--action-ink);border:0;box-shadow:inset 0 1px #ffffff15,0 7px 25px #0002}
 .med-dark-offer .medicine-page .med-hero .med-hero-copy>a.glass-button:hover{background:var(--action-fill);color:var(--action-ink)}
-.med-dark-offer .med-hero .med-audiences span{color:#b3a6c2;border-color:#d4bfed1c;background:linear-gradient(120deg,#ffffff08,#baa3df0c);box-shadow:inset 0 1px #ffffff05;backdrop-filter:blur(14px)}
+.med-dark-offer .med-hero .med-audiences span{color:#c3aea5;border-color:#eeccbe1c;background:linear-gradient(120deg,#ffffff08,#e1b4a10c);box-shadow:inset 0 1px #ffffff05;backdrop-filter:blur(14px)}
 /* Keep navigation dark while it passes over the dark hero, then rejoin the white page. */
-.med-dark-offer .medicine-page .site-header:not(.past-dark-offer){color:#eee9f5;background:transparent;box-shadow:none}
+.med-dark-offer .medicine-page .site-header:not(.past-dark-offer){color:#f5ece9;background:transparent;box-shadow:none}
 .med-dark-offer .medicine-page .site-header.scrolled:not(.past-dark-offer){background:#08090dbd;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
-.med-dark-offer .medicine-page .site-header:not(.past-dark-offer) .brand,.med-dark-offer .medicine-page .site-header:not(.past-dark-offer) .brand span{color:#f2edf8}
-.med-dark-offer .medicine-page .site-header:not(.past-dark-offer) nav a{color:#d0c6dc}
+.med-dark-offer .medicine-page .site-header:not(.past-dark-offer) .brand,.med-dark-offer .medicine-page .site-header:not(.past-dark-offer) .brand span{color:#f8f0ed}
+.med-dark-offer .medicine-page .site-header:not(.past-dark-offer) nav a{color:#ddccc5}
 .med-dark-offer .medicine-page .site-header:not(.past-dark-offer) nav a:hover{color:#fff;background:#ffffff12}
-.med-dark-offer .medicine-page .site-header:not(.past-dark-offer) .nav-medical span{background-image:linear-gradient(110deg,#e69abb,#b4a0ed 60%,#91bdd9)}
-.med-dark-offer .medicine-page .site-header:not(.past-dark-offer) .header-social{color:#f2edf8;background:transparent}
-.med-dark-offer .medicine-page .site-header:not(.past-dark-offer) .header-social .header-icon,.med-dark-offer .medicine-page .site-header:not(.past-dark-offer) .header-social svg path{color:#f2edf8;fill:#f2edf8}
+.med-dark-offer .medicine-page .site-header:not(.past-dark-offer) .nav-medical span{background-image:linear-gradient(110deg,#e69abb,#efb69e 60%,#dba68f)}
+.med-dark-offer .medicine-page .site-header:not(.past-dark-offer) .header-social{color:#f8f0ed;background:transparent}
+.med-dark-offer .medicine-page .site-header:not(.past-dark-offer) .header-social .header-icon,.med-dark-offer .medicine-page .site-header:not(.past-dark-offer) .header-social svg path{color:#f8f0ed;fill:#f8f0ed}
 .med-dark-offer .medicine-page .site-header:not(.past-dark-offer) .header-social:hover{background:#ffffff12}
-.med-dark-offer .medicine-page .site-header:not(.past-dark-offer) .header-cta{--action-fill:linear-gradient(110deg,#ffffff26,#cdb4e42c);--action-ink:#f2edf8}
-.med-dark-offer .medicine-page .site-header:not(.past-dark-offer) .menu-toggle{color:#f2edf8}
-.med-dark-offer .medicine-page .site-header:not(.past-dark-offer) .menu-toggle svg{color:#f2edf8}
-.med-dark-offer .medicine-page .mobile-menu:not(.past-dark-offer){background:#14111cf5;color:#f2edf8;border-color:#c6afdf17}
-.med-dark-offer .medicine-page .mobile-menu:not(.past-dark-offer)>a{color:#e0d4ec}
-.med-dark-offer .medicine-page .mobile-menu:not(.past-dark-offer) .glass-button{--action-fill:#c6abd32b;--action-ink:#f2edf8}
+.med-dark-offer .medicine-page .site-header:not(.past-dark-offer) .header-cta{--action-fill:linear-gradient(110deg,#ffffff26,#e5c2b32c);--action-ink:#f8f0ed}
+.med-dark-offer .medicine-page .site-header:not(.past-dark-offer) .menu-toggle{color:#f8f0ed}
+.med-dark-offer .medicine-page .site-header:not(.past-dark-offer) .menu-toggle svg{color:#f8f0ed}
+.med-dark-offer .medicine-page .mobile-menu:not(.past-dark-offer){background:#14111cf5;color:#f8f0ed;border-color:#e0bdae17}
+.med-dark-offer .medicine-page .mobile-menu:not(.past-dark-offer)>a{color:#eddbd3}
+.med-dark-offer .medicine-page .mobile-menu:not(.past-dark-offer) .glass-button{--action-fill:#d4b7aa2b;--action-ink:#f8f0ed}
 .med-dark-offer .ribs-unavailable .med-rib-field{background:radial-gradient(ellipse at 60% 50%,#bb76a52d,transparent 65%),repeating-linear-gradient(48deg,#08090d 0 70px,#292239 90px,#08090d 105px)}
 @media(max-width:1100px){.med-dark-offer .medicine-page .site-header:not(.past-dark-offer) .header-social,.med-dark-offer .medicine-page .site-header:not(.past-dark-offer) .menu-toggle{background:#ffffff0a}}
 /* Approved particle-body study. Scoped to the dark medical offer only. */
@@ -74,7 +74,7 @@
 .med-body-offer .med-hero .med-lead{left:auto;right:8.5%;top:clamp(190px,24svh,260px);width:22%;max-width:300px;font-size:18px;line-height:1.5;text-align:left}
 .med-body-offer .medicine-page .med-hero .med-hero-copy>a.glass-button{left:69.5%;right:auto;top:clamp(375px,42svh,420px)}
 .med-body-offer .med-hero .med-audiences{bottom:85px;max-width:850px;width:78%;gap:9px;z-index:3;flex-wrap:wrap}
-.med-body-offer .med-hero .med-audiences span{font-size:18px;line-height:1.25;padding:12px 19px;color:#e0d7e7;background:linear-gradient(120deg,#ffffff0c,#b4a2d313);border-color:#d4bfed26}
+.med-body-offer .med-hero .med-audiences span{font-size:18px;line-height:1.25;padding:12px 19px;color:#e7dcd7;background:linear-gradient(120deg,#ffffff0c,#d4b0a113);border-color:#eeccbe26}
 @media(min-width:761px) and (max-width:1100px){
  .med-body-offer .med-hero h1{left:5%;width:27%;font-size:34px}
  .med-body-offer .med-hero .med-lead{right:5%;width:23%;font-size:16px}
@@ -93,31 +93,31 @@
 }
 
 /* Blue backlight and a wider two-line offer. */
-.med-body-offer .medicine-page .med-hero::before{box-shadow:0 -12px 36px #43c8f53b,0 -38px 95px #249fdb2b,0 -70px 150px #1979c517}
+.med-body-offer .medicine-page .med-hero::before{box-shadow:0 -12px 36px #f9773f3b,0 -38px 95px #e0591f2b,0 -70px 150px #c94b1517}
 .med-body-offer .med-hero h1{width:39%;max-width:650px;font-size:clamp(42px,4.1vw,68px);line-height:1.08;letter-spacing:-.05em}
 .med-body-offer .med-hero h1 span{white-space:nowrap}
 .med-body-offer .med-hero .med-lead{left:69.5%;right:auto;width:27.5%;max-width:440px;text-wrap:pretty}
-.med-body-offer .medicine-page .med-hero .med-hero-copy>a.glass-button{top:clamp(345px,39svh,410px);background:radial-gradient(ellipse at 50% 125%,#f28b6147,transparent 72%),linear-gradient(120deg,#ffffff2e,#cab5e62c);box-shadow:inset 0 1px #ffffff15,0 12px 28px -16px #f28b6180}
-.med-body-offer .medicine-page .med-hero .med-hero-copy>a.glass-button:hover{background:radial-gradient(ellipse at 50% 125%,#f28b6159,transparent 72%),linear-gradient(120deg,#ffffff2e,#cab5e62c)}
+.med-body-offer .medicine-page .med-hero .med-hero-copy>a.glass-button{top:clamp(345px,39svh,410px);background:radial-gradient(ellipse at 50% 125%,#f28b6147,transparent 72%),linear-gradient(120deg,#ffffff2e,#e7c3b42c);box-shadow:inset 0 1px #ffffff15,0 12px 28px -16px #f28b6180}
+.med-body-offer .medicine-page .med-hero .med-hero-copy>a.glass-button:hover{background:radial-gradient(ellipse at 50% 125%,#f28b6159,transparent 72%),linear-gradient(120deg,#ffffff2e,#e7c3b42c)}
 @media(min-width:761px) and (max-width:1100px){
  .med-body-offer .med-hero h1{font-size:clamp(32px,4.1vw,46px);width:42%}
  .med-body-offer .med-hero .med-lead{left:69.5%;width:28%;font-size:16px}
  .med-body-offer .medicine-page .med-hero .med-hero-copy>a.glass-button{left:69.5%}
 }
 @media(max-width:760px){
- .med-body-offer .medicine-page .med-hero::before{box-shadow:0 -10px 30px #43c8f533,0 -35px 85px #249fdb26}
+ .med-body-offer .medicine-page .med-hero::before{box-shadow:0 -10px 30px #f9773f33,0 -35px 85px #e0591f26}
  .med-body-offer .med-hero h1{width:100%;font-size:clamp(29px,7.9vw,55px);max-width:600px}
  .med-body-offer .med-hero .med-lead{left:auto;right:auto;width:100%;font-size:17px}
  .med-body-offer .medicine-page .med-hero .med-hero-copy>a.glass-button{left:auto;top:auto}
 }
-.med-body-offer .medicine-page .med-hero .med-hero-copy>a.glass-button{--action-fill:radial-gradient(ellipse at 50% 135%,#f28b6173,transparent 72%),linear-gradient(120deg,#ffffff2e,#cab5e62c);--action-shadow:inset 0 -8px 18px -12px #f28b61aa,0 10px 24px -14px #f28b6166}
+.med-body-offer .medicine-page .med-hero .med-hero-copy>a.glass-button{--action-fill:radial-gradient(ellipse at 50% 135%,#f28b6173,transparent 72%),linear-gradient(120deg,#ffffff2e,#e7c3b42c);--action-shadow:inset 0 -8px 18px -12px #f28b61aa,0 10px 24px -14px #f28b6166}
 
 /* Approved composition: an upper text band and the unchanged particle portrait below. */
 .med-body-offer .medicine-page .med-hero{min-height:max(1000px,calc(100svh + 150px))}
 .med-body-offer .med-hero h1{top:115px;width:58%;max-width:1000px;font-size:clamp(46px,4.7vw,80px);font-family:inherit;font-weight:450;line-height:1.06}
 .med-body-offer .med-hero .med-lead{top:120px}
 .med-body-offer .medicine-page .med-hero .med-hero-copy>a.glass-button{top:250px}
-.med-body-offer .medicine-page .med-hero::before{top:370px;width:110vw;border:1px solid #49bde77a;background:transparent;box-shadow:0 -1px 8px #43c8f53d,0 -8px 35px #249fdb26;mask-image:linear-gradient(to bottom,#000 0%,#000 22%,transparent 45%)}
+.med-body-offer .medicine-page .med-hero::before{top:370px;width:110vw;border:1px solid #eb77457a;background:transparent;box-shadow:0 -1px 8px #f9773f3d,0 -8px 35px #e0591f26;mask-image:linear-gradient(to bottom,#000 0%,#000 22%,transparent 45%)}
 @media(min-width:761px) and (max-width:1100px){
  .med-body-offer .med-hero h1{font-size:clamp(38px,4.7vw,52px);top:120px;width:60%}
  .med-body-offer .med-hero .med-lead{top:120px}
@@ -137,7 +137,7 @@
 .med-body-offer .med-hero h1{top:clamp(180px,23svh,245px);width:39%;max-width:650px;font-size:clamp(42px,4.1vw,68px)}
 .med-body-offer .med-hero .med-hero-details{position:absolute;z-index:3;left:69.5%;top:clamp(190px,24svh,260px);width:27.5%;max-width:440px;display:flex;flex-direction:column;align-items:flex-start;gap:22px}
 .med-body-offer .med-hero .med-hero-details .med-lead{position:static;left:auto;right:auto;top:auto;width:100%;max-width:none;margin:0;text-align:left;font-size:18px;line-height:1.5}
-.med-body-offer .med-hero .med-hero-details>a.glass-button{position:relative;flex:none;align-self:flex-start;--action-fill:radial-gradient(ellipse at 50% 135%,#f28b6173,transparent 72%),linear-gradient(120deg,#ffffff2e,#cab5e62c);--action-ink:#f5f0fc;--action-shadow:inset 0 -8px 18px -12px #f28b61aa,0 10px 24px -14px #f28b6166}
+.med-body-offer .med-hero .med-hero-details>a.glass-button{position:relative;flex:none;align-self:flex-start;--action-fill:radial-gradient(ellipse at 50% 135%,#f28b6173,transparent 72%),linear-gradient(120deg,#ffffff2e,#e7c3b42c);--action-ink:#fcf3f0;--action-shadow:inset 0 -8px 18px -12px #f28b61aa,0 10px 24px -14px #f28b6166}
 @media(min-width:761px) and (max-width:1100px){
  .med-body-offer .med-hero h1{font-size:clamp(32px,4.1vw,46px)}
  .med-body-offer .med-hero .med-hero-details{width:28%}
@@ -152,10 +152,10 @@
 }
 /* Full dark medicine edition, continuous with the main KATSA site. */
 .med-dark-offer{color-scheme:dark;background:#08090d}
-.med-dark-offer .medicine-page{background:#08090d;color:#eeedf4;--med-muted:#a5a2ac;--med-line:#ffffff12;--med-surface:#141519}
+.med-dark-offer .medicine-page{background:#08090d;color:#f4efed;--med-muted:#a5a2ac;--med-line:#ffffff12;--med-surface:#141519}
 .med-dark-offer .medicine-page .section-label{color:#918e99}
-.med-dark-offer .med-experience strong{color:#e2d1e2}
-.med-dark-offer .med-experience h2,.med-dark-offer .med-section h2,.med-dark-offer .med-project-copy h3{color:#eeedf4}
+.med-dark-offer .med-experience strong{color:#e2d6d1}
+.med-dark-offer .med-experience h2,.med-dark-offer .med-section h2,.med-dark-offer .med-project-copy h3{color:#f4efed}
 .med-dark-offer .med-experience p,.med-dark-offer .med-project-copy>p:last-child{color:#a5a2ac}
 .med-dark-offer .med-project-copy .section-label{color:#a39aaf}
 .med-dark-offer .med-project-4{background:linear-gradient(130deg,#18181e,#101115);border-color:#ffffff12}
@@ -165,39 +165,39 @@
 .med-dark-offer .task-bento-4{background:#353136}
 .med-dark-offer .task-bento-6{background:linear-gradient(120deg,#1b1924,#171e26)}
 .med-dark-offer .task-bento-7{background:#1d1923}
-.med-dark-offer .task-bento-notch{background:#08090d;color:#c6b6d9}
-.med-dark-offer .medicine-page .task-bento h3{color:#eeedf4}
+.med-dark-offer .task-bento-notch{background:#08090d;color:#dac0b5}
+.med-dark-offer .medicine-page .task-bento h3{color:#f4efed}
 .med-dark-offer .medicine-page .task-bento p,.med-dark-offer .medicine-page .task-bento-2 p{color:#aaa4b5}
 .med-dark-offer .medicine-page .task-bento-3 p,.med-dark-offer .medicine-page .task-bento-4 p{color:#ffffffd4}
-.med-dark-offer .medicine-page #approach>h2{color:#eeedf4}
-.med-dark-offer .medicine-page #approach .work-panel{background:linear-gradient(145deg,#1b1b21,#111216);border-color:#ffffff10;color:#eeedf4}
+.med-dark-offer .medicine-page #approach>h2{color:#f4efed}
+.med-dark-offer .medicine-page #approach .work-panel{background:linear-gradient(145deg,#1b1b21,#111216);border-color:#ffffff10;color:#f4efed}
 .med-dark-offer .medicine-page #approach .work-panel-copy>p,.med-dark-offer .medicine-page #approach .timeline-stage>p{color:#a5a2ac}
 .med-dark-offer .medicine-page #approach .project-calendar{background:#ffffff03;border-color:#ffffff0c}
-.med-dark-offer .medicine-page #approach .calendar-top,.med-dark-offer .medicine-page #approach .agenda-title,.med-dark-offer .medicine-page #approach .calendar-day.has-event{color:#e4dce9}
+.med-dark-offer .medicine-page #approach .calendar-top,.med-dark-offer .medicine-page #approach .agenda-title,.med-dark-offer .medicine-page #approach .calendar-day.has-event{color:#e9e0dc}
 .med-dark-offer .medicine-page #approach .calendar-day{color:#7d7787}
-.med-dark-offer .medicine-page #approach .calendar-day.selected{color:#211a29;background:#c6afd8}
-.med-dark-offer .medicine-page #approach .agenda-day{color:#c3a0d2}
+.med-dark-offer .medicine-page #approach .calendar-day.selected{color:#211a29;background:#d9bbae}
+.med-dark-offer .medicine-page #approach .agenda-day{color:#d3ae9f}
 .med-dark-offer .medicine-page #approach .agenda-detail,.med-dark-offer .medicine-page #approach .calendar-weekdays,.med-dark-offer .medicine-page #approach .calendar-cycle{color:#a49aad}
-.med-dark-offer .medicine-page #approach .chat-message.customer{background:#ffffff08;border-color:#ffffff0c;color:#ddd6e5}
-.med-dark-offer .medicine-page #approach .chat-message.studio{background:#cfc4dc;color:#221d29}
-.med-dark-offer .medicine-page #approach .timeline-panel{background:radial-gradient(ellipse at 100% 0,#a981ba0d,transparent 65%),#131418}
-.med-dark-offer .medicine-page #approach .stage-title{color:#e0d7eb!important}
-.med-dark-offer .medicine-page #approach .stage-title>span{color:#9c87af}
+.med-dark-offer .medicine-page #approach .chat-message.customer{background:#ffffff08;border-color:#ffffff0c;color:#e5dad6}
+.med-dark-offer .medicine-page #approach .chat-message.studio{background:#ddcbc3;color:#221d29}
+.med-dark-offer .medicine-page #approach .timeline-panel{background:radial-gradient(ellipse at 100% 0,#bb92800d,transparent 65%),#131418}
+.med-dark-offer .medicine-page #approach .stage-title{color:#ecddd6!important}
+.med-dark-offer .medicine-page #approach .stage-title>span{color:#b09386}
 .med-dark-offer .medicine-page #approach .timeline-header{border-color:#ffffff14}
 .med-dark-offer .medicine-page #contact{border-color:#ffffff14;background:none}
-.med-dark-offer .medicine-page #contact h2,.med-dark-offer .medicine-page #contact h3{color:#eeedf4}
-.med-dark-offer .medicine-page #contact h2 span{color:#b39add}
+.med-dark-offer .medicine-page #contact h2,.med-dark-offer .medicine-page #contact h3{color:#f4efed}
+.med-dark-offer .medicine-page #contact h2 span{color:#dfad98}
 .med-dark-offer .medicine-page #contact .contact-intro,.med-dark-offer .medicine-page #contact p{color:#a5a2ac}
-.med-dark-offer .medicine-page #contact .direct-contact a{background:#ffffff08;color:#eeedf4;border-color:#ffffff12}
+.med-dark-offer .medicine-page #contact .direct-contact a{background:#ffffff08;color:#f4efed;border-color:#ffffff12}
 .med-dark-offer .medicine-page #contact .direct-contact svg{filter:none}
 .med-dark-offer .medicine-page #project-request label:not(.service-consent){background:#ffffff04;border-color:#ffffff15;color:#aaa1b5}
-.med-dark-offer .medicine-page #project-request input,.med-dark-offer .medicine-page #project-request textarea{color:#eeedf4}
+.med-dark-offer .medicine-page #project-request input,.med-dark-offer .medicine-page #project-request textarea{color:#f4efed}
 .med-dark-offer .medicine-page #project-request input::placeholder,.med-dark-offer .medicine-page #project-request textarea::placeholder{color:#80788c}
 .med-dark-offer .medicine-page #contact .service-consent{color:#9a91a5}
-.med-dark-offer .medicine-page #contact .service-consent a{color:#c5b7d5}
+.med-dark-offer .medicine-page #contact .service-consent a{color:#d6c0b6}
 .med-dark-offer .medicine-page #project-request .contact-send button{--action-fill:var(--action-neutral);--action-ink:#f4f4f6;background:var(--action-fill);color:var(--action-ink)}
 .med-dark-offer .medicine-page #contact .footer{color:#93879d;border-color:#ffffff14}
-.med-dark-offer .medicine-page #contact .footer-brand{color:#eeedf4}
+.med-dark-offer .medicine-page #contact .footer-brand{color:#f4efed}
 .med-dark-offer .medicine-page #contact .footer nav a,.med-dark-offer .medicine-page #contact .footer-bottom a{color:#a99ab7}
 /* Center the experience strip; use the same two-column project rhythm as home. */
 .med-dark-offer .med-experience{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}
